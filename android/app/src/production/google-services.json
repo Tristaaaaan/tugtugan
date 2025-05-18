@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "287820568101",
+    "project_id": "tugtugan-74f45",
+    "storage_bucket": "tugtugan-74f45.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:287820568101:android:5b05d645629aad941591cc",
+        "android_client_info": {
+          "package_name": "com.tristans.tugtugan"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjZ3JZVn92wj6K4X8f8-bIn8A3JiWD6N8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
