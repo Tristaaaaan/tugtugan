@@ -74,7 +74,3 @@ class SigninPage extends ConsumerWidget {
     );
   }
 }
-
-final authServicesProvider = Provider<AuthServices>((ref) {
-  return AuthServices();
-});

@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+final authServicesProvider = Provider<AuthServices>((ref) {
+  return AuthServices();
+});
+
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -58,7 +62,7 @@ class AuthServices {
       return null;
     } catch (e) {
       if (context.mounted) {
-        await signOutAccount(ref); // Sign out the user
+        await signOutAccount(ref);
       }
 
       return null;
