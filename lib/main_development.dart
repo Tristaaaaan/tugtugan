@@ -1,10 +1,29 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:tugtugan/config/app_config.dart';
 import 'package:tugtugan/config/app_environments.dart';
+import 'package:tugtugan/features/authentication/auth_gate.dart';
+import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
-void main() {
-  AppConfig.setEnvironment(Flavors.production);
-  runApp(const MainApp());
+void main() async {
+  AppConfig.setEnvironment(Flavors.development);
+
+  await dotenv.load(fileName: '.env');
+
+  String token = dotenv.env['MAPBOX_SECRET_TOKEN'] ?? '';
+
+  MapboxOptions.setAccessToken(token);
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    name: "tugtugan-dev",
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -15,7 +34,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Tugtugan Development!'),
+          child: AuthGate(),
         ),
       ),
     );
