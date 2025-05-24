@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:tugtugan/commons/widgets/loading_state_notifier.dart';
+import 'package:tugtugan/commons/widgets/buttons/loading_state_notifier.dart';
 import 'package:tugtugan/core/appimages/app_images.dart';
 
 class RegularButton extends ConsumerWidget {
