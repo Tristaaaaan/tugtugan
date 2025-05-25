@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "tugtugan-dev",
+    "dev": "tugtugan-dev",
+    "prod": "tugtugan-74f45"
+  }
+}
