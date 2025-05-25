@@ -44,5 +44,5 @@ app.*.map.json
 
 # lib Related
 **lib/firebase
-
+/functions/*.json
 .env
