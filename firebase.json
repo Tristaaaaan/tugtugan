@@ -1,1 +1,65 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"tugtugan-74f45","appId":"1:287820568101:android:5b05d645629aad941591cc","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"tugtugan-74f45","appId":"1:287820568101:ios:2320f694bbd5d19a1591cc","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"tugtugan-74f45","appId":"1:287820568101:ios:2320f694bbd5d19a1591cc","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase/dev/firebase_options.dart":{"projectId":"tugtugan-dev","configurations":{"android":"1:766765293741:android:dd1dcc56bd205c24bee624","ios":"1:766765293741:ios:206789c8bbd1de6cbee624","macos":"1:766765293741:ios:206789c8bbd1de6cbee624","web":"1:766765293741:web:4ed693d399ec452dbee624","windows":"1:766765293741:web:fc9a49aa759ab23bbee624"}},"lib/firebase/prod/firebase_options.dart":{"projectId":"tugtugan-74f45","configurations":{"android":"1:287820568101:android:5b05d645629aad941591cc","ios":"1:287820568101:ios:2320f694bbd5d19a1591cc","macos":"1:287820568101:ios:2320f694bbd5d19a1591cc","web":"1:287820568101:web:f6b30aaaa66e57981591cc","windows":"1:287820568101:web:49a5ac7179a140341591cc"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "tugtugan-74f45",
+          "appId": "1:287820568101:android:5b05d645629aad941591cc",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "tugtugan-74f45",
+          "appId": "1:287820568101:ios:2320f694bbd5d19a1591cc",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "tugtugan-74f45",
+          "appId": "1:287820568101:ios:2320f694bbd5d19a1591cc",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase/dev/firebase_options.dart": {
+          "projectId": "tugtugan-dev",
+          "configurations": {
+            "android": "1:766765293741:android:dd1dcc56bd205c24bee624",
+            "ios": "1:766765293741:ios:206789c8bbd1de6cbee624",
+            "macos": "1:766765293741:ios:206789c8bbd1de6cbee624",
+            "web": "1:766765293741:web:4ed693d399ec452dbee624",
+            "windows": "1:766765293741:web:fc9a49aa759ab23bbee624"
+          }
+        },
+        "lib/firebase/prod/firebase_options.dart": {
+          "projectId": "tugtugan-74f45",
+          "configurations": {
+            "android": "1:287820568101:android:5b05d645629aad941591cc",
+            "ios": "1:287820568101:ios:2320f694bbd5d19a1591cc",
+            "macos": "1:287820568101:ios:2320f694bbd5d19a1591cc",
+            "web": "1:287820568101:web:f6b30aaaa66e57981591cc",
+            "windows": "1:287820568101:web:49a5ac7179a140341591cc"
+          }
+        }
+      }
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "venv",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "runtime": "python313"
+    }
+  ]
+}
