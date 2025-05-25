@@ -44,7 +44,7 @@ class _ExpandableTextState extends State<ExpandableText> {
               ),
               const SizedBox(width: 7),
               Icon(
-                Icons.keyboard_arrow_down,
+                _readMore ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                 color: Theme.of(context).colorScheme.primary,
                 size: 16,
               )
