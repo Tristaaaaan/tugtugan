@@ -41,6 +41,13 @@ class RegularButton extends ConsumerWidget {
           color: Theme.of(context).colorScheme.secondary,
           width: 1,
         ),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 4,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
