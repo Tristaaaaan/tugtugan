@@ -29,13 +29,14 @@ class RegularButton extends ConsumerWidget {
     final isLoading =
         ref.watch(regularButtonLoadingProvider)[buttonKey] ?? false;
     return Container(
-      height: 50,
-      margin: const EdgeInsets.symmetric(
-        horizontal: 25,
-      ),
+      height: 55,
+      width: 200,
+      // margin: const EdgeInsets.symmetric(
+      //   horizontal: 25,
+      // ),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: Theme.of(context).colorScheme.secondary,
           width: 1,
@@ -69,14 +70,24 @@ class RegularButton extends ConsumerWidget {
                           size: 30,
                         ),
                       )
-                    : Text(
-                        text,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                          color: textColor,
-                        ),
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            text,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: textColor,
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Icon(
+                            Icons.chevron_right,
+                            color: Theme.of(context).colorScheme.surface,
+                          )
+                        ],
                       ),
               ),
               if (withIcon == true)
