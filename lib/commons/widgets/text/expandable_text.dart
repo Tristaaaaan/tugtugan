@@ -24,13 +24,31 @@ class _ExpandableTextState extends State<ExpandableText> {
       children: [
         Text(
           widget.text,
+          style: const TextStyle(
+            fontSize: 14,
+          ),
           maxLines: _readMore ? null : widget.trimLines,
         ),
-        InkWell(
+        const SizedBox(height: 10),
+        GestureDetector(
           onTap: () => setState(() => _readMore = !_readMore),
-          child: Text(
-            _readMore ? 'Read less' : 'Read more',
-            style: const TextStyle(color: Colors.blue),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                _readMore ? 'Read less' : 'Read more',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 7),
+              Icon(
+                Icons.keyboard_arrow_down,
+                color: Theme.of(context).colorScheme.primary,
+                size: 16,
+              )
+            ],
           ),
         ),
       ],
