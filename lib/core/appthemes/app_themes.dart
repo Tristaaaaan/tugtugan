@@ -5,14 +5,16 @@ class ThemeNotifier extends StateNotifier<bool> {
   ThemeNotifier() : super(false); // Initial state is light mode (false)
 
   static final ThemeData lightMode = ThemeData(
-    colorScheme: ColorScheme.light(
+    colorScheme: const ColorScheme.light(
         surface: Colors.white,
-        primary: const Color(0xff196EEE),
-        secondary: const Color(0xff2DD7A4),
-        tertiary: const Color(0xffB47820),
-        inversePrimary: Colors.grey.shade900,
-        tertiaryContainer: const Color(0xffDF9652),
-        primaryFixedDim: Colors.black),
+        primary: Color(0xff196EEE),
+        secondary: Color(0xff2DD7A4),
+        tertiary: Color(0xffB47820),
+        primaryContainer: Color(0xffF3F8FE),
+        inversePrimary: Color(0xffB8B8B8),
+        tertiaryContainer: Color(0xffDF9652),
+        primaryFixedDim: Color(0xff4D5652),
+        tertiaryFixedDim: Color(0xffF8D675)),
   );
 
   static final ThemeData darkMode = ThemeData(
