@@ -3,14 +3,18 @@ import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:tugtugan/commons/helpers/permissions.dart';
 
 class Maps extends StatelessWidget {
-  const Maps({super.key});
+  final String name;
+  const Maps({
+    super.key,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
     final LocationService locationService = LocationService();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tugtugan'),
+        title: Text(name),
       ),
       body: MapWidget(
         key: const ValueKey('map'),
