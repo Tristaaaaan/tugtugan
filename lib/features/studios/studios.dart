@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/commons/widgets/text/expandable_text.dart';
 import 'package:tugtugan/core/apptext/app_text.dart';
+import 'package:tugtugan/features/authentication/auth_services.dart';
 
-class Studio extends StatelessWidget {
+class Studio extends ConsumerWidget {
   const Studio({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AuthServices authServices = AuthServices();
+
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              icon: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+              onPressed: () async {
+                authServices.signOutAccount(ref);
+              },
+            ),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(25),
@@ -23,7 +41,7 @@ class Studio extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
                         child: Image.asset(
-                          "assets/icons/2023-09-11.png",
+                          "assets/icons/Rectangle990.png",
                           fit: BoxFit.cover,
                           height: 400,
                         ),
@@ -61,12 +79,27 @@ class Studio extends StatelessWidget {
                     ),
                   ],
                 ),
-                const Text(
-                  "Tristan Studios",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                  ),
+                const SizedBox(height: 5),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Lorem ipsum",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => context.go('/maps?name=Studio'),
+                      child: Text("Show map",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary,
+                          )),
+                    )
+                  ],
                 ),
                 const SizedBox(height: 5),
                 Row(

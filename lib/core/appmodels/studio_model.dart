@@ -2,38 +2,51 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class StudioModel {
   String id;
-  String name;
+  String studioName;
   String description;
   String address;
   GeoPoint location;
-  Contact contact;
-  List<String> images;
-  List<String> facilities;
-  List<Service> services;
-  List<Availability> availability;
-  List<String> rules;
-  Ratings ratings;
-  DateTime createdAt;
-  DateTime updatedAt;
-  bool isActive;
+  String imageUrl;
+  // Contact contact;
+  // List<String> images;
+  // List<String> facilities;
+  // List<Service> services;
+  // List<Availability> availability;
+  // List<String> rules;
+  // Ratings ratings;
+  // DateTime createdAt;
+  // DateTime updatedAt;
+  // bool isActive;
 
   StudioModel({
     required this.id,
-    required this.name,
+    required this.studioName,
     required this.description,
     required this.address,
     required this.location,
-    required this.contact,
-    required this.images,
-    required this.facilities,
-    required this.services,
-    required this.availability,
-    required this.rules,
-    required this.ratings,
-    required this.createdAt,
-    required this.updatedAt,
-    required this.isActive,
+    required this.imageUrl,
+    // required this.contact,
+    // required this.images,
+    // required this.facilities,
+    // required this.services,
+    // required this.availability,
+    // required this.rules,
+    // required this.ratings,
+    // required this.createdAt,
+    // required this.updatedAt,
+    // required this.isActive,
   });
+
+  factory StudioModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
+    return StudioModel(
+      id: doc['id'],
+      studioName: doc['studioName'],
+      description: doc['description'],
+      address: doc['address'],
+      location: doc['location'],
+      imageUrl: doc['imageUrl'],
+    );
+  }
 }
 
 class Amenities {
