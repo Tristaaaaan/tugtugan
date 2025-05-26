@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/features/authentication/signin.dart';
-import 'package:tugtugan/features/studios/studios.dart';
+import 'package:tugtugan/features/home/home.dart';
 
 final authStateProvider = StreamProvider<User?>((ref) {
   return FirebaseAuth.instance.authStateChanges();
@@ -18,7 +18,7 @@ class AuthGate extends ConsumerWidget {
     final user = authStateAsync.value;
 
     return Scaffold(
-      body: user != null ? const Studio() : const SigninPage(),
+      body: user != null ? const HomePage() : const SigninPage(),
     );
   }
 }
