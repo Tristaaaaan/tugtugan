@@ -13,6 +13,7 @@ class RegularButton extends ConsumerWidget {
   final String buttonKey;
   final bool? withoutLoading;
   final void Function()? onTap;
+  final bool? suffixIcon;
   const RegularButton({
     super.key,
     this.withIcon = true,
@@ -22,6 +23,7 @@ class RegularButton extends ConsumerWidget {
     required this.buttonKey,
     this.withoutLoading = false,
     this.onTap,
+    this.suffixIcon = true,
   });
 
   @override
@@ -31,9 +33,6 @@ class RegularButton extends ConsumerWidget {
     return Container(
       height: 55,
       width: 200,
-      // margin: const EdgeInsets.symmetric(
-      //   horizontal: 25,
-      // ),
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(16),
@@ -90,10 +89,11 @@ class RegularButton extends ConsumerWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          Icon(
-                            Icons.chevron_right,
-                            color: Theme.of(context).colorScheme.surface,
-                          )
+                          if (suffixIcon!)
+                            Icon(
+                              Icons.chevron_right,
+                              color: Theme.of(context).colorScheme.surface,
+                            )
                         ],
                       ),
               ),
