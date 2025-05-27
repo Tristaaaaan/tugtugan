@@ -7,6 +7,7 @@ class StudioModel {
   String address;
   GeoPoint location;
   String imageUrl;
+  List<dynamic> followers;
   // Contact contact;
   // List<String> images;
   // List<String> facilities;
@@ -25,6 +26,7 @@ class StudioModel {
     required this.address,
     required this.location,
     required this.imageUrl,
+    required this.followers,
     // required this.contact,
     // required this.images,
     // required this.facilities,
@@ -45,6 +47,7 @@ class StudioModel {
       address: doc['address'],
       location: doc['location'],
       imageUrl: doc['imageUrl'],
+      followers: doc['followers'],
     );
   }
 }
