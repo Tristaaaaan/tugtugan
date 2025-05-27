@@ -12,6 +12,7 @@ class ThemeNotifier extends StateNotifier<bool> {
         tertiary: Color(0xffB47820),
         primaryContainer: Color(0xffF3F8FE),
         inversePrimary: Color(0xffB8B8B8),
+        inverseSurface: Colors.black,
         tertiaryContainer: Color(0xffDF9652),
         primaryFixedDim: Color(0xff4D5652),
         tertiaryFixedDim: Color(0xffF8D675)),

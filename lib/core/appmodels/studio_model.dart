@@ -7,6 +7,7 @@ class StudioModel {
   String address;
   GeoPoint location;
   String imageUrl;
+  List<dynamic> followers;
   // Contact contact;
   // List<String> images;
   // List<String> facilities;
@@ -25,6 +26,7 @@ class StudioModel {
     required this.address,
     required this.location,
     required this.imageUrl,
+    required this.followers,
     // required this.contact,
     // required this.images,
     // required this.facilities,
@@ -36,6 +38,27 @@ class StudioModel {
     // required this.updatedAt,
     // required this.isActive,
   });
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'studioName': studioName,
+      'description': description,
+      'address': address,
+      'location': location,
+      'imageUrl': imageUrl,
+      'followers': followers,
+      // 'contact': contact?.toMap(),
+      // 'images': images,
+      // 'facilities': facilities,
+      // 'services': services.map((service) => service.toMap()).toList(),
+      // 'availability': availability.map((avail) => avail.toMap()).toList(),
+      // 'rules': rules,
+      // 'ratings': ratings?.toMap(),
+      // 'createdAt': createdAt?.toIso8601String(),
+      // 'updatedAt': updatedAt?.toIso8601String(),
+      // 'isActive': isActive,
+    };
+  }
 
   factory StudioModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     return StudioModel(
@@ -45,6 +68,7 @@ class StudioModel {
       address: doc['address'],
       location: doc['location'],
       imageUrl: doc['imageUrl'],
+      followers: doc['followers'],
     );
   }
 }

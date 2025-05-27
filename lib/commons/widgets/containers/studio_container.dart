@@ -7,23 +7,29 @@ class StudioContainer extends StatelessWidget {
   final String studioName;
   final double rating;
 
+  final void Function() onTap;
+
   const StudioContainer({
     super.key,
     required this.image,
     required this.studioName,
     required this.rating,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(24),
-      ),
-      height: 240,
-      width: 188,
-      child: Expanded(
+    return GestureDetector(
+      onTap: () {
+        onTap();
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        height: 240,
+        width: 188,
         child: Stack(
           children: [
             ClipRRect(
