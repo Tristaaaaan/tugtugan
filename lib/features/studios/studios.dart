@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -10,6 +11,7 @@ import 'package:tugtugan/commons/widgets/text/expandable_text.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 import 'package:tugtugan/core/apptext/app_text.dart';
 import 'package:tugtugan/features/authentication/auth_services.dart';
+import 'package:tugtugan/features/studios/studio_data_providers.dart';
 import 'package:tugtugan/features/studios/studio_services.dart';
 
 class Studio extends ConsumerWidget {
@@ -23,7 +25,8 @@ class Studio extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AuthServices authServices = AuthServices();
     final specificStudio = ref.watch(specificStudioProvider(studioId!));
-
+    final StudioServices studioService = StudioServices();
+    final FirebaseAuth auth = FirebaseAuth.instance;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -41,6 +44,9 @@ class Studio extends ConsumerWidget {
       body: specificStudio.when(
         data: (data) {
           final StudioModel studio = data;
+          final userId = auth.currentUser!.uid;
+          final isFollowing = studio.followers.contains(userId);
+
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(25),
@@ -98,10 +104,27 @@ class Studio extends ConsumerWidget {
                                 ),
                               ],
                             ),
-                            child: const Icon(
-                              Icons.favorite,
-                              color: Colors.red,
-                              size: 30,
+                            child: GestureDetector(
+                              onTap: () async {
+                                if (isFollowing) {
+                                  await studioService.unfollowStudio(
+                                    studio.id,
+                                    userId,
+                                  );
+                                } else {
+                                  await studioService.followStudio(
+                                    studio.id,
+                                    userId,
+                                  );
+                                }
+                              },
+                              child: isFollowing
+                                  ? const Icon(Icons.favorite,
+                                      color: Colors.red)
+                                  : const Icon(
+                                      Icons.favorite_border,
+                                      color: Colors.grey,
+                                    ),
                             ),
                           ),
                         ),
