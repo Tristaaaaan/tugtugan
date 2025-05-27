@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tugtugan/commons/widgets/containers/studio_container.dart';
@@ -85,6 +86,8 @@ class HomePage extends ConsumerWidget {
                                 image: studio.imageUrl,
                                 studioName: studio.studioName,
                                 rating: 4.2,
+                                onTap: () =>
+                                    context.go('/studio?studioId=${studio.id}'),
                               );
                             },
                           );
