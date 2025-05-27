@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class RegularTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final IconData icon;
+  final bool? numbersOnly;
+  final String title;
+  final String hintText;
   const RegularTextField({
     super.key,
     required this.controller,
+    required this.icon,
+    required this.title,
+    required this.hintText,
+    this.numbersOnly = false,
   });
-
-  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +22,10 @@ class RegularTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Studio', style: TextStyle(fontSize: 14)),
+        Text(
+          title,
+          style: const TextStyle(fontSize: 14),
+        ),
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
@@ -27,16 +38,27 @@ class RegularTextField extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.house,
-                  color: Theme.of(context).colorScheme.inversePrimary,
+                  icon,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextField(
+                    keyboardType: numbersOnly! ? TextInputType.number : null,
+                    inputFormatters: numbersOnly!
+                        ? [
+                            FilteringTextInputFormatter.digitsOnly,
+                            LengthLimitingTextInputFormatter(11),
+                          ]
+                        : null,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).colorScheme.inverseSurface,
+                    ),
                     controller: controller,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Studio name",
+                      hintText: hintText,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).colorScheme.inversePrimary,
