@@ -28,7 +28,7 @@ class StudioRegistration extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 RegularTextField(
                   key: const Key("studioName"),
@@ -55,40 +55,36 @@ class StudioRegistration extends StatelessWidget {
                   numbersOnly: true,
                 ),
                 const SizedBox(height: 24),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: RegularButton(
-                    text: "Register Studio",
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    textColor: Theme.of(context).colorScheme.surface,
-                    withoutLoading: true,
-                    withIcon: false,
-                    onTap: () async {
-                      developer
-                          .log("Studio Name: ${studioNameController.text}");
-                      developer.log(
-                          "Studio Address: ${studioAddressController.text}");
-                      developer.log(
-                          "Contact Number: ${contactNumberController.text}");
-                      developer.log(
-                        "Studio Description: ${studioDescriptionController.text}",
-                      );
-                      StudioModel studio = StudioModel(
-                        id: "",
-                        description: studioDescriptionController.text,
-                        imageUrl: "",
-                        location:
-                            const GeoPoint(0, 0), // Placeholder for location
-                        followers: [],
-                        address: studioAddressController.text,
-                        studioName: studioNameController.text,
-                      );
+                RegularButton(
+                  text: "Register Studio",
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  textColor: Theme.of(context).colorScheme.surface,
+                  withoutLoading: true,
+                  withIcon: false,
+                  onTap: () async {
+                    developer.log("Studio Name: ${studioNameController.text}");
+                    developer
+                        .log("Studio Address: ${studioAddressController.text}");
+                    developer
+                        .log("Contact Number: ${contactNumberController.text}");
+                    developer.log(
+                      "Studio Description: ${studioDescriptionController.text}",
+                    );
+                    StudioModel studio = StudioModel(
+                      id: "",
+                      description: studioDescriptionController.text,
+                      imageUrl: "",
+                      location:
+                          const GeoPoint(0, 0), // Placeholder for location
+                      followers: [],
+                      address: studioAddressController.text,
+                      studioName: studioNameController.text,
+                    );
 
-                      await studioService.addStudio(studio);
-                    },
-                    buttonKey: "registerStudio",
-                    suffixIcon: false,
-                  ),
+                    await studioService.addStudio(studio);
+                  },
+                  buttonKey: "registerStudio",
+                  suffixIcon: false,
                 ),
               ],
             ),
