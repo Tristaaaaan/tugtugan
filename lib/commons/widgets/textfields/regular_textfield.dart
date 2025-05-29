@@ -5,15 +5,21 @@ class RegularTextField extends StatelessWidget {
   final TextEditingController controller;
   final IconData icon;
   final bool? numbersOnly;
-  final String title;
+  final String? title;
   final String hintText;
+  final bool? withTitle;
+  final bool? withSuffixIcon;
+  final Function? onSuffixIconPressed;
   const RegularTextField({
     super.key,
     required this.controller,
     required this.icon,
-    required this.title,
+    this.title,
     required this.hintText,
     this.numbersOnly = false,
+    this.withTitle = true,
+    this.withSuffixIcon = false,
+    this.onSuffixIconPressed,
   });
 
   @override
@@ -22,10 +28,11 @@ class RegularTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: const TextStyle(fontSize: 14),
-        ),
+        if (withTitle!)
+          Text(
+            title!,
+            style: const TextStyle(fontSize: 14),
+          ),
         const SizedBox(height: 8),
         Container(
           decoration: BoxDecoration(
@@ -65,7 +72,15 @@ class RegularTextField extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                if (withSuffixIcon!)
+                  GestureDetector(
+                    onTap: () => onSuffixIconPressed?.call(),
+                    child: Icon(
+                      Icons.send,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
               ],
             ),
           ),

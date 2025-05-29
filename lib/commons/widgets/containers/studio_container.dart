@@ -61,18 +61,23 @@ class StudioContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(59),
-                      color: Theme.of(context).colorScheme.primaryFixedDim,
-                    ),
-                    child: Text(
-                      studioName,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Theme.of(context).colorScheme.surface,
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 120),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(59),
+                        color: Theme.of(context).colorScheme.primaryFixedDim,
+                      ),
+                      child: Text(
+                        studioName,
+                        maxLines: 2,
+                        style: TextStyle(
+                          fontSize: 12,
+                          overflow: TextOverflow.ellipsis,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
                       ),
                     ),
                   ),
