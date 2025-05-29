@@ -8,7 +8,8 @@ import 'package:tugtugan/config/app_config.dart';
 import 'package:tugtugan/config/app_environments.dart';
 import 'package:tugtugan/core/appthemes/app_themes.dart';
 import 'package:tugtugan/features/authentication/auth_gate.dart';
-import 'package:tugtugan/features/maps/maps.dart';
+import 'package:tugtugan/features/chat/presentation/chat.dart';
+import 'package:tugtugan/features/maps/presentation/maps.dart';
 import 'package:tugtugan/features/studios/studios.dart';
 import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
@@ -49,22 +50,33 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-            path: 'maps',
-            builder: (BuildContext context, GoRouterState state) {
-              final name = state.uri.queryParameters['name'] ?? 'Guest';
-              final double longitude = double.tryParse(
-                      state.uri.queryParameters['longitude'] ?? '') ??
-                  0.0;
-              final double latitude = double.tryParse(
-                      state.uri.queryParameters['latitude'] ?? '') ??
-                  0.0;
+          path: 'chat',
+          builder: (BuildContext context, GoRouterState state) {
+            final studioId = state.uri.queryParameters['studioId'] ?? '';
 
-              return Maps(
-                name: name,
-                longitude: longitude,
-                latitude: latitude,
-              );
-            }),
+            return ChatPage(
+              studioId: studioId,
+            );
+          },
+        ),
+        GoRoute(
+          path: 'maps',
+          builder: (BuildContext context, GoRouterState state) {
+            final name = state.uri.queryParameters['name'] ?? 'Guest';
+            final double longitude =
+                double.tryParse(state.uri.queryParameters['longitude'] ?? '') ??
+                    0.0;
+            final double latitude =
+                double.tryParse(state.uri.queryParameters['latitude'] ?? '') ??
+                    0.0;
+
+            return Maps(
+              name: name,
+              longitude: longitude,
+              latitude: latitude,
+            );
+          },
+        ),
       ],
     ),
   ],

@@ -1,10 +1,8 @@
 import 'dart:developer' as developer;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
-import 'package:tugtugan/core/appmodels/studio_model.dart';
 import 'package:tugtugan/features/studios/studio_services.dart';
 
 class StudioRegistration extends StatelessWidget {
@@ -56,32 +54,45 @@ class StudioRegistration extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 RegularButton(
+                  key: const Key("registerStudioButton"),
                   text: "Register Studio",
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   textColor: Theme.of(context).colorScheme.surface,
                   withoutLoading: true,
                   withIcon: false,
                   onTap: () async {
-                    developer.log("Studio Name: ${studioNameController.text}");
-                    developer
-                        .log("Studio Address: ${studioAddressController.text}");
-                    developer
-                        .log("Contact Number: ${contactNumberController.text}");
-                    developer.log(
-                      "Studio Description: ${studioDescriptionController.text}",
-                    );
-                    StudioModel studio = StudioModel(
-                      id: "",
-                      description: studioDescriptionController.text,
-                      imageUrl: "",
-                      location:
-                          const GeoPoint(0, 0), // Placeholder for location
-                      followers: [],
-                      address: studioAddressController.text,
-                      studioName: studioNameController.text,
+                    final bool areTextFieldsEmpty = checkTextFields(
+                      studioNameController,
+                      studioAddressController,
+                      contactNumberController,
                     );
 
-                    await studioService.addStudio(studio);
+                    developer.log(
+                      "Are text fields empty? $areTextFieldsEmpty",
+                    );
+
+                    if (areTextFieldsEmpty) {
+                      // Show an error message or warning
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Please fill in all fields."),
+                        ),
+                      );
+                      return;
+                    }
+
+                    // StudioModel studio = StudioModel(
+                    //   id: "",
+                    //   description: studioDescriptionController.text,
+                    //   imageUrl: "",
+                    //   location:
+                    //       const GeoPoint(0, 0), // Placeholder for location
+                    //   followers: [],
+                    //   address: studioAddressController.text,
+                    //   studioName: studioNameController.text,
+                    // );
+
+                    // await studioService.addStudio(studio);
                   },
                   buttonKey: "registerStudio",
                   suffixIcon: false,
@@ -93,4 +104,14 @@ class StudioRegistration extends StatelessWidget {
       ),
     );
   }
+}
+
+bool checkTextFields(
+  TextEditingController studioNameController,
+  TextEditingController studioAddressController,
+  TextEditingController contactNumberController,
+) {
+  return (studioNameController.text.isEmpty ||
+      studioAddressController.text.isEmpty ||
+      contactNumberController.text.isEmpty);
 }
