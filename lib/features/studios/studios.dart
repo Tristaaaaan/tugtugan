@@ -137,11 +137,14 @@ class Studio extends ConsumerWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        data.studioName,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 250),
+                        child: Text(
+                          data.studioName,
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       GestureDetector(
@@ -187,9 +190,36 @@ class Studio extends ConsumerWidget {
                       const Text("4.5 (12 reviews)"),
                     ],
                   ),
-                  const SizedBox(
-                    height: 25,
+                  const SizedBox(height: 12),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () {
+                      context.go('/chat?studioId=${studio.id}');
+                      developer.log("Chat with studio: ${studio.id}");
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.message,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "Chat",
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                  const SizedBox(height: 25),
                   ExpandableText(
                     text: studio.description,
                   ),
