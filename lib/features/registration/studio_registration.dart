@@ -31,6 +31,7 @@ class StudioRegistration extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 RegularTextField(
+                  key: const Key("studioName"),
                   controller: studioNameController,
                   icon: Icons.music_note,
                   title: "Studio Name",
@@ -38,6 +39,7 @@ class StudioRegistration extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 RegularTextField(
+                  key: const Key("studioAddress"),
                   controller: studioAddressController,
                   icon: Icons.location_on,
                   title: "Studio Address",
@@ -45,6 +47,7 @@ class StudioRegistration extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 RegularTextField(
+                  key: const Key("contactNumber"),
                   controller: contactNumberController,
                   icon: Icons.phone,
                   title: "Contact Number",
