@@ -35,6 +35,22 @@ class StudioChatModel {
       'members': members?.map((key, value) => MapEntry(key, value.toMap())),
     };
   }
+
+  factory StudioChatModel.fromMap(Map<String, dynamic> map) {
+    return StudioChatModel(
+      studioChatId: map['studioChatId'] as String?,
+      clientId: map['clientId'] as String,
+      studioId: map['studioId'] as String,
+      lastMessage: map['lastMessage'] as String,
+      lastMessageSenderId: map['lastMessageSenderId'] as String,
+      lastMessageTimeSent: map['lastMessageTimeSent'] as Timestamp,
+      lastMessageType: map['lastMessageType'] as String,
+      lastMessageId: map['lastMessageId'] as String?,
+      members: (map['members'] as Map<String, dynamic>?)?.map(
+        (key, value) => MapEntry(key, ChatMembers.fromMap(value)),
+      ),
+    );
+  }
 }
 
 class ChatMembers {

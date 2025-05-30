@@ -1,15 +1,28 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tugtugan/features/chat/application/stream_message_use_case.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:tugtugan/features/chat/data/chat_service.dart';
+import 'package:tugtugan/features/chat/domain/chat_repository.dart';
 import 'package:tugtugan/features/chat/domain/message_model.dart';
+import 'package:tugtugan/features/chat/domain/studio_chat_model.dart';
 
-final streamMessagesUseCaseProvider = Provider(
-  (ref) => StreamMessagesUseCase(ChatService()),
-);
+final chatServiceProvider = Provider<ChatRepository>((ref) {
+  return ChatService();
+});
 
-final chatMessagesStreamProvider =
-    StreamProvider.family<List<MessageModel>, (String, String)>((ref, tuple) {
-  final (studioId, clientId) = tuple;
-  final useCase = ref.watch(streamMessagesUseCaseProvider);
-  return useCase(studioId, clientId);
+final combinedChatProvider = StreamProvider.family<
+    ({List<MessageModel> messages, StudioChatModel? chat}),
+    (String studioId, String clientId)>((ref, params) {
+  final chatService = ref.watch(chatServiceProvider);
+  final (studioId, clientId) = params;
+
+  final messageStream = chatService.streamMessages(studioId, clientId);
+  final chatStream =
+      chatService.streamSpecificStudio(studioId); // FIXED: Use correct method
+
+  return Rx.combineLatest2<List<MessageModel>, StudioChatModel?,
+      ({List<MessageModel> messages, StudioChatModel? chat})>(
+    messageStream,
+    chatStream,
+    (messages, chat) => (messages: messages, chat: chat),
+  );
 });
