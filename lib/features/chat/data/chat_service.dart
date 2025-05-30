@@ -49,4 +49,18 @@ class ChatService implements ChatRepository {
           .toList();
     });
   }
+
+  @override
+  Stream<StudioChatModel> streamSpecificStudio(String studioId) {
+    return _firestore
+        .collection('studios')
+        .doc(studioId)
+        .collection('inbox')
+        .where('studioId', isEqualTo: studioId)
+        .limit(1) // Only fetch one document
+        .snapshots()
+        .map((snapshot) {
+      return StudioChatModel.fromMap(snapshot.docs.first.data());
+    });
+  }
 }

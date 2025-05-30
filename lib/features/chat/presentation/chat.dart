@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
 import 'package:tugtugan/features/chat/data/chat_service.dart';
+import 'package:tugtugan/features/chat/presentation/chat_provider.dart';
 import 'package:tugtugan/features/chat/presentation/widget/chatbox.dart';
 import 'package:tugtugan/features/chat/presentation/widget/chatscreen.dart';
 
@@ -17,26 +18,32 @@ class ChatPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final TextEditingController messageController = TextEditingController();
-
+    final conversations =
+        ref.watch(combinedChatProvider((studioId, auth.currentUser!.uid)));
     final sendMessage = SendMessageUseCase(ChatService());
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat'),
-      ),
-      body: Column(
-        children: [
-          ChatScreen(
-            studioId: studioId,
-            clientId: auth.currentUser!.uid,
+    return conversations.when(
+      data: (messages) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(messages.chat!.lastMessage),
           ),
-          ChatBox(
-            messageController: messageController,
-            studioId: studioId,
-            auth: auth,
-            sendMessage: sendMessage,
+          body: Column(
+            children: [
+              ChatScreen(
+                messages: messages.messages,
+              ),
+              ChatBox(
+                messageController: messageController,
+                studioId: studioId,
+                auth: auth,
+                sendMessage: sendMessage,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text('Error: $error')),
     );
   }
 }
