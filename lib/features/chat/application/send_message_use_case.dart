@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tugtugan/features/chat/domain/chat_repository.dart';
 import 'package:tugtugan/features/chat/domain/message_model.dart';
 import 'package:tugtugan/features/chat/domain/studio_chat_model.dart';
@@ -16,7 +15,7 @@ class SendMessageUseCase {
       studioId: messageModel.studioId,
       lastMessage: messageModel.message,
       lastMessageSenderId: messageModel.clientId,
-      lastMessageTimeSent: Timestamp.now(),
+      lastMessageTimeSent: messageModel.timestamp,
       lastMessageType: "text",
       lastMessageId: messageId,
       studioChatId: "${messageModel.studioId}${messageModel.clientId}",
