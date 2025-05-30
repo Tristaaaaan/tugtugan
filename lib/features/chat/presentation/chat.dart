@@ -5,8 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
-import 'package:tugtugan/core/appmodels/conversation_model.dart';
-import 'package:tugtugan/features/chat/chat_services.dart';
+import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
+import 'package:tugtugan/features/chat/data/chat_service.dart';
+import 'package:tugtugan/features/chat/domain/message_model.dart';
 
 class ChatPage extends ConsumerWidget {
   final String studioId;
@@ -19,7 +20,8 @@ class ChatPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final TextEditingController messageController = TextEditingController();
-    final ChatServices chatServices = ChatServices();
+
+    final useCase = SendMessageUseCase(ChatService());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Chat'),
@@ -50,8 +52,8 @@ class ChatPage extends ConsumerWidget {
                     type: "text",
                     clientId: auth.currentUser!.uid,
                     studioId: studioId);
-
-                await chatServices.addMessage(message);
+                await useCase.execute(message);
+                // await chatServices.addMessage(message);
 
                 messageController.clear();
               },
