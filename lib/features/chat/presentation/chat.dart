@@ -1,8 +1,11 @@
-import 'dart:developer' as developer;
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
+import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
+import 'package:tugtugan/features/chat/data/chat_service.dart';
+import 'package:tugtugan/features/chat/presentation/chat_provider.dart';
+import 'package:tugtugan/features/chat/presentation/widget/chatbox.dart';
+import 'package:tugtugan/features/chat/presentation/widget/chatscreen.dart';
 
 class ChatPage extends ConsumerWidget {
   final String studioId;
@@ -13,33 +16,34 @@ class ChatPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
     final TextEditingController messageController = TextEditingController();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat'),
-      ),
-      body: Column(
-        children: [
-          const Expanded(
-            child: Text("This is the chat page"),
+    final conversations =
+        ref.watch(combinedChatProvider((studioId, auth.currentUser!.uid)));
+    final sendMessage = SendMessageUseCase(ChatService());
+    return conversations.when(
+      data: (messages) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(messages.chat!.lastMessage),
           ),
-          Container(
-            padding: const EdgeInsets.all(25),
-            width: double.infinity,
-            child: RegularTextField(
-              controller: messageController,
-              icon: Icons.add,
-              hintText: "Type a message here",
-              withTitle: false,
-              withSuffixIcon: true,
-              onSuffixIconPressed: () {
-                developer.log("Message sent: ${messageController.text}");
-                messageController.clear();
-              },
-            ),
+          body: Column(
+            children: [
+              ChatScreen(
+                messages: messages.messages,
+              ),
+              ChatBox(
+                messageController: messageController,
+                studioId: studioId,
+                auth: auth,
+                sendMessage: sendMessage,
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
+      loading: () => const Center(child: CircularProgressIndicator()),
+      error: (error, stack) => Center(child: Text('Error: $error')),
     );
   }
 }
