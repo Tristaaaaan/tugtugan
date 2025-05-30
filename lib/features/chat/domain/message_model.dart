@@ -47,4 +47,40 @@ class MessageModel {
       'replySenderId': replySenderId,
     };
   }
+
+  factory MessageModel.fromMap(Map<String, dynamic> map) {
+    return MessageModel(
+      messageId: map['messageId'] ?? '',
+      message: map['message'] ?? '',
+      timestamp: map['timestamp'] ?? Timestamp.now(),
+      type: map['type'] ?? 'text',
+      downloadUrl: map['downloadUrl'],
+      filename: map['filename'],
+      clientId: map['clientId'] ?? '',
+      studioId: map['studioId'] ?? '',
+      replyMessage: map['replyMessage'],
+      replyMessageCategory: map['replyMessageCategory'],
+      replyMessageDownloadUrl: map['replyMessageDownloadUrl'],
+      replyMessageFileName: map['replyMessageFileName'],
+      replySenderId: map['replySenderId'],
+    );
+  }
+  factory MessageModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> doc) {
+    return MessageModel(
+      messageId: doc['messageId'] ?? '',
+      message: doc['message'] ?? '',
+      timestamp: doc['timestamp'] ?? Timestamp.now(),
+      type: doc['type'] ?? 'text',
+      downloadUrl: doc['downloadUrl'],
+      filename: doc['filename'],
+      clientId: doc['clientId'] ?? '',
+      studioId: doc['studioId'] ?? '',
+      replyMessage: doc['replyMessage'],
+      replyMessageCategory: doc['replyMessageCategory'],
+      replyMessageDownloadUrl: doc['replyMessageDownloadUrl'],
+      replyMessageFileName: doc['replyMessageFileName'],
+      replySenderId: doc['replySenderId'],
+    );
+  }
 }

@@ -28,4 +28,25 @@ class ChatService implements ChatRepository {
         .doc('${chatModel.studioId}${chatModel.clientId}')
         .set(chatModel.toMap());
   }
+
+  @override
+  Stream<List<MessageModel>> streamMessages(
+    String studioId,
+    String clientId,
+  ) {
+    return _firestore
+        .collection('studios')
+        .doc(studioId)
+        .collection('inbox')
+        .doc('$studioId$clientId')
+        .collection('messages')
+        .orderBy('timestamp', descending: true)
+        .limit(20) // Limit to the last 100 messages
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs
+          .map((doc) => MessageModel.fromMap(doc.data()))
+          .toList();
+    });
+  }
 }
