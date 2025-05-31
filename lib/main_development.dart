@@ -9,7 +9,12 @@ import 'package:tugtugan/config/app_environments.dart';
 import 'package:tugtugan/core/appthemes/app_themes.dart';
 import 'package:tugtugan/features/authentication/auth_gate.dart';
 import 'package:tugtugan/features/chat/presentation/chat.dart';
+import 'package:tugtugan/features/favorite/presentation/favorite.dart';
+import 'package:tugtugan/features/home/presentation/home.dart';
+import 'package:tugtugan/features/inbox/presentation/inbox.dart';
 import 'package:tugtugan/features/maps/presentation/maps.dart';
+import 'package:tugtugan/features/navigation/presentation/gate.dart';
+import 'package:tugtugan/features/profile/presentation/profile.dart';
 import 'package:tugtugan/features/studios/studios.dart';
 import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
@@ -48,6 +53,43 @@ final GoRouter _router = GoRouter(
               studioId: studioId,
             );
           },
+        ),
+        ShellRoute(
+          builder: (context, state, child) {
+            return const NavigationGate();
+          },
+          routes: [
+            GoRoute(
+              path: '/home',
+              builder: (context, state) {
+                return const HomePage();
+              },
+            ),
+            GoRoute(
+              path: '/search-studio',
+              builder: (context, state) {
+                return const InboxPage();
+              },
+            ),
+            GoRoute(
+              path: '/favorite-studio',
+              builder: (BuildContext context, GoRouterState state) {
+                return const FavoriteStudioPage();
+              },
+            ),
+            GoRoute(
+              path: '/inbox',
+              builder: (BuildContext context, GoRouterState state) {
+                return const InboxPage();
+              },
+            ),
+            GoRoute(
+              path: '/profile',
+              builder: (BuildContext context, GoRouterState state) {
+                return const ProfilePage();
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: 'chat',

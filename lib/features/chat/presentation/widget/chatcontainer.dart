@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/features/chat/domain/message_model.dart';
+import 'package:tugtugan/features/chat/presentation/widget/chatbubble.dart';
 
 class ChatScreen extends ConsumerWidget {
   final List<MessageModel> messages;
@@ -21,10 +22,8 @@ class ChatScreen extends ConsumerWidget {
               itemCount: messages.length,
               itemBuilder: (context, index) {
                 final message = messages[index];
-                return ListTile(
-                  title: Text(
-                    message.message,
-                  ),
+                return ChatBubble(
+                  message: message,
                 );
               },
             ),
