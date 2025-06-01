@@ -7,7 +7,7 @@ class MessageModel {
   final String type;
   final String? downloadUrl;
   final String? filename;
-  final String clientId;
+  final String senderId;
   final String studioId;
   final String? replyMessage;
   final String? replyMessageCategory;
@@ -23,7 +23,7 @@ class MessageModel {
     this.downloadUrl,
     required this.studioId,
     this.filename,
-    required this.clientId,
+    required this.senderId,
     this.replyMessage,
     this.replyMessageCategory,
     this.replyMessageDownloadUrl,
@@ -39,7 +39,7 @@ class MessageModel {
       'type': type,
       'downloadUrl': downloadUrl,
       'filename': filename,
-      'clientId': clientId,
+      'senderId': senderId,
       'replyMessage': replyMessage,
       'replyMessageCategory': replyMessageCategory,
       'replyMessageDownloadUrl': replyMessageDownloadUrl,
@@ -56,7 +56,7 @@ class MessageModel {
       type: map['type'] ?? 'text',
       downloadUrl: map['downloadUrl'],
       filename: map['filename'],
-      clientId: map['clientId'] ?? '',
+      senderId: map['senderId'] ?? '',
       studioId: map['studioId'] ?? '',
       replyMessage: map['replyMessage'],
       replyMessageCategory: map['replyMessageCategory'],
@@ -74,7 +74,7 @@ class MessageModel {
       type: doc['type'] ?? 'text',
       downloadUrl: doc['downloadUrl'],
       filename: doc['filename'],
-      clientId: doc['clientId'] ?? '',
+      senderId: doc['senderId'] ?? '',
       studioId: doc['studioId'] ?? '',
       replyMessage: doc['replyMessage'],
       replyMessageCategory: doc['replyMessageCategory'],

@@ -11,20 +11,20 @@ class SendMessageUseCase {
     final messageId = await repository.sendMessage(messageModel);
 
     final updatedChat = StudioChatModel(
-      clientId: messageModel.clientId,
+      clientId: messageModel.senderId,
       studioId: messageModel.studioId,
       lastMessage: messageModel.message,
-      lastMessageSenderId: messageModel.clientId,
+      lastMessageSenderId: messageModel.senderId,
       lastMessageTimeSent: messageModel.timestamp,
       lastMessageType: "text",
       lastMessageId: messageId,
-      studioChatId: "${messageModel.studioId}${messageModel.clientId}",
+      studioChatId: "${messageModel.studioId}${messageModel.senderId}",
       members: {
         messageModel.studioId: ChatMembers(
           isAdmin: false,
           receiveNotification: true,
         ),
-        messageModel.clientId: ChatMembers(
+        messageModel.senderId: ChatMembers(
           isAdmin: true,
           receiveNotification: true,
           lastMessageIdRead: messageId,
