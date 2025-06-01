@@ -60,6 +60,32 @@ class StudioModel {
     };
   }
 
+  factory StudioModel.fromMap(Map<String, dynamic> map) {
+    return StudioModel(
+      id: map['id'],
+      studioName: map['studioName'],
+      description: map['description'],
+      address: map['address'],
+      location: map['location'],
+      imageUrl: map['imageUrl'],
+      followers: List<String>.from(map['followers'] ?? []),
+      // contact: Contact.fromMap(map['contact']),
+      // images: List<String>.from(map['images'] ?? []),
+      // facilities: List<String>.from(map['facilities'] ?? []),
+      // services: (map['services'] as List)
+      //     .map((service) => Service.fromMap(service))
+      //     .toList(),
+      // availability: (map['availability'] as List)
+      //     .map((avail) => Availability.fromMap(avail))
+      //     .toList(),
+      // rules: List<String>.from(map['rules'] ?? []),
+      // ratings: Ratings.fromMap(map['ratings']),
+      // createdAt: DateTime.parse(map['createdAt']),
+      // updatedAt: DateTime.parse(map['updatedAt']),
+      // isActive: map['isActive'] ?? true,
+    );
+  }
+
   factory StudioModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     return StudioModel(
       id: doc['id'],

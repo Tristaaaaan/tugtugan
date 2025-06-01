@@ -12,7 +12,7 @@ class ChatService implements ChatRepository {
         .collection('studios')
         .doc(messageModel.studioId)
         .collection('inbox')
-        .doc('${messageModel.studioId}${messageModel.clientId}')
+        .doc('${messageModel.studioId}${messageModel.senderId}')
         .collection('messages')
         .add(messageModel.toMap());
 
@@ -41,7 +41,7 @@ class ChatService implements ChatRepository {
         .doc('$studioId$clientId')
         .collection('messages')
         .orderBy('timestamp', descending: true)
-        .limit(20) // Limit to the last 100 messages
+        .limit(20)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs
@@ -51,16 +51,18 @@ class ChatService implements ChatRepository {
   }
 
   @override
-  Stream<StudioChatModel> streamSpecificStudio(String studioId) {
+  Stream<StudioChatModel?> streamSpecificStudio(
+      String studioId, String clientId) {
+    final docId = '$studioId$clientId';
     return _firestore
         .collection('studios')
         .doc(studioId)
         .collection('inbox')
-        .where('studioId', isEqualTo: studioId)
-        .limit(1) // Only fetch one document
+        .doc(docId)
         .snapshots()
-        .map((snapshot) {
-      return StudioChatModel.fromMap(snapshot.docs.first.data());
+        .map((docSnapshot) {
+      if (!docSnapshot.exists) return null;
+      return StudioChatModel.fromMap(docSnapshot.data()!);
     });
   }
 }

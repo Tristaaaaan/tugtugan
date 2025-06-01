@@ -3,7 +3,7 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
-import 'package:tugtugan/features/studios/studio_services.dart';
+import 'package:tugtugan/features/studios/data/studio_services.dart';
 
 class StudioRegistration extends StatelessWidget {
   const StudioRegistration({super.key});
