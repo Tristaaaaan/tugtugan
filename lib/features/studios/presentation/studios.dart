@@ -11,8 +11,9 @@ import 'package:tugtugan/commons/widgets/text/expandable_text.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 import 'package:tugtugan/core/apptext/app_text.dart';
 import 'package:tugtugan/features/authentication/auth_services.dart';
+import 'package:tugtugan/features/studios/application/studio_use_case.dart';
+import 'package:tugtugan/features/studios/data/studio_services.dart';
 import 'package:tugtugan/features/studios/studio_data_providers.dart';
-import 'package:tugtugan/features/studios/studio_services.dart';
 
 class Studio extends ConsumerWidget {
   final String? studioId;
@@ -25,7 +26,7 @@ class Studio extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AuthServices authServices = AuthServices();
     final specificStudio = ref.watch(specificStudioProvider(studioId!));
-    final StudioServices studioService = StudioServices();
+    final studioService = StudioUseCase(StudioServices());
     final FirebaseAuth auth = FirebaseAuth.instance;
     return Scaffold(
       appBar: AppBar(
@@ -106,17 +107,11 @@ class Studio extends ConsumerWidget {
                             ),
                             child: GestureDetector(
                               onTap: () async {
-                                if (isFollowing) {
-                                  await studioService.unfollowStudio(
-                                    studio.id,
-                                    userId,
-                                  );
-                                } else {
-                                  await studioService.followStudio(
-                                    studio.id,
-                                    userId,
-                                  );
-                                }
+                                await studioService.execute(
+                                  isFollowing,
+                                  studio.id,
+                                  userId,
+                                );
                               },
                               child: isFollowing
                                   ? const Icon(

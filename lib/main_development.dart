@@ -15,7 +15,7 @@ import 'package:tugtugan/features/inbox/presentation/inbox.dart';
 import 'package:tugtugan/features/maps/presentation/maps.dart';
 import 'package:tugtugan/features/navigation/presentation/gate.dart';
 import 'package:tugtugan/features/profile/presentation/profile.dart';
-import 'package:tugtugan/features/studios/studios.dart';
+import 'package:tugtugan/features/studios/presentation/studios.dart';
 import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
 void main() async {
