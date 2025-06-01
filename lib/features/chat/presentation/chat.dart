@@ -4,8 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
 import 'package:tugtugan/features/chat/data/chat_service.dart';
 import 'package:tugtugan/features/chat/presentation/chat_provider.dart';
-import 'package:tugtugan/features/chat/presentation/widget/chatbox.dart';
-import 'package:tugtugan/features/chat/presentation/widget/chatcontainer.dart';
+
+import 'widget/chatbox.dart';
+import 'widget/chatcontainer.dart';
 
 class ChatPage extends ConsumerWidget {
   final String studioId;
@@ -21,16 +22,18 @@ class ChatPage extends ConsumerWidget {
     final conversations =
         ref.watch(combinedChatProvider((studioId, auth.currentUser!.uid)));
     final sendMessage = SendMessageUseCase(ChatService());
+
     return conversations.when(
       data: (messages) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(messages.chat!.lastMessage),
+            title: Text(messages.studio?.studioName ?? 'Unknown Studio'),
           ),
           body: Column(
             children: [
               ChatScreen(
                 messages: messages.messages,
+                studio: messages.studio!,
               ),
               ChatBox(
                 messageController: messageController,

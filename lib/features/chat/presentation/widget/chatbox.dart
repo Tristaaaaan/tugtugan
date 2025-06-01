@@ -46,7 +46,7 @@ class ChatBox extends StatelessWidget {
               message: messageController.text,
               timestamp: Timestamp.now(),
               type: "text",
-              clientId: auth.currentUser!.uid,
+              senderId: auth.currentUser!.uid,
               studioId: studioId);
 
           await sendMessage.execute(message);
