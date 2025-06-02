@@ -43,11 +43,13 @@ class ChatService implements ChatRepository {
         .orderBy('timestamp', descending: true)
         .limit(20)
         .snapshots()
-        .map((snapshot) {
-      return snapshot.docs
-          .map((doc) => MessageModel.fromMap(doc.data()))
-          .toList();
-    });
+        .map(
+      (snapshot) {
+        return snapshot.docs
+            .map((doc) => MessageModel.fromMap(doc.data()))
+            .toList();
+      },
+    );
   }
 
   @override
@@ -60,9 +62,26 @@ class ChatService implements ChatRepository {
         .collection('inbox')
         .doc(docId)
         .snapshots()
-        .map((docSnapshot) {
-      if (!docSnapshot.exists) return null;
-      return StudioChatModel.fromMap(docSnapshot.data()!);
+        .map(
+      (docSnapshot) {
+        if (!docSnapshot.exists) return null;
+        return StudioChatModel.fromMap(docSnapshot.data()!);
+      },
+    );
+  }
+
+  @override
+  Stream<List<StudioChatModel>> streamUserInboxStudio(String clientId) {
+    return _firestore
+        .collectionGroup('inbox')
+        .where('memberIds', arrayContains: clientId)
+        .orderBy('lastMessageTimeSent', descending: true)
+        .orderBy("__name__", descending: true)
+        .snapshots()
+        .map((querySnapshot) {
+      return querySnapshot.docs
+          .map((doc) => StudioChatModel.fromMap(doc.data()))
+          .toList();
     });
   }
 }

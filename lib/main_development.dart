@@ -46,7 +46,7 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'studio',
+          path: '/studio',
           builder: (BuildContext context, GoRouterState state) {
             final studioId = state.uri.queryParameters['studioId'] ?? '';
             return Studio(

@@ -45,13 +45,11 @@ class StudioServices implements StudioRepository {
 
   @override
   Stream<StudioModel?> streamSpecificStudio(String studioId, String clientId) {
-    return _firestore
-        .collection('studios')
-        .doc(studioId)
-        .snapshots()
-        .map((docSnapshot) {
-      if (!docSnapshot.exists) return null;
-      return StudioModel.fromMap(docSnapshot.data()!);
-    });
+    return _firestore.collection('studios').doc(studioId).snapshots().map(
+      (docSnapshot) {
+        if (!docSnapshot.exists) return null;
+        return StudioModel.fromMap(docSnapshot.data()!);
+      },
+    );
   }
 }
