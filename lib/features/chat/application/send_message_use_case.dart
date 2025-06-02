@@ -30,6 +30,7 @@ class SendMessageUseCase {
           lastMessageIdRead: messageId,
         ),
       },
+      memberIds: [messageModel.studioId, messageModel.senderId],
     );
 
     await repository.updateInbox(updatedChat);

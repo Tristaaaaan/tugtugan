@@ -10,6 +10,7 @@ class StudioChatModel {
   final String lastMessageType;
   final String? lastMessageId;
   final Map<String, ChatMembers>? members;
+  final List<String> memberIds;
 
   StudioChatModel({
     this.studioChatId,
@@ -21,6 +22,7 @@ class StudioChatModel {
     required this.lastMessageType,
     this.lastMessageId,
     this.members,
+    required this.memberIds,
   });
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -33,6 +35,7 @@ class StudioChatModel {
       'lastMessageType': lastMessageType,
       'lastMessageId': lastMessageId,
       'members': members?.map((key, value) => MapEntry(key, value.toMap())),
+      'memberIds': memberIds
     };
   }
 
@@ -49,6 +52,7 @@ class StudioChatModel {
       members: (map['members'] as Map<String, dynamic>?)?.map(
         (key, value) => MapEntry(key, ChatMembers.fromMap(value)),
       ),
+      memberIds: (map['members'] as Map<String, dynamic>?)?.keys.toList() ?? [],
     );
   }
 }
