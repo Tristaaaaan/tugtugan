@@ -5,7 +5,7 @@ import 'package:tugtugan/core/appmodels/studio_model.dart';
 final studioProvider = StreamProvider<List<StudioModel>>((ref) {
   return FirebaseFirestore.instance
       .collection("studios")
-      .limit(100)
+      .limit(10)
       .snapshots()
       .map((querySnapshot) => querySnapshot.docs
           .map((doc) => StudioModel.fromSnapshot(doc))
