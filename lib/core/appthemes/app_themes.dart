@@ -8,6 +8,7 @@ class ThemeNotifier extends StateNotifier<bool> {
     colorScheme: const ColorScheme.light(
         surface: Colors.white,
         primary: Color(0xff196EEE),
+        onPrimaryContainer: Color(0xff3592E7),
         secondary: Color(0xff2DD7A4),
         tertiary: Color(0xffB47820),
         primaryContainer: Color(0xffF3F8FE),
