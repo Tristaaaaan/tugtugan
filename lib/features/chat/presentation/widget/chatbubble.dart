@@ -1,18 +1,14 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:tugtugan/features/chat/domain/message_model.dart';
-
-import '../../../../core/appmodels/studio_model.dart';
 
 class ChatBubble extends StatelessWidget {
   final MessageModel message;
-  final StudioModel studio;
+  // final StudioModel studio;
   const ChatBubble({
     super.key,
     required this.message,
-    required this.studio,
+    // required this.studio,
   });
 
   @override
@@ -32,32 +28,32 @@ class ChatBubble extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                width: 50,
-                height: 50,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: CachedNetworkImage(
-                    imageUrl: studio.imageUrl,
-                    fit: BoxFit.cover,
-                    errorWidget: (context, url, error) => const Icon(
-                      Icons.broken_image,
-                    ),
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      baseColor: Colors.grey[400]!,
-                      highlightColor: Colors.grey[300]!,
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                        height: 150,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              // SizedBox(
+              //   width: 50,
+              //   height: 50,
+              //   child: ClipRRect(
+              //     borderRadius: BorderRadius.circular(50),
+              //     child: CachedNetworkImage(
+              //       imageUrl: studio.imageUrl,
+              //       fit: BoxFit.cover,
+              //       errorWidget: (context, url, error) => const Icon(
+              //         Icons.broken_image,
+              //       ),
+              //       placeholder: (context, url) => Shimmer.fromColors(
+              //         baseColor: Colors.grey[400]!,
+              //         highlightColor: Colors.grey[300]!,
+              //         child: Container(
+              //           width: double.infinity,
+              //           decoration: BoxDecoration(
+              //             borderRadius: BorderRadius.circular(5),
+              //             color: Theme.of(context).colorScheme.tertiary,
+              //           ),
+              //           height: 150,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(width: 8),
               Flexible(
                 child: Container(

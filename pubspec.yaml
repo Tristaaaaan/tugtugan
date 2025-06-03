@@ -25,6 +25,8 @@ dependencies:
   shimmer: ^3.0.0
   rxdart: ^0.28.0
   intl: ^0.20.2
+  firebase_pagination: ^4.1.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
