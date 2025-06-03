@@ -2,14 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class StudioContainer extends StatelessWidget {
+class StudioTile extends StatelessWidget {
   final String image;
   final String studioName;
   final double rating;
 
   final void Function() onTap;
 
-  const StudioContainer({
+  const StudioTile({
     super.key,
     required this.image,
     required this.studioName,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tugtugan/commons/widgets/containers/studio_container.dart';
+import 'package:tugtugan/commons/widgets/tiles/studio_tiles.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 import 'package:tugtugan/features/studios/studio_data_providers.dart';
 
@@ -82,7 +82,7 @@ class HomePage extends ConsumerWidget {
                             itemCount: data.length,
                             itemBuilder: (context, index) {
                               final StudioModel studio = data[index];
-                              return StudioContainer(
+                              return StudioTile(
                                 image: studio.imageUrl,
                                 studioName: studio.studioName,
                                 rating: 4.2,
