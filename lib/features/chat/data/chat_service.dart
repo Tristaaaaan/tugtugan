@@ -41,7 +41,7 @@ class ChatService implements ChatRepository {
         .doc('$studioId$clientId')
         .collection('messages')
         .orderBy('timestamp', descending: true)
-        .limit(20)
+        .limit(15)
         .snapshots()
         .map(
       (snapshot) {

@@ -67,20 +67,25 @@ class MessageModel {
   }
   factory MessageModel.fromSnapshot(
       DocumentSnapshot<Map<String, dynamic>> doc) {
+    final data = doc.data();
+    if (data == null) {
+      throw StateError('Missing data for messageId: ${doc.id}');
+    }
+
     return MessageModel(
-      messageId: doc['messageId'] ?? '',
-      message: doc['message'] ?? '',
-      timestamp: doc['timestamp'] ?? Timestamp.now(),
-      type: doc['type'] ?? 'text',
-      downloadUrl: doc['downloadUrl'],
-      filename: doc['filename'],
-      senderId: doc['senderId'] ?? '',
-      studioId: doc['studioId'] ?? '',
-      replyMessage: doc['replyMessage'],
-      replyMessageCategory: doc['replyMessageCategory'],
-      replyMessageDownloadUrl: doc['replyMessageDownloadUrl'],
-      replyMessageFileName: doc['replyMessageFileName'],
-      replySenderId: doc['replySenderId'],
+      messageId: data['messageId'] ?? doc.id,
+      message: data['message'] ?? '',
+      timestamp: data['timestamp'] ?? Timestamp.now(),
+      type: data['type'] ?? 'text',
+      downloadUrl: data['downloadUrl'],
+      filename: data['filename'],
+      senderId: data['senderId'] ?? '',
+      studioId: data['studioId'] ?? '',
+      replyMessage: data['replyMessage'],
+      replyMessageCategory: data['replyMessageCategory'],
+      replyMessageDownloadUrl: data['replyMessageDownloadUrl'],
+      replyMessageFileName: data['replyMessageFileName'],
+      replySenderId: data['replySenderId'],
     );
   }
 }
