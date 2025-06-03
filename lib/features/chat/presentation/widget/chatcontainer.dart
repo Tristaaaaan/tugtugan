@@ -1,36 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:tugtugan/core/appmodels/studio_model.dart';
-import 'package:tugtugan/features/chat/domain/message_model.dart';
-import 'package:tugtugan/features/chat/presentation/widget/chatbubble.dart';
+import 'package:tugtugan/features/chat/presentation/chat_provider.dart';
+
+import 'chatbubble.dart';
 
 class ChatScreen extends ConsumerWidget {
-  final List<MessageModel> messages;
-  final StudioModel studio;
+  final String studioId;
+  final String clientId;
+
   const ChatScreen({
     super.key,
-    required this.messages,
-    required this.studio,
+    required this.studioId,
+    required this.clientId,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(realtimeChatStateProvider((studioId, clientId)));
+
     return Expanded(
-      child: messages.isEmpty
-          ? const Center(
-              child: Text('No messages'),
-            )
-          : ListView.builder(
-              reverse: true,
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                final message = messages[index];
-                return ChatBubble(
-                  message: message,
-                  studio: studio,
-                );
-              },
-            ),
+      child: ListView.builder(
+        reverse: true,
+        controller: state.homeScrollController,
+        itemCount: state.users.length + (state.hasNextUser ? 1 : 0),
+        itemBuilder: (context, index) {
+          if (index < state.users.length) {
+            final user = state.users[index];
+            return ChatBubble(message: user);
+          } else {
+            return const Padding(
+              padding: EdgeInsets.all(16),
+              child: Center(child: CircularProgressIndicator()),
+            );
+          }
+        },
+      ),
     );
   }
 }

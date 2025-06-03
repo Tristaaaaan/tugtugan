@@ -4,9 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
 import 'package:tugtugan/features/chat/data/chat_service.dart';
 import 'package:tugtugan/features/chat/presentation/chat_provider.dart';
-
-import 'widget/chatbox.dart';
-import 'widget/chatcontainer.dart';
+import 'package:tugtugan/features/chat/presentation/widget/chatbox.dart';
+import 'package:tugtugan/features/chat/presentation/widget/chatcontainer.dart';
 
 class ChatPage extends ConsumerWidget {
   final String studioId;
@@ -31,10 +30,11 @@ class ChatPage extends ConsumerWidget {
           ),
           body: Column(
             children: [
-              ChatScreen(
-                messages: messages.messages,
-                studio: messages.studio!,
-              ),
+              ChatScreen(studioId: studioId, clientId: auth.currentUser!.uid),
+              // ChatScreen(
+              //   messages: messages.messages,
+              //   studio: messages.studio!,
+              // ),
               ChatBox(
                 messageController: messageController,
                 studioId: studioId,
