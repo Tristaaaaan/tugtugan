@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 
-import '../domain/chat_repository.dart';
+import '../domain/studio_repository.dart';
 
 class StudioServices implements StudioRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
