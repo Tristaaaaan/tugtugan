@@ -8,7 +8,7 @@ import 'package:tugtugan/config/app_config.dart';
 import 'package:tugtugan/config/app_environments.dart';
 import 'package:tugtugan/core/appthemes/app_themes.dart';
 import 'package:tugtugan/features/authentication/auth_gate.dart';
-import 'package:tugtugan/features/chat/presentation/chat.dart';
+import 'package:tugtugan/features/chat/presentation/chat_screen.dart';
 import 'package:tugtugan/features/favorite/presentation/favorite.dart';
 import 'package:tugtugan/features/home/presentation/home.dart';
 import 'package:tugtugan/features/inbox/presentation/inbox.dart';

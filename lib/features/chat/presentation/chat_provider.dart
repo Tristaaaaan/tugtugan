@@ -51,6 +51,7 @@ final chatTestRepositoryProvider =
     return RealTimeChatRepository(studioId: studioId, clientId: clientId);
   },
 );
+
 final realtimeChatStateProvider = ChangeNotifierProvider.family<
     RealTimeChatState, (String studioId, String clientId)>(
   (ref, args) {
