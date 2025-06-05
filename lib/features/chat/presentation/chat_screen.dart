@@ -30,11 +30,10 @@ class ChatPage extends ConsumerWidget {
           ),
           body: Column(
             children: [
-              ChatScreen(studioId: studioId, clientId: auth.currentUser!.uid),
-              // ChatScreen(
-              //   messages: messages.messages,
-              //   studio: messages.studio!,
-              // ),
+              ChatScreen(
+                studioId: studioId,
+                clientId: auth.currentUser!.uid,
+              ),
               ChatBox(
                 messageController: messageController,
                 studioId: studioId,

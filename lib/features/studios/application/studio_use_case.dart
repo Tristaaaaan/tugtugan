@@ -1,4 +1,4 @@
-import 'package:tugtugan/features/studios/domain/chat_repository.dart';
+import 'package:tugtugan/features/studios/domain/studio_repository.dart';
 
 class StudioUseCase {
   final StudioRepository repository;
