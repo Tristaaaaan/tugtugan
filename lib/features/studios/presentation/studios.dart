@@ -145,7 +145,7 @@ class Studio extends ConsumerWidget {
                       GestureDetector(
                         onTap: () {
                           context.go(
-                              '/maps?name=Studio&latitude=${studio.location.latitude}&longitude=${studio.location.longitude}');
+                              '/maps?name=${studio.studioName}&latitude=${studio.location.latitude}&longitude=${studio.location.longitude}');
                           developer.log("Show map");
                           developer.log(data.studioName);
                           developer
