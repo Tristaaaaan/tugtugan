@@ -1,14 +1,13 @@
-import 'dart:developer' as developer;
+import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
-import 'package:tugtugan/core/appimages/app_images.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class Maps extends StatelessWidget {
+class Maps extends StatefulWidget {
   final String name;
   final double latitude;
   final double longitude;
+
   const Maps({
     super.key,
     required this.name,
@@ -17,67 +16,43 @@ class Maps extends StatelessWidget {
   });
 
   @override
+  State<Maps> createState() => _MapState();
+}
+
+class _MapState extends State<Maps> {
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
+
+  late final CameraPosition _initialPosition;
+
+  @override
+  void initState() {
+    super.initState();
+    _initialPosition = CameraPosition(
+      target: LatLng(widget.latitude, widget.longitude),
+      zoom: 19,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    developer.log('Longitude: $longitude, Latitude: $latitude, Name: $name');
-    // final LocationService locationService = LocationService();
     return Scaffold(
       appBar: AppBar(
-        title: Text(name),
+        title: Text(widget.name),
       ),
-      body: Stack(
-        children: [
-          MapWidget(
-            key: const ValueKey('map'),
-            cameraOptions: CameraOptions(
-              center: Point(
-                coordinates: Position(
-                  longitude,
-                  latitude,
-                ),
-              ),
-              zoom: 12,
-            ),
-            styleUri: MapboxStyles.MAPBOX_STREETS,
-            onMapCreated: (MapboxMap map) async {
-              // final locationData = await locationService.getCurrentLocation();
-              map.flyTo(
-                CameraOptions(
-                  center: Point(
-                    coordinates: Position(longitude, latitude),
-                  ),
-                  zoom: 14.0,
-                ),
-                MapAnimationOptions(duration: 1000),
-              );
-
-              final annotationManager =
-                  await map.annotations.createPointAnnotationManager();
-
-              await annotationManager.create(PointAnnotationOptions(
-                geometry: Point(
-                  coordinates: Position(
-                    longitude,
-                    latitude,
-                  ),
-                ),
-                image: (await rootBundle.load(AppImages.mapMarker))
-                    .buffer
-                    .asUint8List(),
-              ));
-            },
+      body: GoogleMap(
+        mapType: MapType.hybrid,
+        initialCameraPosition: _initialPosition,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        markers: {
+          Marker(
+            markerId: const MarkerId('targetLocation'),
+            position: LatLng(widget.latitude, widget.longitude),
+            infoWindow: InfoWindow(title: widget.name),
           ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.all(16),
-            child: ElevatedButton(
-              onPressed: () {
-                // Handle button press
-                developer.log('Button pressed at $latitude, $longitude');
-              },
-              child: const Text('Pressss Me'),
-            ),
-          ),
-        ],
+        },
       ),
     );
   }

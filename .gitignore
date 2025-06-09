@@ -46,3 +46,6 @@ app.*.map.json
 **lib/firebase
 /functions/*.json
 .env
+
+# Secrets
+secrets.properties
