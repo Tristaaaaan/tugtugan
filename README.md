@@ -7,11 +7,15 @@ Tugtugan will be the go-to platform for musicians looking for practice studios o
 * Find music studios near you.
 * Book appointments effortlessly.
 
-## Technology Tools
+**Core Technologies:**
 
-* Dart
-* Flutter
-* Firebase
+*   **Framework:** Flutter (v3.32.x+)
+*   **Language:** Dart (v3.8.x+)
+*   **State Management:** Riverpod (v2.x+)
+*   **Routing:** GoRouter
+*   **HTTP Client:** Dio
+*   **Build System:** Flutter Build System
+*   **Flavors:** Development, Staging, Production
 
 ## Contact
 
