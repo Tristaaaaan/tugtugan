@@ -24,16 +24,17 @@ class StudioTile extends StatelessWidget {
         onTap();
       },
       child: Container(
+        margin: const EdgeInsets.only(right: 10),
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20),
         ),
-        height: 240,
-        width: 188,
+        height: 300,
+        width: 167,
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(15),
               child: CachedNetworkImage(
                 imageUrl: image,
                 fit: BoxFit.cover,
