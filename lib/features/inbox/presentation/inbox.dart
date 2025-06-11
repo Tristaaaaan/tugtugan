@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:tugtugan/commons/widgets/avatars/avatar_placeholder.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 
 import '../../chat/domain/studio_chat_model.dart';
@@ -83,25 +84,27 @@ class InboxBox extends StatelessWidget {
                   height: 50,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
-                    child: CachedNetworkImage(
-                      imageUrl: studio.imageUrl,
-                      fit: BoxFit.cover,
-                      errorWidget: (context, url, error) => const Icon(
-                        Icons.broken_image,
-                      ),
-                      placeholder: (context, url) => Shimmer.fromColors(
-                        baseColor: Colors.grey[400]!,
-                        highlightColor: Colors.grey[300]!,
-                        child: Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Theme.of(context).colorScheme.tertiary,
+                    child: studio.imageUrl.isEmpty
+                        ? UserAvatarPlaceHolder(name: studio.studioName)
+                        : CachedNetworkImage(
+                            imageUrl: studio.imageUrl,
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.broken_image,
+                            ),
+                            placeholder: (context, url) => Shimmer.fromColors(
+                              baseColor: Colors.grey[400]!,
+                              highlightColor: Colors.grey[300]!,
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
+                                height: 150,
+                              ),
+                            ),
                           ),
-                          height: 150,
-                        ),
-                      ),
-                    ),
                   ),
                 ),
                 const SizedBox(width: 10),
