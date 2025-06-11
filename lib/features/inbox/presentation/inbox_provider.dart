@@ -1,5 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:tugtugan/features/inbox/data/chat_service.dart';
+import 'package:tugtugan/features/inbox/domain/inbox_repository.dart';
 import 'package:tugtugan/features/inbox/domain/realtime_inbox_repository.dart';
 import 'package:tugtugan/features/inbox/presentation/inbox_state.dart';
 import 'package:tugtugan/features/studios/presentation/studio_provider.dart';
@@ -27,6 +29,10 @@ final enrichedInboxProvider = StreamProvider.family<
       return Rx.combineLatestList(studioStreams);
     },
   );
+});
+
+final inboxServiceProvider = Provider<InboxRepository>((ref) {
+  return InboxService();
 });
 
 final studioInboxProvider = StreamProvider.family<List<StudioModel>, String>(
