@@ -7,6 +7,7 @@ import 'package:tugtugan/config/app_config.dart';
 import 'package:tugtugan/config/app_environments.dart';
 import 'package:tugtugan/core/appthemes/app_themes.dart';
 import 'package:tugtugan/features/authentication/auth_gate.dart';
+import 'package:tugtugan/features/book_appointment/presentation/screen/book_appointment.dart';
 import 'package:tugtugan/features/chat/presentation/chat_screen.dart';
 import 'package:tugtugan/features/favorite/presentation/favorite.dart';
 import 'package:tugtugan/features/home/presentation/home.dart';
@@ -48,6 +49,14 @@ final GoRouter _router = GoRouter(
               studioId: studioId,
             );
           },
+          routes: [
+            GoRoute(
+              path: 'book-appointment',
+              builder: (BuildContext context, GoRouterState state) {
+                return const BookAppointmentScreen();
+              },
+            ),
+          ],
         ),
         ShellRoute(
           builder: (context, state, child) {
