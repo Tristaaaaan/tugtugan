@@ -85,7 +85,7 @@ class HomePage extends ConsumerWidget {
                           ),
                           const SizedBox(height: 12),
                           SizedBox(
-                            height: 180,
+                            height: 167,
                             child: studioList.when(
                               data: (data) {
                                 return ListView.builder(
@@ -99,8 +99,8 @@ class HomePage extends ConsumerWidget {
                                       image: studio.imageUrl,
                                       studioName: studio.studioName,
                                       rating: 4.2,
-                                      onTap: () => context
-                                          .go('/studio?studioId=${studio.id}'),
+                                      onTap: () => context.push(
+                                          '/studio?studioId=${studio.id}'),
                                     );
                                   },
                                 );
@@ -143,7 +143,7 @@ class HomePage extends ConsumerWidget {
                           ),
                           const SizedBox(height: 12),
                           SizedBox(
-                            height: 180,
+                            height: 167,
                             child: studioList.when(
                               data: (data) {
                                 return ListView.builder(
