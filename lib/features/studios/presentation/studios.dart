@@ -201,7 +201,8 @@ class Studio extends ConsumerWidget {
                         children: [
                           Icon(
                             Icons.message,
-                            color: Theme.of(context).colorScheme.primary,
+                            color:
+                                Theme.of(context).colorScheme.primaryFixedDim,
                           ),
                           const SizedBox(height: 4),
                           const Text(
@@ -239,29 +240,23 @@ class Studio extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                const Text(
-                  AppText.price,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
+              Text(
+                "₱199/hr",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primaryFixedDim,
                 ),
-                Text(
-                  "\$199",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ]),
+              ),
               RegularButton(
                 text: AppText.bookNow,
-                backgroundColor: Theme.of(context).colorScheme.primary,
+                backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
                 textColor: Theme.of(context).colorScheme.surface,
                 buttonKey: "bookButton",
                 withIcon: false,
+                onTap: () {
+                  context.push('/book-appointment');
+                },
               ),
             ],
           ),
