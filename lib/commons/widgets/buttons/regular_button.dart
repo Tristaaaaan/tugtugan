@@ -14,8 +14,10 @@ class RegularButton extends ConsumerWidget {
   final bool? withoutLoading;
   final void Function()? onTap;
   final bool? suffixIcon;
+  final bool? withBorder;
   const RegularButton({
     super.key,
+    this.withBorder = false,
     this.withIcon = true,
     required this.text,
     required this.backgroundColor,
@@ -34,13 +36,14 @@ class RegularButton extends ConsumerWidget {
       height: 55,
       width: 200,
       decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).colorScheme.secondary,
-          width: 1,
-        ),
-      ),
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(16),
+          border: withBorder!
+              ? Border.all(
+                  color: Theme.of(context).colorScheme.secondary,
+                  width: 1,
+                )
+              : null),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: GestureDetector(
