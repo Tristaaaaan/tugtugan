@@ -4,4 +4,6 @@ class AppText {
   static const bookNow = "Book Now";
 
   static const price = "Price";
+
+  static const datePref = "Date and Preferences";
 }
