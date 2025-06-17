@@ -17,6 +17,8 @@ import 'package:tugtugan/features/profile/presentation/profile.dart';
 import 'package:tugtugan/features/studios/presentation/studios.dart';
 import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
+import 'features/book_appointment/presentation/screen/book_appointment.dart';
+
 void main() async {
   AppConfig.setEnvironment(Flavors.development);
 
@@ -41,12 +43,10 @@ final GoRouter _router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: '/studio',
-          builder: (BuildContext context, GoRouterState state) {
+          path: 'studio',
+          builder: (context, state) {
             final studioId = state.uri.queryParameters['studioId'] ?? '';
-            return Studio(
-              studioId: studioId,
-            );
+            return Studio(studioId: studioId);
           },
         ),
         ShellRoute(
@@ -95,6 +95,10 @@ final GoRouter _router = GoRouter(
               studioId: studioId,
             );
           },
+        ),
+        GoRoute(
+          path: 'book-appointment',
+          builder: (context, state) => const BookAppointmentScreen(),
         ),
         GoRoute(
           path: 'maps',
