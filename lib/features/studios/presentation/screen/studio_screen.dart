@@ -15,6 +15,8 @@ import 'package:tugtugan/features/studios/application/studio_use_case.dart';
 import 'package:tugtugan/features/studios/data/studio_services.dart';
 import 'package:tugtugan/features/studios/studio_data_providers.dart';
 
+import '../../../reviews/presentation/widgets/write_review.dart';
+
 class Studio extends ConsumerWidget {
   final String? studioId;
   const Studio({
@@ -207,6 +209,35 @@ class Studio extends ConsumerWidget {
                           const SizedBox(height: 4),
                           const Text(
                             "Chat",
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () async {
+                      showReviewSheet(context);
+                      developer.log("Chat with studio: ${studio.id}");
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.message,
+                            color:
+                                Theme.of(context).colorScheme.primaryFixedDim,
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "Review",
                             style: TextStyle(
                               fontSize: 14,
                             ),
