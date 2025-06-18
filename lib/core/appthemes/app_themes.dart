@@ -24,7 +24,8 @@ class ThemeNotifier extends StateNotifier<bool> {
         surface: Colors.black,
         primary: Colors.white,
         secondary: Colors.white,
-        tertiary: const Color.fromARGB(255, 180, 180, 180).withOpacity(0.2),
+        tertiary:
+            const Color.fromARGB(255, 180, 180, 180).withValues(alpha: 0.2),
         inversePrimary: Colors.grey.shade900,
         tertiaryContainer: const Color(0xff939cc4),
         primaryFixedDim: Colors.white),

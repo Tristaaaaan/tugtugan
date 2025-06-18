@@ -3,21 +3,20 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
-import 'package:tugtugan/features/studios/data/studio_services.dart';
 
 class StudioRegistration extends StatelessWidget {
   const StudioRegistration({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final StudioServices studioService = StudioServices();
+    // final StudioServices studioService = StudioServices();
     final TextEditingController studioNameController = TextEditingController();
     final TextEditingController studioAddressController =
         TextEditingController();
     final TextEditingController contactNumberController =
         TextEditingController();
-    final TextEditingController studioDescriptionController =
-        TextEditingController();
+    // final TextEditingController studioDescriptionController =
+    //     TextEditingController();
 
     return Scaffold(
       body: Center(
