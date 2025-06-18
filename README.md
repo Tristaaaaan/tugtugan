@@ -6,6 +6,7 @@ Tugtugan will be the go-to platform for musicians looking for practice studios o
 
 * Find music studios near you.
 * Book appointments effortlessly.
+* Rent music equipments
 
 ## Core Technologies
 
