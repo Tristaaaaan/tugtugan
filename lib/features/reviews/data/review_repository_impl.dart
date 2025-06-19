@@ -13,11 +13,15 @@ class ReviewRepositoryImpl extends ReviewRepository {
   @override
   Future<void> addReview(ReviewModel reviewData) async {
     try {
-      await _firestore
+      final docRef = _firestore
           .collection("studios")
           .doc(reviewData.studioId)
           .collection("reviews")
-          .add(reviewData.toMap());
+          .doc();
+
+      final reviewWithId = reviewData.toMap()..['reviewId'] = docRef.id;
+
+      await docRef.set(reviewWithId);
     } catch (e, st) {
       developer.log('Error adding review', error: e, stackTrace: st);
       rethrow;

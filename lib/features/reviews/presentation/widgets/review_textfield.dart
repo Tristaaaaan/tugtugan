@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class ReviewTextField extends StatefulWidget {
-  const ReviewTextField({super.key});
-
-  @override
-  State<ReviewTextField> createState() => _ReviewTextFieldState();
-}
-
 class _ReviewTextFieldState extends State<ReviewTextField> {
   final int maxChars = 250;
   late final TextEditingController _controller;
@@ -18,9 +11,11 @@ class _ReviewTextFieldState extends State<ReviewTextField> {
     super.initState();
     _controller = TextEditingController()
       ..addListener(() {
+        final text = _controller.text;
         setState(() {
-          remaining = maxChars - _controller.text.length;
+          remaining = maxChars - text.length;
         });
+        widget.onChanged(text); // ✅ Update parent/provider
       });
   }
 
@@ -61,9 +56,8 @@ class _ReviewTextFieldState extends State<ReviewTextField> {
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
-              counterText: '', // Hide default counter
-              contentPadding: EdgeInsets.fromLTRB(
-                  12, 12, 12, 36), // space for custom counter
+              counterText: '',
+              contentPadding: EdgeInsets.fromLTRB(12, 12, 12, 36),
             ),
           ),
         ),
@@ -91,4 +85,16 @@ class SpaceSanitizerFormatter extends TextInputFormatter {
       selection: TextSelection.collapsed(offset: newText.length),
     );
   }
+}
+
+class ReviewTextField extends StatefulWidget {
+  final void Function(String) onChanged;
+
+  const ReviewTextField({
+    super.key,
+    required this.onChanged,
+  });
+
+  @override
+  State<ReviewTextField> createState() => _ReviewTextFieldState();
 }

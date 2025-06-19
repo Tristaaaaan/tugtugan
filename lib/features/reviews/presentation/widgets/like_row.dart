@@ -1,43 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../provider/review_provider.dart';
 import 'like_option_tile.dart';
 
-class LikeOptionsRow extends StatefulWidget {
+class LikeOptionsRow extends ConsumerStatefulWidget {
   const LikeOptionsRow({super.key});
 
   @override
-  State<LikeOptionsRow> createState() => _LikeOptionsRowState();
+  ConsumerState<LikeOptionsRow> createState() => _LikeOptionsRowState();
 }
 
-class _LikeOptionsRowState extends State<LikeOptionsRow> {
-  String? selected; // can be 'like', 'dislike', or null
-
+class _LikeOptionsRowState extends ConsumerState<LikeOptionsRow> {
   @override
   Widget build(BuildContext context) {
+    final selected = ref.watch(wouldRecommendProvider);
+
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         LikeOption(
           icon: Icons.thumb_up_rounded,
           text: 'Yes',
-          isSelected: selected == 'Yes',
+          isSelected: selected == true, // ✅ Safe nullable check
           onTap: () {
-            setState(() {
-              selected = selected == 'Yes' ? null : 'Yes';
-            });
+            ref.read(wouldRecommendProvider.notifier).state =
+                selected == true ? null : true;
           },
         ),
-        const SizedBox(
-          width: 50,
-        ),
+        const SizedBox(width: 50),
         LikeOption(
           icon: Icons.thumb_down,
           text: 'No',
-          isSelected: selected == 'No',
+          isSelected: selected == false, // ✅ Safe nullable check
           onTap: () {
-            setState(() {
-              selected = selected == 'No' ? null : 'No';
-            });
+            ref.read(wouldRecommendProvider.notifier).state =
+                selected == false ? null : false;
           },
         ),
       ],

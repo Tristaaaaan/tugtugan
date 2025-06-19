@@ -220,7 +220,7 @@ class Studio extends ConsumerWidget {
                   InkWell(
                     borderRadius: BorderRadius.circular(8),
                     onTap: () async {
-                      showReviewSheet(context);
+                      showReviewSheet(context, studio.id);
                       developer.log("Chat with studio: ${studio.id}");
                     },
                     child: Container(
