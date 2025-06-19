@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ReviewModel {
+  final String? reviewId;
   final String userId;
   final String studioId;
   final int experienceRating;
   final int instrumentRating;
-  final bool wouldRecommend;
+  final bool? wouldRecommend;
   final String writtenReview;
-  final DateTime createdAt;
-  final DateTime? updatedAt;
-  final List<String>? images;
+  final Timestamp createdAt;
+  final Timestamp? updatedAt;
+  final List<String?>? images; // nullable list with 3 nullable strings
+
   ReviewModel({
+    this.reviewId,
     required this.userId,
     required this.studioId,
     required this.experienceRating,
@@ -20,24 +23,29 @@ class ReviewModel {
     required this.createdAt,
     this.updatedAt,
     this.images,
-  });
+  }) : assert(images == null || images.length == 3,
+            'If provided, images must contain exactly 3 items');
 
   factory ReviewModel.fromMap(Map<String, dynamic> map) {
     return ReviewModel(
-      userId: map['userId'],
-      studioId: map['studioId'],
-      experienceRating: map['experienceRating'],
-      instrumentRating: map['instrumentRating'],
-      wouldRecommend: map['wouldRecommend'],
-      writtenReview: map['writtenReview'],
-      createdAt: (map['createdAt'] as Timestamp).toDate(),
-      updatedAt: (map['updatedAt'] as Timestamp).toDate(),
-      images: List<String>.from(map['images']),
+      reviewId: map['reviewId'] as String?,
+      userId: map['userId'] as String,
+      studioId: map['studioId'] as String,
+      experienceRating: map['experienceRating'] as int,
+      instrumentRating: map['instrumentRating'] as int,
+      wouldRecommend: map['wouldRecommend'] as bool?,
+      writtenReview: map['writtenReview'] as String,
+      createdAt: map['createdAt'] as Timestamp,
+      updatedAt: map['updatedAt'] as Timestamp?,
+      images: map['images'] != null
+          ? List<String?>.from(map['images'] as List)
+          : null,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'reviewId': reviewId,
       'userId': userId,
       'studioId': studioId,
       'experienceRating': experienceRating,
@@ -46,22 +54,25 @@ class ReviewModel {
       'writtenReview': writtenReview,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
-      'images': images
+      'images': images,
     };
   }
 
   factory ReviewModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> doc) {
     final data = doc.data()!;
     return ReviewModel(
-      userId: data['userId'],
-      studioId: data['studioId'],
-      experienceRating: data['experienceRating'],
-      instrumentRating: data['instrumentRating'],
-      wouldRecommend: data['wouldRecommend'],
-      writtenReview: data['writtenReview'],
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
-      updatedAt: (data['updatedAt'] as Timestamp).toDate(),
-      images: List<String>.from(data['images']),
+      reviewId: doc.id,
+      userId: data['userId'] as String,
+      studioId: data['studioId'] as String,
+      experienceRating: data['experienceRating'] as int,
+      instrumentRating: data['instrumentRating'] as int,
+      wouldRecommend: data['wouldRecommend'] as bool?, // ✅ updated
+      writtenReview: data['writtenReview'] as String,
+      createdAt: data['createdAt'] as Timestamp,
+      updatedAt: data['updatedAt'] as Timestamp?,
+      images: data['images'] != null
+          ? List<String?>.from(data['images'] as List)
+          : null,
     );
   }
 }

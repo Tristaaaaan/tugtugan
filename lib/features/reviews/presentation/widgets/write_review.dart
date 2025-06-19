@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'review_form.dart';
 
-void showReviewSheet(BuildContext context) {
+void showReviewSheet(BuildContext context, String studioId) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -13,14 +13,16 @@ void showReviewSheet(BuildContext context) {
     builder: (context) {
       return DraggableScrollableSheet(
         expand: false,
-        initialChildSize: 0.5, // 50% of screen height
-        minChildSize: 0.4, // Minimum when collapsed
-        maxChildSize: 0.9, // Maximum when expanded
+        initialChildSize: 0.5,
+        minChildSize: 0.4,
+        maxChildSize: 0.9,
         builder: (context, scrollController) {
           return SingleChildScrollView(
             controller: scrollController,
             padding: const EdgeInsets.all(16.0),
-            child: const ReviewForm(),
+            child: ReviewForm(
+              studioId: studioId,
+            ),
           );
         },
       );
