@@ -15,6 +15,7 @@ class RegularButton extends ConsumerWidget {
   final void Function()? onTap;
   final bool? suffixIcon;
   final bool? withBorder;
+  final double width;
   const RegularButton({
     super.key,
     this.withBorder = false,
@@ -26,6 +27,7 @@ class RegularButton extends ConsumerWidget {
     this.withoutLoading = false,
     this.onTap,
     this.suffixIcon = true,
+    required this.width,
   });
 
   @override
@@ -34,7 +36,7 @@ class RegularButton extends ConsumerWidget {
         ref.watch(regularButtonLoadingProvider)[buttonKey] ?? false;
     return Container(
       height: 55,
-      width: 200,
+      width: width,
       decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(16),

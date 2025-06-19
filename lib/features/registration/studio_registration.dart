@@ -55,6 +55,7 @@ class StudioRegistration extends StatelessWidget {
                 RegularButton(
                   key: const Key("registerStudioButton"),
                   text: "Register Studio",
+                  width: double.infinity,
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   textColor: Theme.of(context).colorScheme.surface,
                   withoutLoading: true,

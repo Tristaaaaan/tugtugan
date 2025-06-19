@@ -280,6 +280,7 @@ class Studio extends ConsumerWidget {
                 ),
               ),
               RegularButton(
+                width: 200,
                 text: AppText.bookNow,
                 backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
                 textColor: Theme.of(context).colorScheme.surface,
