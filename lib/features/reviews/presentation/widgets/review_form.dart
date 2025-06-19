@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/reviews/presentation/widgets/like_row.dart';
-import 'package:tugtugan/features/reviews/presentation/widgets/review_textfield.dart';
-import 'package:tugtugan/features/reviews/presentation/widgets/review_with_rating.dart';
+import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
+
+import 'feedback_section.dart';
+import 'header_section.dart';
+import 'recommendation_section.dart';
+import 'review_with_rating.dart';
 
 class ReviewForm extends StatelessWidget {
   const ReviewForm({super.key});
@@ -12,52 +15,35 @@ class ReviewForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const Text('Leave a Review',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+        const SectionHeader(title: 'Leave a Review'),
         const SizedBox(height: 18),
-        const Text(
-          "Instruments",
-          style: TextStyle(fontSize: 24),
-        ),
         const ReviewWithRating(
           key: Key('experience_rating'),
+          title: "Experience",
+          description: "How was your experience with this studio?",
         ),
+        const SizedBox(height: 10),
         const ReviewWithRating(
           key: Key('instrument_rating'),
+          title: "Instrument",
+          description: "How was the instrument in this studio?",
         ),
-        const Text(
-          "How was you overall experience?",
-          style: TextStyle(fontSize: 16),
-        ),
-        const Text(
-          "Would you recommend this studio to a friend?",
-          style: TextStyle(fontSize: 16),
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-        const LikeOptionsRow(),
         const SizedBox(height: 10),
         const Divider(thickness: .5),
         const SizedBox(height: 10),
-        const Text(
-          "Care to share more?",
-          style: TextStyle(fontSize: 24),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        const Text(
-          "How was your overall experience?",
-          style: TextStyle(fontSize: 16),
-        ),
-        const ReviewTextField(),
+        const RecommendationSection(),
+        const SizedBox(height: 10),
+        const Divider(thickness: .5),
+        const SizedBox(height: 10),
+        const FeedbackSection(),
         const SizedBox(height: 16),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop(); // Close modal
-          },
-          child: const Text('Submit'),
+        RegularButton(
+          width: double.infinity,
+          withIcon: false,
+          text: "Submit Review",
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          textColor: Theme.of(context).colorScheme.surface,
+          buttonKey: "submit_review",
         ),
       ],
     );

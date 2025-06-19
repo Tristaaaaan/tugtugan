@@ -1,9 +1,15 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'star_rating.dart';
 
 class ReviewWithRating extends StatefulWidget {
-  const ReviewWithRating({super.key});
+  final String title;
+  final String description;
+  const ReviewWithRating({
+    super.key,
+    required this.title,
+    required this.description,
+  });
 
   @override
   State<ReviewWithRating> createState() => _ReviewWithRatingState();
@@ -17,9 +23,19 @@ class _ReviewWithRatingState extends State<ReviewWithRating> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Rate this studio',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        Text(
+          widget.title,
+          style: const TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(
+          height: 8,
+        ),
+        Text(
+          widget.description,
+          style: const TextStyle(fontSize: 16),
         ),
         const SizedBox(height: 8),
         StarRating(
