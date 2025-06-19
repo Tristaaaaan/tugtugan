@@ -15,6 +15,8 @@ import 'package:tugtugan/features/studios/application/studio_use_case.dart';
 import 'package:tugtugan/features/studios/data/studio_services.dart';
 import 'package:tugtugan/features/studios/studio_data_providers.dart';
 
+import '../../../reviews/presentation/widgets/write_review.dart';
+
 class Studio extends ConsumerWidget {
   final String? studioId;
   const Studio({
@@ -215,6 +217,35 @@ class Studio extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () async {
+                      showReviewSheet(context, studio.id);
+                      developer.log("Chat with studio: ${studio.id}");
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.message,
+                            color:
+                                Theme.of(context).colorScheme.primaryFixedDim,
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            "Review",
+                            style: TextStyle(
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   const SizedBox(height: 25),
                   ExpandableText(
                     text: studio.description,
@@ -249,6 +280,7 @@ class Studio extends ConsumerWidget {
                 ),
               ),
               RegularButton(
+                width: 200,
                 text: AppText.bookNow,
                 backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
                 textColor: Theme.of(context).colorScheme.surface,

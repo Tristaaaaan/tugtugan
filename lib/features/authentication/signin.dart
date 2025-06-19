@@ -47,6 +47,7 @@ class SigninPage extends ConsumerWidget {
                   ],
                 ),
                 RegularButton(
+                  width: double.infinity,
                   text: AppText.google,
                   backgroundColor: Theme.of(context).colorScheme.surface,
                   textColor: Theme.of(context).colorScheme.primary,
