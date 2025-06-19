@@ -1,3 +1,5 @@
+import 'dart:developer' as developer;
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -108,6 +110,7 @@ class BookAppointmentScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final focusedDay = ref.watch(focusedDayProvider);
+    final currentFocusedMonth = ref.watch(focusedMonthProvider);
     List<DateTime> datesWithData = [];
     return Scaffold(
       appBar: AppBar(
@@ -118,7 +121,24 @@ class BookAppointmentScreen extends ConsumerWidget {
         slivers: [
           SliverList(
             delegate: SliverChildListDelegate([
-              const Text("Data and Preferences"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.chevron_left),
+                    onPressed: () => _navigateToMonth(ref, -1),
+                  ),
+                  Text(
+                    DateFormat('MMMM yyyy').format(currentFocusedMonth),
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.chevron_right),
+                    onPressed: () => _navigateToMonth(ref, 1),
+                  ),
+                ],
+              ),
               TableCalendar(
                 availableGestures: AvailableGestures.none,
                 headerVisible: false,
@@ -127,6 +147,10 @@ class BookAppointmentScreen extends ConsumerWidget {
                 focusedDay: focusedDay,
                 onPageChanged: (focusedMonth) {
                   ref.read(focusedMonthProvider.notifier).state = focusedMonth;
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  ref.read(focusedDayProvider.notifier).state = selectedDay;
+                  developer.log(selectedDay.toString());
                 },
                 calendarBuilders: CalendarBuilders(
                   defaultBuilder: (context, day, focusedDay) {
