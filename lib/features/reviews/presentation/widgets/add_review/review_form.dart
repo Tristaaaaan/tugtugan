@@ -3,12 +3,12 @@ import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tugtugan/commons/widgets/buttons/loading_state_notifier.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/core/appmodels/review_model.dart';
 
-import '../provider/review_provider.dart';
+import '../../provider/review_provider.dart';
 import 'feedback_section.dart';
 import 'header_section.dart';
 import 'recommendation_section.dart';

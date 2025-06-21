@@ -3,8 +3,8 @@ import 'dart:developer' as developer;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/commons/widgets/text/expandable_text.dart';
@@ -13,9 +13,9 @@ import 'package:tugtugan/core/apptext/app_text.dart';
 import 'package:tugtugan/features/authentication/auth_services.dart';
 import 'package:tugtugan/features/studios/application/studio_use_case.dart';
 import 'package:tugtugan/features/studios/data/studio_services.dart';
-import 'package:tugtugan/features/studios/studio_data_providers.dart';
+import 'package:tugtugan/features/studios/presentation/providers/studio_data_providers.dart';
 
-import '../../../reviews/presentation/widgets/write_review.dart';
+import '../../../reviews/presentation/widgets/add_review/write_review.dart';
 
 class Studio extends ConsumerWidget {
   final String? studioId;

@@ -29,14 +29,16 @@ class ReviewRepositoryImpl extends ReviewRepository {
   }
 
   @override
-  Stream<List<ReviewModel>> streamReviews(String studioId) {
+  Future<List<ReviewModel>> getReviews(String studioId) {
     return _firestore
         .collection("studios")
         .doc(studioId)
         .collection("reviews")
-        .orderBy("createdAt", descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs
+        .where("writtenReview", isNotEqualTo: "")
+        .orderBy("experienceRating", descending: true)
+        .limit(10)
+        .get()
+        .then((snapshot) => snapshot.docs
             .map((doc) => ReviewModel.fromMap(doc.data()))
             .toList());
   }
