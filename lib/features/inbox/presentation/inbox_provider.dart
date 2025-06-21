@@ -1,10 +1,10 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tugtugan/features/inbox/data/chat_service.dart';
 import 'package:tugtugan/features/inbox/domain/inbox_repository.dart';
 import 'package:tugtugan/features/inbox/domain/realtime_inbox_repository.dart';
 import 'package:tugtugan/features/inbox/presentation/inbox_state.dart';
-import 'package:tugtugan/features/studios/presentation/studio_provider.dart';
+import 'package:tugtugan/features/studios/presentation/providers/studio_provider.dart';
 
 import '../../../core/appmodels/studio_model.dart';
 import '../../chat/domain/studio_chat_model.dart';

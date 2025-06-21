@@ -1,4 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 final regularButtonLoadingProvider =
     StateNotifierProvider<RegularButtonLoadingNotifier, Map<String, bool>>(

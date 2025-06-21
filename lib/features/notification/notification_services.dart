@@ -1,5 +1,5 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 final messageServicesProvider = StateProvider<FirebaseMessage>((ref) {
   return FirebaseMessage();
