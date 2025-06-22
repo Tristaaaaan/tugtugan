@@ -21,18 +21,20 @@ Review _$ReviewFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Review {
   String? get reviewId =>
-      throw _privateConstructorUsedError; // Make this nullable for new reviews
+      throw _privateConstructorUsedError; // Nullable for new reviews before Firestore ID is assigned
   String get userId => throw _privateConstructorUsedError;
   String get studioId => throw _privateConstructorUsedError;
-  int get experienceRating => throw _privateConstructorUsedError;
-  int get instrumentRating => throw _privateConstructorUsedError;
+  int get experienceRating =>
+      throw _privateConstructorUsedError; // Default value for safety
+  int get instrumentRating =>
+      throw _privateConstructorUsedError; // Default value for safety
   bool? get wouldRecommend => throw _privateConstructorUsedError;
   String? get writtenReview => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime get createdAt => throw _privateConstructorUsedError;
   @TimestampNullableConverter()
   DateTime? get updatedAt => throw _privateConstructorUsedError;
-  List<String>? get images => throw _privateConstructorUsedError;
+  List<String> get images => throw _privateConstructorUsedError;
 
   /// Serializes this Review to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,7 +60,7 @@ abstract class $ReviewCopyWith<$Res> {
       String? writtenReview,
       @TimestampConverter() DateTime createdAt,
       @TimestampNullableConverter() DateTime? updatedAt,
-      List<String>? images});
+      List<String> images});
 }
 
 /// @nodoc
@@ -85,7 +87,7 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
     Object? writtenReview = freezed,
     Object? createdAt = null,
     Object? updatedAt = freezed,
-    Object? images = freezed,
+    Object? images = null,
   }) {
     return _then(_value.copyWith(
       reviewId: freezed == reviewId
@@ -124,10 +126,10 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      images: freezed == images
+      images: null == images
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
     ) as $Val);
   }
 }
@@ -149,7 +151,7 @@ abstract class _$$ReviewImplCopyWith<$Res> implements $ReviewCopyWith<$Res> {
       String? writtenReview,
       @TimestampConverter() DateTime createdAt,
       @TimestampNullableConverter() DateTime? updatedAt,
-      List<String>? images});
+      List<String> images});
 }
 
 /// @nodoc
@@ -174,7 +176,7 @@ class __$$ReviewImplCopyWithImpl<$Res>
     Object? writtenReview = freezed,
     Object? createdAt = null,
     Object? updatedAt = freezed,
-    Object? images = freezed,
+    Object? images = null,
   }) {
     return _then(_$ReviewImpl(
       reviewId: freezed == reviewId
@@ -213,10 +215,10 @@ class __$$ReviewImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      images: freezed == images
+      images: null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
     ));
   }
 }
@@ -228,13 +230,13 @@ class _$ReviewImpl extends _Review {
       {this.reviewId,
       required this.userId,
       required this.studioId,
-      required this.experienceRating,
-      required this.instrumentRating,
+      this.experienceRating = 0,
+      this.instrumentRating = 0,
       this.wouldRecommend,
       this.writtenReview,
       @TimestampConverter() required this.createdAt,
       @TimestampNullableConverter() this.updatedAt,
-      final List<String>? images})
+      final List<String> images = const []})
       : _images = images,
         super._();
 
@@ -243,15 +245,19 @@ class _$ReviewImpl extends _Review {
 
   @override
   final String? reviewId;
-// Make this nullable for new reviews
+// Nullable for new reviews before Firestore ID is assigned
   @override
   final String userId;
   @override
   final String studioId;
   @override
+  @JsonKey()
   final int experienceRating;
+// Default value for safety
   @override
+  @JsonKey()
   final int instrumentRating;
+// Default value for safety
   @override
   final bool? wouldRecommend;
   @override
@@ -262,14 +268,13 @@ class _$ReviewImpl extends _Review {
   @override
   @TimestampNullableConverter()
   final DateTime? updatedAt;
-  final List<String>? _images;
+  final List<String> _images;
   @override
-  List<String>? get images {
-    final value = _images;
-    if (value == null) return null;
+  @JsonKey()
+  List<String> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_images);
   }
 
   @override
@@ -338,27 +343,28 @@ abstract class _Review extends Review {
       {final String? reviewId,
       required final String userId,
       required final String studioId,
-      required final int experienceRating,
-      required final int instrumentRating,
+      final int experienceRating,
+      final int instrumentRating,
       final bool? wouldRecommend,
       final String? writtenReview,
       @TimestampConverter() required final DateTime createdAt,
       @TimestampNullableConverter() final DateTime? updatedAt,
-      final List<String>? images}) = _$ReviewImpl;
+      final List<String> images}) = _$ReviewImpl;
   const _Review._() : super._();
 
   factory _Review.fromJson(Map<String, dynamic> json) = _$ReviewImpl.fromJson;
 
   @override
-  String? get reviewId; // Make this nullable for new reviews
+  String?
+      get reviewId; // Nullable for new reviews before Firestore ID is assigned
   @override
   String get userId;
   @override
   String get studioId;
   @override
-  int get experienceRating;
+  int get experienceRating; // Default value for safety
   @override
-  int get instrumentRating;
+  int get instrumentRating; // Default value for safety
   @override
   bool? get wouldRecommend;
   @override
@@ -370,7 +376,7 @@ abstract class _Review extends Review {
   @TimestampNullableConverter()
   DateTime? get updatedAt;
   @override
-  List<String>? get images;
+  List<String> get images;
 
   /// Create a copy of Review
   /// with the given fields replaced by the non-null parameter values.
