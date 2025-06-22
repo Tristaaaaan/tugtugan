@@ -1,6 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tugtugan/core/appmodels/review.dart';
 
 import '../../../core/appmodels/review_model.dart';
 import '../domain/review_repository.dart';
@@ -29,17 +30,36 @@ class ReviewRepositoryImpl extends ReviewRepository {
   }
 
   @override
-  Future<List<ReviewModel>> getReviews(String studioId) {
-    return _firestore
-        .collection("studios")
-        .doc(studioId)
-        .collection("reviews")
-        .where("writtenReview", isNotEqualTo: "")
-        .orderBy("experienceRating", descending: true)
-        .limit(10)
-        .get()
-        .then((snapshot) => snapshot.docs
-            .map((doc) => ReviewModel.fromMap(doc.data()))
-            .toList());
+  Future<List<Review>> getReviews(String studioId) async {
+    try {
+      // Validate studioId first
+      if (studioId.isEmpty) {
+        throw ArgumentError('studioId cannot be empty');
+      }
+      final snapshot = await _firestore
+          .collection("studios")
+          .doc(studioId)
+          .collection("reviews")
+          .where("writtenReview", isNotEqualTo: "")
+          .orderBy("writtenReview")
+          .orderBy("experienceRating", descending: true)
+          .orderBy("__name__", descending: true)
+          .limit(10)
+          .get();
+
+      return snapshot.docs.map((doc) {
+        // Include document ID in the data
+        final data = doc.data()..['reviewId'] = doc.id;
+        return Review.fromJson(data);
+      }).toList();
+    } on FirebaseException catch (e) {
+      // Firebase-specific errors
+      print('Firestore error fetching reviews: ${e.code} - ${e.message}');
+      return [];
+    } catch (e) {
+      // Other errors
+      print('Unexpected error fetching reviews: $e');
+      return [];
+    }
   }
 }

@@ -7,25 +7,35 @@ part 'review.g.dart';
 
 @freezed
 class Review with _$Review {
-  const Review._(); // Added private constructor for methods
+  const Review._();
 
   const factory Review({
-    String? reviewId, // Make this nullable for new reviews
+    String? reviewId,
     required String userId,
     required String studioId,
-    required int experienceRating,
-    required int instrumentRating,
+    @Default(0) int experienceRating,
+    @Default(0) int instrumentRating,
     bool? wouldRecommend,
     String? writtenReview,
     @TimestampConverter() required DateTime createdAt,
     @TimestampNullableConverter() DateTime? updatedAt,
-    List<String>? images,
+    @Default([]) List<String> images,
   }) = _Review;
 
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
 
-  // Add a method to convert to Firestore-friendly map
+  // Convert to Firestore-friendly map
   Map<String, dynamic> toMap() {
-    return toJson()..remove('reviewId');
+    final map = toJson();
+    // Remove reviewId if it's null to avoid Firestore issues
+    if (map['reviewId'] == null) {
+      map.remove('reviewId');
+    }
+    return map;
+  }
+
+  // Optionally add a copyWith method that handles the reviewId specially
+  Review copyWithNewId(String newId) {
+    return copyWith(reviewId: newId);
   }
 }

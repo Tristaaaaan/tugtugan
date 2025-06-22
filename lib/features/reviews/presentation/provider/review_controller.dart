@@ -1,45 +1,43 @@
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:jogaliga_frontend/features/team_manager_profile/domain/manager_profile_repository.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tugtugan/features/reviews/domain/review_repository.dart';
+import 'package:tugtugan/features/reviews/presentation/provider/review_provider.dart';
 
-// import '../../../data/manager_profile_repo_impl.dart';
-// import 'review_state.dart';
+import 'review_state.dart';
 
-// final managerProfileControllerProvider =
-//     StateNotifierProvider<ManageProfileController, ManagerProfileState>(
-//   (ref) => ManageProfileController(
-//     ref.watch(managerProfileRepositoryProvider),
-//   ),
-// );
+final reviewContentControllerProvider =
+    StateNotifierProvider.family<ReviewContentController, ReviewState, String>(
+  (ref, studioId) => ReviewContentController(
+    ref.watch(reviewRepositoryProvider),
+    studioId,
+  ),
+);
 
-// class ManageProfileController extends StateNotifier<ManagerProfileState> {
-//   final ManagerProfileRepository _managerProfileRepository;
+class ReviewContentController extends StateNotifier<ReviewState> {
+  final ReviewRepository _reviewContentRepository;
+  final String studioId;
 
-//   ManageProfileController(this._managerProfileRepository)
-//       : super(const ManagerProfileState.initial()) {
-//     managerProfileData();
-//   }
+  ReviewContentController(this._reviewContentRepository, this.studioId)
+      : super(const ReviewState.initial()) {
+    reviewContentData();
+  }
 
-//   Future<void> managerProfileData() async {
-//     state = const ManagerProfileState.loading();
+  Future<void> reviewContentData() async {
+    state = const ReviewState.loading();
 
-//     try {
-//       final managerProfileData =
-//           await _managerProfileRepository.getManagerProfileData();
+    try {
+      final reviewData = await _reviewContentRepository.getReviews(
+        studioId, // Use the stored studioId
+      );
 
-//       if (managerProfileData == null) {
-//         state = const ManagerProfileState.empty();
-//         return;
-//       }
+      state = ReviewState.loaded(
+        review: reviewData,
+      );
+    } catch (e) {
+      state = ReviewState.error(e.toString());
+    }
+  }
 
-//       state = ManagerProfileState.loaded(
-//         managerProfile: managerProfileData.managerProfile,
-//       );
-//     } catch (e) {
-//       state = ManagerProfileState.error(e.toString());
-//     }
-//   }
-
-//   Future<void> refreshDashboard() async {
-//     await managerProfileData();
-//   }
-// }
+  Future<void> refreshDashboard() async {
+    await reviewContentData();
+  }
+}

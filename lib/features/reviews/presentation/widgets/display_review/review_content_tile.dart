@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 class ReviewContentTile extends StatelessWidget {
   final String writtenReview;
-  final String imageUrl;
+  final List<String> imageUrl;
   final int rating;
   final Timestamp timestamp;
   const ReviewContentTile({
@@ -25,7 +25,22 @@ class ReviewContentTile extends StatelessWidget {
                 Column(
                   children: [
                     Row(
-                      children: [],
+                      children: [
+                        Text(
+                          'Review',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          'Rating',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 )
