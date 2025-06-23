@@ -13,7 +13,7 @@ import 'package:tugtugan/features/home/presentation/home.dart';
 import 'package:tugtugan/features/inbox/presentation/inbox.dart';
 import 'package:tugtugan/features/maps/presentation/maps.dart';
 import 'package:tugtugan/features/navigation/presentation/gate.dart';
-import 'package:tugtugan/features/profile/presentation/profile.dart';
+import 'package:tugtugan/features/profile/presentation/screen/profile.dart';
 import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
 import 'features/book_appointment/presentation/screen/book_appointment.dart';
