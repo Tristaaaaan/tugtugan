@@ -20,14 +20,11 @@ Review _$ReviewFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Review {
-  String? get reviewId =>
-      throw _privateConstructorUsedError; // Nullable for new reviews before Firestore ID is assigned
+  String? get reviewId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get studioId => throw _privateConstructorUsedError;
-  int get experienceRating =>
-      throw _privateConstructorUsedError; // Default value for safety
-  int get instrumentRating =>
-      throw _privateConstructorUsedError; // Default value for safety
+  int get experienceRating => throw _privateConstructorUsedError;
+  int get instrumentRating => throw _privateConstructorUsedError;
   bool? get wouldRecommend => throw _privateConstructorUsedError;
   String? get writtenReview => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -245,7 +242,6 @@ class _$ReviewImpl extends _Review {
 
   @override
   final String? reviewId;
-// Nullable for new reviews before Firestore ID is assigned
   @override
   final String userId;
   @override
@@ -253,11 +249,9 @@ class _$ReviewImpl extends _Review {
   @override
   @JsonKey()
   final int experienceRating;
-// Default value for safety
   @override
   @JsonKey()
   final int instrumentRating;
-// Default value for safety
   @override
   final bool? wouldRecommend;
   @override
@@ -355,16 +349,15 @@ abstract class _Review extends Review {
   factory _Review.fromJson(Map<String, dynamic> json) = _$ReviewImpl.fromJson;
 
   @override
-  String?
-      get reviewId; // Nullable for new reviews before Firestore ID is assigned
+  String? get reviewId;
   @override
   String get userId;
   @override
   String get studioId;
   @override
-  int get experienceRating; // Default value for safety
+  int get experienceRating;
   @override
-  int get instrumentRating; // Default value for safety
+  int get instrumentRating;
   @override
   bool? get wouldRecommend;
   @override

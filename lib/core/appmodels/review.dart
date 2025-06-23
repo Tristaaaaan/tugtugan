@@ -24,17 +24,15 @@ class Review with _$Review {
 
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
 
-  // Convert to Firestore-friendly map
   Map<String, dynamic> toMap() {
     final map = toJson();
-    // Remove reviewId if it's null to avoid Firestore issues
+
     if (map['reviewId'] == null) {
       map.remove('reviewId');
     }
     return map;
   }
 
-  // Optionally add a copyWith method that handles the reviewId specially
   Review copyWithNewId(String newId) {
     return copyWith(reviewId: newId);
   }

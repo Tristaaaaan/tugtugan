@@ -20,7 +20,7 @@ mixin _$ReviewState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Review>? review) loaded,
+    required TResult Function(dynamic review, dynamic users) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) =>
@@ -29,7 +29,7 @@ mixin _$ReviewState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Review>? review)? loaded,
+    TResult? Function(dynamic review, dynamic users)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) =>
@@ -38,7 +38,7 @@ mixin _$ReviewState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Review>? review)? loaded,
+    TResult Function(dynamic review, dynamic users)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -138,7 +138,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Review>? review) loaded,
+    required TResult Function(dynamic review, dynamic users) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) {
@@ -150,7 +150,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Review>? review)? loaded,
+    TResult? Function(dynamic review, dynamic users)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) {
@@ -162,7 +162,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Review>? review)? loaded,
+    TResult Function(dynamic review, dynamic users)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -261,7 +261,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Review>? review) loaded,
+    required TResult Function(dynamic review, dynamic users) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) {
@@ -273,7 +273,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Review>? review)? loaded,
+    TResult? Function(dynamic review, dynamic users)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) {
@@ -285,7 +285,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Review>? review)? loaded,
+    TResult Function(dynamic review, dynamic users)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -347,7 +347,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Review>? review});
+  $Res call({dynamic review, dynamic users});
 }
 
 /// @nodoc
@@ -364,12 +364,17 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? review = freezed,
+    Object? users = freezed,
   }) {
     return _then(_$LoadedImpl(
       review: freezed == review
-          ? _value._review
+          ? _value.review
           : review // ignore: cast_nullable_to_non_nullable
-              as List<Review>?,
+              as dynamic,
+      users: freezed == users
+          ? _value.users
+          : users // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 }
@@ -377,21 +382,16 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({final List<Review>? review}) : _review = review;
+  const _$LoadedImpl({this.review, this.users});
 
-  final List<Review>? _review;
   @override
-  List<Review>? get review {
-    final value = _review;
-    if (value == null) return null;
-    if (_review is EqualUnmodifiableListView) return _review;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final dynamic review;
+  @override
+  final dynamic users;
 
   @override
   String toString() {
-    return 'ReviewState.loaded(review: $review)';
+    return 'ReviewState.loaded(review: $review, users: $users)';
   }
 
   @override
@@ -399,12 +399,15 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(other._review, _review));
+            const DeepCollectionEquality().equals(other.review, review) &&
+            const DeepCollectionEquality().equals(other.users, users));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_review));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(review),
+      const DeepCollectionEquality().hash(users));
 
   /// Create a copy of ReviewState
   /// with the given fields replaced by the non-null parameter values.
@@ -419,11 +422,11 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Review>? review) loaded,
+    required TResult Function(dynamic review, dynamic users) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) {
-    return loaded(review);
+    return loaded(review, users);
   }
 
   @override
@@ -431,11 +434,11 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Review>? review)? loaded,
+    TResult? Function(dynamic review, dynamic users)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) {
-    return loaded?.call(review);
+    return loaded?.call(review, users);
   }
 
   @override
@@ -443,13 +446,13 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Review>? review)? loaded,
+    TResult Function(dynamic review, dynamic users)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(review);
+      return loaded(review, users);
     }
     return orElse();
   }
@@ -496,9 +499,11 @@ class _$LoadedImpl implements _Loaded {
 }
 
 abstract class _Loaded implements ReviewState {
-  const factory _Loaded({final List<Review>? review}) = _$LoadedImpl;
+  const factory _Loaded({final dynamic review, final dynamic users}) =
+      _$LoadedImpl;
 
-  List<Review>? get review;
+  dynamic get review;
+  dynamic get users;
 
   /// Create a copy of ReviewState
   /// with the given fields replaced by the non-null parameter values.
@@ -577,7 +582,7 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Review>? review) loaded,
+    required TResult Function(dynamic review, dynamic users) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) {
@@ -589,7 +594,7 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Review>? review)? loaded,
+    TResult? Function(dynamic review, dynamic users)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) {
@@ -601,7 +606,7 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Review>? review)? loaded,
+    TResult Function(dynamic review, dynamic users)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
@@ -708,7 +713,7 @@ class _$EmptyImpl implements _Empty {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Review>? review) loaded,
+    required TResult Function(dynamic review, dynamic users) loaded,
     required TResult Function(String message) error,
     required TResult Function() empty,
   }) {
@@ -720,7 +725,7 @@ class _$EmptyImpl implements _Empty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Review>? review)? loaded,
+    TResult? Function(dynamic review, dynamic users)? loaded,
     TResult? Function(String message)? error,
     TResult? Function()? empty,
   }) {
@@ -732,7 +737,7 @@ class _$EmptyImpl implements _Empty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Review>? review)? loaded,
+    TResult Function(dynamic review, dynamic users)? loaded,
     TResult Function(String message)? error,
     TResult Function()? empty,
     required TResult orElse(),
