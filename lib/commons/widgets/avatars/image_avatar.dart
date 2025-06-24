@@ -4,16 +4,20 @@ import 'package:shimmer/shimmer.dart';
 
 class ImageAvatar extends StatelessWidget {
   final String imageUrl;
+  final double? width;
+  final double? height;
   const ImageAvatar({
     super.key,
     required this.imageUrl,
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 81,
-      height: 81,
+      width: width ?? 81,
+      height: height ?? 81,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(50),
         child: CachedNetworkImage(
