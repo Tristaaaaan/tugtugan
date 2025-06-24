@@ -1,0 +1,49 @@
+name: Create Pull Request with Diff Summary
+
+on:
+  push:
+    branches:
+      - feature/**  # trigger only on feature branches (optional)
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Get previous commit SHA
+        id: prev
+        run: |
+          echo "PREV_SHA=$(git rev-parse HEAD~1)" >> "$GITHUB_ENV"
+
+      - name: Get diff summary
+        id: diff
+        run: |
+          DIFF=$(git diff --name-only $PREV_SHA HEAD)
+          echo "DIFF_SUMMARY<<EOF" >> $GITHUB_ENV
+          echo "$DIFF" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: 'Auto-generated PR: ${GITHUB_REF##*/}'
+          body: |
+            ## 📝 Description  
+            Auto-generated PR from push to `${GITHUB_REF##*/}`.
+
+            ## ✅ Changes Made  
+            Files changed:
+            ```
+            ${{ env.DIFF_SUMMARY }}
+            ```
+
+            ## 💬 Notes  
+            This PR was auto-created by GitHub Actions.
+
+            ## 📱 Screenshots/Recording  
+            _Attach if available._
+
+          base: main
+          branch: ${{ github.ref_name }}
