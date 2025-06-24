@@ -17,12 +17,12 @@ final reviewContentControllerProvider =
 
 class ReviewContentController extends StateNotifier<ReviewState> {
   final ReviewRepository _reviewContentRepository;
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
   final String studioId;
 
   ReviewContentController(
     this._reviewContentRepository,
-    this._userRepository,
+    this.userRepository,
     this.studioId,
   ) : super(const ReviewState.initial()) {
     reviewContentData();

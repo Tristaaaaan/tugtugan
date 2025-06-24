@@ -24,7 +24,7 @@ DateTime parseGroupDate(String originalDate) {
 }
 
 // Helper function to format the date string
-String _formatDateDisplay(String dateString) {
+String formatDateDisplay(String dateString) {
   final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);
   final yesterday = today.subtract(const Duration(days: 1));
