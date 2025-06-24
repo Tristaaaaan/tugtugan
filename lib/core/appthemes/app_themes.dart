@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 
 class ThemeNotifier extends StateNotifier<bool> {
   ThemeNotifier() : super(false); // Initial state is light mode (false)

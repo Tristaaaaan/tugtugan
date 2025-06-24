@@ -1,7 +1,7 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -115,7 +115,7 @@ class BookAppointmentScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Data and Preferences"),
+        title: const Text("Date and Preferences"),
       ),
       body: CustomScrollView(
         slivers: [

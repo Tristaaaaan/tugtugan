@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
 import 'package:tugtugan/features/chat/data/chat_service.dart';
 import 'package:tugtugan/features/chat/presentation/chat_provider.dart';

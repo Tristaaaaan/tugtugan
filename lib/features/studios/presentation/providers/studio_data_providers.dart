@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:riverpod/riverpod.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 
 final studioProvider = StreamProvider<List<StudioModel>>((ref) {

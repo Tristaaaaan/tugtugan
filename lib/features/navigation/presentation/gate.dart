@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tugtugan/features/favorite/presentation/favorite.dart';
 import 'package:tugtugan/features/home/presentation/home.dart';
 import 'package:tugtugan/features/inbox/presentation/inbox.dart';
-import 'package:tugtugan/features/profile/presentation/profile.dart';
+import 'package:tugtugan/features/profile/presentation/screen/profile.dart';
 import 'package:tugtugan/features/search/presentation/search.dart';
 
 import '../../../commons/widgets/navbar/custom_navbar.dart';
