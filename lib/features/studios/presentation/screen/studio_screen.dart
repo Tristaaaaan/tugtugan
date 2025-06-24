@@ -10,7 +10,6 @@ import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 import 'package:tugtugan/commons/widgets/text/expandable_text.dart';
 import 'package:tugtugan/core/appmodels/studio_model.dart';
 import 'package:tugtugan/core/apptext/app_text.dart';
-import 'package:tugtugan/features/authentication/auth_services.dart';
 import 'package:tugtugan/features/studios/application/studio_use_case.dart';
 import 'package:tugtugan/features/studios/data/studio_services.dart';
 import 'package:tugtugan/features/studios/presentation/providers/studio_data_providers.dart';
@@ -26,7 +25,6 @@ class Studio extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final AuthServices authServices = AuthServices();
     final specificStudio = ref.watch(specificStudioProvider(studioId!));
     final studioService = StudioUseCase(StudioServices());
     final FirebaseAuth auth = FirebaseAuth.instance;
