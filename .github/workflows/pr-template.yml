@@ -1,56 +1,10 @@
-name: Manual PR with Diff Summary
+## 📝 Description
 
-on:
-  workflow_dispatch:
-    inputs:
-      base:
-        description: 'Base branch (e.g., main)'
-        required: true
-        default: 'main'
-      head:
-        description: 'Head branch (e.g., feature/my-feature)'
-        required: true
-        default: 'feature/my-feature'
+## ✅ Changes Made
+-
 
-jobs:
-  create-pr:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Required to get full git history
+## 💬 Notes
+-
 
-      - name: Fetch all branches
-        run: git fetch --all
-
-      - name: Generate diff summary
-        id: diff
-        run: |
-          DIFF=$(git diff --name-only origin/${{ github.event.inputs.base }} origin/${{ github.event.inputs.head }})
-          echo "DIFF_SUMMARY<<EOF" >> $GITHUB_ENV
-          echo "$DIFF" >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: ${{ github.event.inputs.base }}
-          branch: ${{ github.event.inputs.head }}
-          title: 'PR from ${{ github.event.inputs.head }}'
-          body: |
-            ## 📝 Description  
-            Auto-generated PR from `${{ github.event.inputs.head }}` to `${{ github.event.inputs.base }}`
-
-            ## ✅ Changes Made  
-            Files changed:
-            ```
-            ${{ env.DIFF_SUMMARY }}
-            ```
-
-            ## 💬 Notes  
-            Triggered manually via workflow_dispatch
-
-            ## 📱 Screenshots/Recording  
-            _Attach if available._
+## 📱 Screenshots/Recording
+- 
