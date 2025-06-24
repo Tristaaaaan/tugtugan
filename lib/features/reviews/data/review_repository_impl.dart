@@ -1,12 +1,15 @@
 import 'dart:developer' as developer;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tugtugan/core/appmodels/review.dart';
 
 import '../../../core/appmodels/review_model.dart';
+import '../../../core/appmodels/users.dart';
 import '../domain/review_repository.dart';
 
 class ReviewRepositoryImpl extends ReviewRepository {
   final FirebaseFirestore _firestore;
+
   ReviewRepositoryImpl({FirebaseFirestore? firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
@@ -29,15 +32,55 @@ class ReviewRepositoryImpl extends ReviewRepository {
   }
 
   @override
-  Stream<List<ReviewModel>> streamReviews(String studioId) {
-    return _firestore
-        .collection("studios")
-        .doc(studioId)
-        .collection("reviews")
-        .orderBy("createdAt", descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => ReviewModel.fromMap(doc.data()))
-            .toList());
+  Future<ReviewsData> getReviews(String studioId) async {
+    try {
+      if (studioId.isEmpty) {
+        throw ArgumentError('studioId cannot be empty');
+      }
+
+      // Fetch reviews
+      final snapshot = await _firestore
+          .collection("studios")
+          .doc(studioId)
+          .collection("reviews")
+          .where("writtenReview", isNotEqualTo: "")
+          .orderBy("writtenReview")
+          .orderBy("experienceRating", descending: true)
+          .orderBy("__name__", descending: true)
+          .limit(10)
+          .get();
+
+      final reviews = snapshot.docs.map((doc) {
+        final data = doc.data()..['reviewId'] = doc.id;
+
+        if (data['userId'] == null) {
+          throw StateError('Missing userId in review document: ${doc.id}');
+        }
+
+        return Review.fromJson(data);
+      }).toList();
+
+      // Get unique userIds from the reviews
+      final userIds = reviews.map((r) => r.userId).toSet().toList();
+
+      // Fetch all users in one go using `whereIn` (max 10)
+      final userQuery = await _firestore
+          .collection("users")
+          .where(FieldPath.documentId, whereIn: userIds)
+          .get();
+
+      final userMap = {
+        for (var doc in userQuery.docs) doc.id: UserData.fromJson(doc.data()),
+      };
+
+      return ReviewsData(
+        reviews: reviews,
+        users: userMap,
+      );
+    } catch (e, st) {
+      developer.log('Error fetching reviews with users',
+          error: e, stackTrace: st);
+      return ReviewsData(reviews: [], users: {});
+    }
   }
 }

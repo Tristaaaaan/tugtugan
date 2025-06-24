@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tugtugan/features/studios/studio_data_providers.dart';
+import 'package:tugtugan/features/studios/presentation/providers/studio_data_providers.dart';
 
 import '../../../commons/widgets/tiles/studio_tiles.dart';
 import '../../../core/appmodels/studio_model.dart';

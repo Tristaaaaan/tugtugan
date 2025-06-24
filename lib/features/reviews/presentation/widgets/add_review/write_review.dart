@@ -17,11 +17,15 @@ void showReviewSheet(BuildContext context, String studioId) {
         minChildSize: 0.4,
         maxChildSize: 0.9,
         builder: (context, scrollController) {
-          return SingleChildScrollView(
-            controller: scrollController,
-            padding: const EdgeInsets.all(16.0),
-            child: ReviewForm(
-              studioId: studioId,
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: SingleChildScrollView(
+              controller: scrollController,
+              padding: const EdgeInsets.all(16.0),
+              child: ReviewForm(
+                studioId: studioId,
+              ),
             ),
           );
         },

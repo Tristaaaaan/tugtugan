@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../provider/review_provider.dart';
+import '../../provider/review_provider.dart';
 import 'like_option_tile.dart';
 
 class LikeOptionsRow extends ConsumerStatefulWidget {
@@ -31,7 +31,7 @@ class _LikeOptionsRowState extends ConsumerState<LikeOptionsRow> {
         LikeOption(
           icon: Icons.thumb_down,
           text: 'No',
-          isSelected: selected == false, // ✅ Safe nullable check
+          isSelected: selected == false,
           onTap: () {
             ref.read(wouldRecommendProvider.notifier).state =
                 selected == false ? null : false;

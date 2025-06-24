@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tugtugan/config/app_config.dart';
 import 'package:tugtugan/config/app_environments.dart';
 import 'package:tugtugan/core/appthemes/app_themes.dart';
@@ -13,7 +13,7 @@ import 'package:tugtugan/features/home/presentation/home.dart';
 import 'package:tugtugan/features/inbox/presentation/inbox.dart';
 import 'package:tugtugan/features/maps/presentation/maps.dart';
 import 'package:tugtugan/features/navigation/presentation/gate.dart';
-import 'package:tugtugan/features/profile/presentation/profile.dart';
+import 'package:tugtugan/features/profile/presentation/screen/profile.dart';
 import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
 import 'features/book_appointment/presentation/screen/book_appointment.dart';
