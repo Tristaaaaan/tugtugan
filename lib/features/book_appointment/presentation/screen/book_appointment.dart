@@ -115,7 +115,7 @@ class BookAppointmentScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Data and Preferences"),
+        title: const Text("Date and Preferences"),
       ),
       body: CustomScrollView(
         slivers: [
