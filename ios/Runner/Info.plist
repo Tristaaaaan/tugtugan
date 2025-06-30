@@ -33,10 +33,14 @@
 			</array>
 		</dict>
 	</array>
+	<key>GMSApiKey</key>
+	<string>AIzaSyCFlS4sdfycQTgrgj8IxO5_uZ378F8K8os</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>GIDClientID</key>
 	<string>766765293741-qkp6jkab140cd7ku54stn1sv4g9in1bk.apps.googleusercontent.com</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show maps accurately.</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
