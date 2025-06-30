@@ -4,14 +4,14 @@ class UserModel {
   final String? uid;
   final String? fullName;
   final String email;
-  final String fcmtoken;
+  final String? fcmtoken;
   final String? imageUrl;
 
   UserModel({
     this.uid,
     this.fullName,
     required this.email,
-    required this.fcmtoken,
+    this.fcmtoken,
     this.imageUrl,
   });
 

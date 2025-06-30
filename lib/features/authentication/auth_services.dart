@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tugtugan/core/appmodels/user_model.dart';
-import 'package:tugtugan/features/notification/notification_services.dart';
 
 final authServicesProvider = Provider<AuthServices>((ref) {
   return AuthServices();
@@ -13,10 +14,18 @@ final authServicesProvider = Provider<AuthServices>((ref) {
 class AuthServices {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseMessage firebaseMessaging = FirebaseMessage();
+
   Future<UserCredential?> signInWithGoogle(
       WidgetRef ref, BuildContext context) async {
-    final String? fcmtoken = await firebaseMessaging.getFCMToken();
+    final String? fcmtoken;
+
+    if (Platform.isAndroid) {
+      // final FirebaseMessage firebaseMessaging = FirebaseMessage();
+      fcmtoken = null; //await firebaseMessaging.getFCMToken();
+    } else {
+      fcmtoken = null;
+    }
+
     try {
       final GoogleSignInAccount? guser = await GoogleSignIn().signIn();
       if (guser != null) {
@@ -36,7 +45,7 @@ class AuthServices {
         UserModel newUserData = UserModel(
           uid: userCredential.user!.uid,
           email: userCredential.user!.email!,
-          fcmtoken: fcmtoken!,
+          fcmtoken: fcmtoken,
           fullName: userCredential.user!.displayName!,
           imageUrl: userCredential.user!.photoURL.toString(),
         );
@@ -46,7 +55,7 @@ class AuthServices {
 
         final DocumentSnapshot docSnapshot = await docRef.get();
 
-        if (docSnapshot.exists) {
+        if (docSnapshot.exists && fcmtoken != null) {
           // Document exists, update only necessary fields
           await docRef.update({
             'fcmToken': fcmtoken,
