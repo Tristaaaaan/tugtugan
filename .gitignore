@@ -54,3 +54,6 @@ secrets.properties
 
 # Ignore Firebase plist files per environment
 ios/config/**/GoogleService-Info.plist
+
+google-cloud-sdk-*/
+functions/
