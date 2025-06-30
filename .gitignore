@@ -62,3 +62,5 @@ google-cloud-sdk-468.0.0-darwin-arm.tar.gz
 google-cloud-sdk/
 google-cloud-sdk*/
 *.tar.gz
+
+ios/Runner/Info.plist
