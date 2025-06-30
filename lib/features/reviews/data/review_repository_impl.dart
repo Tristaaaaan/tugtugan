@@ -1,11 +1,11 @@
 import 'dart:developer' as developer;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tugtugan/core/appmodels/review.dart';
+import 'package:tugtugan/features/reviews/domain/model/review.dart';
 
 import '../../../core/appmodels/review_model.dart';
 import '../../../core/appmodels/users.dart';
-import '../domain/review_repository.dart';
+import '../domain/repo/review_repository.dart';
 
 class ReviewRepositoryImpl extends ReviewRepository {
   final FirebaseFirestore _firestore;
@@ -63,15 +63,20 @@ class ReviewRepositoryImpl extends ReviewRepository {
       // Get unique userIds from the reviews
       final userIds = reviews.map((r) => r.userId).toSet().toList();
 
-      // Fetch all users in one go using `whereIn` (max 10)
-      final userQuery = await _firestore
-          .collection("users")
-          .where(FieldPath.documentId, whereIn: userIds)
-          .get();
+      final userMap = <String, UserData>{};
 
-      final userMap = {
-        for (var doc in userQuery.docs) doc.id: UserData.fromJson(doc.data()),
-      };
+      if (userIds.isNotEmpty) {
+        final userQuery = await _firestore
+            .collection("users")
+            .where(FieldPath.documentId, whereIn: userIds)
+            .get();
+
+        userMap.addEntries(
+          userQuery.docs.map(
+            (doc) => MapEntry(doc.id, UserData.fromJson(doc.data())),
+          ),
+        );
+      }
 
       return ReviewsData(
         reviews: reviews,

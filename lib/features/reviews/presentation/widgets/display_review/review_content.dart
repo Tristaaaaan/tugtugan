@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../core/appmodels/review.dart';
 import '../../../../../core/appmodels/users.dart';
+import '../../../domain/model/review.dart';
 import '../../provider/review_controller.dart';
 import 'review_content_tile.dart';
 

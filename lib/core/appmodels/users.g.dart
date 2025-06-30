@@ -11,7 +11,7 @@ _$UserDataImpl _$$UserDataImplFromJson(Map<String, dynamic> json) =>
       uid: json['uid'] as String,
       fullName: json['fullName'] as String,
       email: json['email'] as String,
-      fcmToken: json['fcmToken'] as String,
+      fcmToken: json['fcmToken'] as String?,
       imageUrl: json['imageUrl'] as String?,
     );
 

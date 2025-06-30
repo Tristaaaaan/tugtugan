@@ -1,7 +1,7 @@
 import 'package:riverpod/riverpod.dart';
 
 import '../../data/review_repository_impl.dart';
-import '../../domain/review_repository.dart';
+import '../../domain/repo/review_repository.dart';
 
 final reviewRepositoryProvider = Provider<ReviewRepository>((ref) {
   return ReviewRepositoryImpl();

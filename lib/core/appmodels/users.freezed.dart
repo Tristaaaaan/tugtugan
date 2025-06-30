@@ -23,7 +23,7 @@ mixin _$UserData {
   String get uid => throw _privateConstructorUsedError;
   String get fullName => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get fcmToken => throw _privateConstructorUsedError;
+  String? get fcmToken => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
 
   /// Serializes this UserData to a JSON map.
@@ -45,7 +45,7 @@ abstract class $UserDataCopyWith<$Res> {
       {String uid,
       String fullName,
       String email,
-      String fcmToken,
+      String? fcmToken,
       String? imageUrl});
 }
 
@@ -67,7 +67,7 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
     Object? uid = null,
     Object? fullName = null,
     Object? email = null,
-    Object? fcmToken = null,
+    Object? fcmToken = freezed,
     Object? imageUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -83,10 +83,10 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      fcmToken: null == fcmToken
+      fcmToken: freezed == fcmToken
           ? _value.fcmToken
           : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$UserDataImplCopyWith<$Res>
       {String uid,
       String fullName,
       String email,
-      String fcmToken,
+      String? fcmToken,
       String? imageUrl});
 }
 
@@ -127,7 +127,7 @@ class __$$UserDataImplCopyWithImpl<$Res>
     Object? uid = null,
     Object? fullName = null,
     Object? email = null,
-    Object? fcmToken = null,
+    Object? fcmToken = freezed,
     Object? imageUrl = freezed,
   }) {
     return _then(_$UserDataImpl(
@@ -143,10 +143,10 @@ class __$$UserDataImplCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      fcmToken: null == fcmToken
+      fcmToken: freezed == fcmToken
           ? _value.fcmToken
           : fcmToken // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       imageUrl: freezed == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ class _$UserDataImpl extends _UserData {
       {required this.uid,
       required this.fullName,
       required this.email,
-      required this.fcmToken,
+      this.fcmToken,
       this.imageUrl})
       : super._();
 
@@ -176,7 +176,7 @@ class _$UserDataImpl extends _UserData {
   @override
   final String email;
   @override
-  final String fcmToken;
+  final String? fcmToken;
   @override
   final String? imageUrl;
 
@@ -226,7 +226,7 @@ abstract class _UserData extends UserData {
       {required final String uid,
       required final String fullName,
       required final String email,
-      required final String fcmToken,
+      final String? fcmToken,
       final String? imageUrl}) = _$UserDataImpl;
   const _UserData._() : super._();
 
@@ -240,7 +240,7 @@ abstract class _UserData extends UserData {
   @override
   String get email;
   @override
-  String get fcmToken;
+  String? get fcmToken;
   @override
   String? get imageUrl;
 

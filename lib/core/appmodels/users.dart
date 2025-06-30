@@ -11,7 +11,7 @@ class UserData with _$UserData {
     required String uid,
     required String fullName,
     required String email,
-    required String fcmToken,
+    String? fcmToken,
     String? imageUrl,
   }) = _UserData;
 
