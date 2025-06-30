@@ -56,4 +56,7 @@ secrets.properties
 ios/config/**/GoogleService-Info.plist
 
 google-cloud-sdk-*/
-functions/
+functions/google-cloud-sdk-468.0.0-darwin-arm.tar.gz
+google-cloud-sdk/
+google-cloud-sdk-468.0.0-darwin-arm.tar.gz
+google-cloud-sdk/
