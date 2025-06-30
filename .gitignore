@@ -51,3 +51,6 @@ app.*.map.json
 
 # Secrets
 secrets.properties
+
+# Ignore Firebase plist files per environment
+ios/config/**/GoogleService-Info.plist
