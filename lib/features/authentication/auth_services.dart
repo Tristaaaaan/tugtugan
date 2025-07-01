@@ -7,6 +7,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tugtugan/core/appmodels/user_model.dart';
 
+import '../notification/notification_services.dart';
+
 final authServicesProvider = Provider<AuthServices>((ref) {
   return AuthServices();
 });
@@ -20,8 +22,8 @@ class AuthServices {
     final String? fcmtoken;
 
     if (Platform.isAndroid) {
-      // final FirebaseMessage firebaseMessaging = FirebaseMessage();
-      fcmtoken = null; //await firebaseMessaging.getFCMToken();
+      final FirebaseMessage firebaseMessaging = FirebaseMessage();
+      fcmtoken = await firebaseMessaging.getFCMToken();
     } else {
       fcmtoken = null;
     }

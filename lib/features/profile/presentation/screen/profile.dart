@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../commons/widgets/avatars/image_avatar.dart';
 import '../../../../commons/widgets/tiles/option_tile.dart';
 import '../../../authentication/auth_services.dart';
+import '../../../subscription/presentation/widgets/subscription_container.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -72,6 +73,7 @@ class ProfilePage extends ConsumerWidget {
                   ],
                 ),
               ),
+              const TugtuganStudioProgramScreen(),
               OptionTile(
                 onTap: () => authServices.signOutAccount(ref),
               ),
