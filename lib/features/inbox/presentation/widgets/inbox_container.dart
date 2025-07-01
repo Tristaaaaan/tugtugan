@@ -2,8 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'package:tugtugan/features/inbox/data/chat_service.dart';
 
 import '../../../../commons/widgets/avatars/avatar_placeholder.dart';
@@ -104,7 +104,9 @@ class InboxContainer extends StatelessWidget {
               ],
             ),
             Text(
-              DateFormat('hh:mm a').format(inbox.lastMessageTimeSent.toDate()),
+              timeago.format(
+                inbox.lastMessageTimeSent.toDate(),
+              ),
             ),
           ],
         ),
