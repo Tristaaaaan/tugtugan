@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
+import 'package:tugtugan/features/subscription/domain/model/package_model.dart';
 
 class SubscriptionSheet extends StatelessWidget {
-  final List<Package> packages;
+  final List<MockPackage> packages;
 
   const SubscriptionSheet({super.key, required this.packages});
 
@@ -18,34 +18,34 @@ class SubscriptionSheet extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         ...packages.map((package) {
-          final product = package.storeProduct;
+          final product = package.product;
           return Card(
             child: ListTile(
               title: Text(product.title),
               subtitle: Text(product.description),
               trailing: Text(product.priceString),
               onTap: () async {
-                try {
-                  final purchaserInfo =
-                      await Purchases.purchasePackage(package);
+                // try {
+                // final purchaserInfo =
+                //     await Purchases.purchasePackage(package);
 
-                  final isActive =
-                      purchaserInfo.entitlements.all['premium']?.isActive ??
-                          false;
+                // final isActive =
+                //     purchaserInfo.entitlements.all['premium']?.isActive ??
+                //         false;
 
-                  if (isActive && context.mounted) {
-                    Navigator.of(context).pop(); // close the sheet
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Subscription successful!')),
-                    );
-                  }
-                } catch (e) {
-                  if (context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Purchase failed: $e')),
-                    );
-                  }
-                }
+                // if (isActive && context.mounted) {
+                Navigator.of(context).pop(); // close the sheet
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Subscription successful!')),
+                );
+                //   }
+                // } catch (e) {
+                //   if (context.mounted) {
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       SnackBar(content: Text('Purchase failed: $e')),
+                //     );
+                //   }
+                // }
               },
             ),
           );

@@ -1,3 +1,5 @@
+import '../model/package_model.dart';
+
 abstract class SubscriptionRepo {
-  Future<void> subscribe(String userId);
+  Future<List<MockPackage>> subscribe();
 }

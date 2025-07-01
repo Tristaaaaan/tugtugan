@@ -2,14 +2,30 @@ import 'dart:io';
 
 import 'package:purchases_flutter/purchases_flutter.dart';
 
+import '../domain/model/package_model.dart';
 import '../domain/repo/subscription_repo.dart';
 
 class SubscriptionRepoImpl extends SubscriptionRepo {
   @override
-  Future<void> subscribe(String userId) async {
-    // Implement the subscription logic here
-    // For example, you might call an API to subscribe the user
-    print('User $userId subscribed successfully.');
+  Future<List<MockPackage>> subscribe() async {
+    final MockProduct mockProduct = MockProduct(
+      identifier: 'com.app.subscription.monthly',
+      title: 'Monthly Plan',
+      description: 'Access all features monthly.',
+      price: 4.99,
+      priceString: '\$4.99',
+      currencyCode: 'USD',
+      subscriptionPeriod: 'P1M',
+    );
+
+    final MockPackage mockPackage = MockPackage(
+      identifier: 'monthly_mock',
+      offeringIdentifier: 'default',
+      packageType: 'monthly',
+      product: mockProduct,
+    );
+
+    return [mockPackage];
   }
 }
 

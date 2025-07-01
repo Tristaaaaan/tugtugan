@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
 
 import '../../data/subscription_repo_impl.dart';
@@ -46,29 +45,28 @@ class TugtuganStudioProgramScreen extends StatelessWidget {
                   width: 150,
                   onTap: () async {
                     try {
-                      await initPlatformState();
+                      // await initPlatformState();
 
-                      final customerInfo = await Purchases.getCustomerInfo();
-                      final entitlement =
-                          customerInfo.entitlements.all['Basic'];
+                      // final customerInfo = await Purchases.getCustomerInfo();
+                      // final entitlement =
+                      //     customerInfo.entitlements.all['Basic'];
 
-                      if (entitlement != null && entitlement.isActive) {
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('You are already subscribed!')),
-                          );
-                        }
-                        return; // Don't show the paywall
-                      }
+                      // if (entitlement != null && entitlement.isActive) {
+                      //   if (context.mounted) {
+                      //     ScaffoldMessenger.of(context).showSnackBar(
+                      //       const SnackBar(
+                      //           content: Text('You are already subscribed!')),
+                      //     );
+                      //   }
+                      //   return; // Don't show the paywall
+                      // }
 
-                      final offerings = await Purchases.getOfferings();
-                      final availablePackages =
-                          offerings.current?.availablePackages;
+                      // final offerings = await Purchases.getOfferings();
                       // final availablePackages =
-                      //     await SubscriptionRepoImpl().getAvailablePackages();
-                      if (availablePackages != null &&
-                          availablePackages.isNotEmpty) {
+                      //     offerings.current?.availablePackages;
+                      final availablePackages =
+                          await SubscriptionRepoImpl().subscribe();
+                      if (availablePackages.isNotEmpty) {
                         // Show paywall here, or navigate to it
                         if (context.mounted) {
                           showModalBottomSheet(
