@@ -10,7 +10,7 @@ import 'package:tugtugan/features/authentication/auth_gate.dart';
 import 'package:tugtugan/features/chat/presentation/chat_screen.dart';
 import 'package:tugtugan/features/favorite/presentation/favorite.dart';
 import 'package:tugtugan/features/home/presentation/home.dart';
-import 'package:tugtugan/features/inbox/presentation/inbox.dart';
+import 'package:tugtugan/features/inbox/presentation/screen/inbox.dart';
 import 'package:tugtugan/features/maps/presentation/maps.dart';
 import 'package:tugtugan/features/navigation/presentation/gate.dart';
 import 'package:tugtugan/features/profile/presentation/screen/profile.dart';

@@ -30,7 +30,7 @@ class _MapState extends State<Maps> {
     super.initState();
     _initialPosition = CameraPosition(
       target: LatLng(widget.latitude, widget.longitude),
-      zoom: 19,
+      zoom: 15.0,
     );
   }
 
@@ -41,7 +41,7 @@ class _MapState extends State<Maps> {
         title: Text(widget.name),
       ),
       body: GoogleMap(
-        mapType: MapType.hybrid,
+        mapType: MapType.normal,
         initialCameraPosition: _initialPosition,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);
