@@ -58,7 +58,9 @@ class InboxContainer extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: studio.imageUrl.isEmpty
-                        ? UserAvatarPlaceHolder(name: studio.studioName)
+                        ? UserAvatarPlaceHolder(
+                            name: studio.studioName,
+                          )
                         : CachedNetworkImage(
                             imageUrl: studio.imageUrl,
                             fit: BoxFit.cover,
@@ -91,19 +93,31 @@ class InboxContainer extends StatelessWidget {
                       ),
                       child: IntrinsicHeight(
                         child: Text(
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
                           studio.studioName,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
+                          maxLines: 3,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    Text(inbox.lastMessage),
+                    const SizedBox(height: 3),
+                    Text(
+                      inbox.lastMessage,
+                      style: const TextStyle(fontSize: 12),
+                    ),
                   ],
                 ),
               ],
             ),
             Text(
+              style: TextStyle(
+                fontSize: 10,
+                color: Theme.of(context).colorScheme.onSurface.withValues(
+                      alpha: 0.6,
+                    ),
+              ),
               timeago.format(
                 inbox.lastMessageTimeSent.toDate(),
               ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tugtugan/features/inbox/presentation/widgets/inbox_container.dart';
 
-import 'inbox_provider.dart';
+import '../inbox_provider.dart';
 
 class InboxPage extends ConsumerWidget {
   const InboxPage({super.key});
@@ -34,7 +34,9 @@ class InboxPage extends ConsumerWidget {
                       } else {
                         return const Padding(
                           padding: EdgeInsets.all(16),
-                          child: Center(child: CircularProgressIndicator()),
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         );
                       }
                     },
