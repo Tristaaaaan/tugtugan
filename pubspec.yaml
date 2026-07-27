@@ -1,6 +1,6 @@
 name: tugtugan
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -32,6 +32,10 @@ dependencies:
   flutter_svg: ^2.1.0
   timeago: ^3.7.1
   http: ^1.4.0
+  dio: ^5.7.0
+  webview_flutter: ^4.9.0
+  flutter_secure_storage: ^9.2.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -45,6 +49,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  assets: 
+  assets:
     - assets/icons/
     - .env

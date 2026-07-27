@@ -322,8 +322,11 @@ class Studio extends ConsumerWidget {
                 textColor: Theme.of(context).colorScheme.surface,
                 buttonKey: "bookButton",
                 withIcon: false,
-                onTap: () {
-                  context.push('/book-appointment');
+                onTap: () async {
+                  final token =
+                      await FirebaseAuth.instance.currentUser?.getIdToken();
+                  developer.log("Token: $token");
+                  context.push('/booking-payment');
                 },
               ),
             ],
