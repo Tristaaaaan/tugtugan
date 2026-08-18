@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tugtugan/features/inbox/domain/inbox_repository.dart';
+
+import '../domain/inbox_repository.dart';
 
 class InboxService implements InboxRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

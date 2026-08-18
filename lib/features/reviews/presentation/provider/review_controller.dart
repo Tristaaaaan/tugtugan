@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/reviews/domain/repo/review_repository.dart';
-import 'package:tugtugan/features/reviews/presentation/provider/review_provider.dart';
+import '../../domain/repo/review_repository.dart';
+import 'review_provider.dart';
 
 import '../../../profile/domain/user_repository.dart';
 import '../../../profile/presentation/provider/user_provider.dart';

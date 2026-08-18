@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:tugtugan/features/reviews/presentation/widgets/add_review/review_with_rating.dart';
+import 'review_with_rating.dart';
 
 class RatingSection extends StatelessWidget {
   final String title;

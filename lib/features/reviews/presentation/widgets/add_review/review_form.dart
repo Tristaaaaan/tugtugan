@@ -4,9 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/commons/widgets/buttons/loading_state_notifier.dart';
-import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
-import 'package:tugtugan/core/appmodels/review_model.dart';
+import '../../../../../commons/widgets/buttons/loading_state_notifier.dart';
+import '../../../../../commons/widgets/buttons/regular_button.dart';
+import '../../../../../core/appmodels/review_model.dart';
 
 import '../../provider/review_provider.dart';
 import 'feedback_section.dart';

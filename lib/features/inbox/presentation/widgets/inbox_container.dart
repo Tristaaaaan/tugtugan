@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:tugtugan/features/inbox/data/chat_service.dart';
 
 import '../../../../commons/widgets/avatars/avatar_placeholder.dart';
 import '../../../../core/appmodels/studio_model.dart';
 import '../../../chat/domain/studio_chat_model.dart';
+import '../../data/chat_service.dart';
 
 class InboxContainer extends StatelessWidget {
   final StudioChatModel inbox;

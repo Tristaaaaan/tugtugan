@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/inbox/presentation/widgets/inbox_container.dart';
 
 import '../inbox_provider.dart';
+import '../widgets/inbox_container.dart';
 
 class InboxPage extends ConsumerWidget {
   const InboxPage({super.key});

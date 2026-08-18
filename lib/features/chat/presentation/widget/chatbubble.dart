@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/chat/domain/message_model.dart';
+
+import '../../domain/message_model.dart';
 
 class ChatBubble extends StatelessWidget {
   final MessageModel message;

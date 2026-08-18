@@ -1,7 +1,7 @@
 class AppText {
   static const google = "Continue with Google";
 
-  static const bookNow = "Book Now";
+  static const reserve = "Reserve";
 
   static const price = "Price";
 

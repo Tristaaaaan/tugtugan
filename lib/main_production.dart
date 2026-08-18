@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:tugtugan/config/app_config.dart';
-import 'package:tugtugan/config/app_environments.dart';
-import 'package:tugtugan/firebase/prod/firebase_options.dart';
+
+import 'config/app_config.dart';
+import 'config/app_environments.dart';
+import 'firebase/prod/firebase_options.dart';
 
 void main() async {
   AppConfig.setEnvironment(Flavors.production);

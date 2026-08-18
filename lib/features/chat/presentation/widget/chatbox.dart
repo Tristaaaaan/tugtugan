@@ -3,9 +3,10 @@ import 'dart:developer' as developer;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
-import 'package:tugtugan/features/chat/application/send_message_use_case.dart';
-import 'package:tugtugan/features/chat/domain/message_model.dart';
+
+import '../../../../commons/widgets/textfields/regular_textfield.dart';
+import '../../application/send_message_use_case.dart';
+import '../../domain/message_model.dart';
 
 class ChatBox extends StatelessWidget {
   const ChatBox({

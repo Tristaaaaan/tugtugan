@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
+import '../../../../commons/widgets/buttons/regular_button.dart';
 
 import '../../data/subscription_repo_impl.dart';
 import 'subcription_sheet.dart';

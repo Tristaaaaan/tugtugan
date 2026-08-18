@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:tugtugan/features/chat/domain/studio_chat_model.dart';
 
+import '../../chat/domain/studio_chat_model.dart';
 import '../domain/realtime_inbox_repository.dart';
 
 class RealTimeInboxState extends ChangeNotifier {

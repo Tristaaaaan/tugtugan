@@ -1,9 +1,9 @@
 import 'package:riverpod/riverpod.dart';
-import 'package:tugtugan/core/appmodels/review_model.dart';
-import 'package:tugtugan/features/reviews/data/review_repository_impl.dart';
-import 'package:tugtugan/features/reviews/domain/model/review.dart';
 
+import '../../../../core/appmodels/review_model.dart';
 import '../../../../core/appmodels/users.dart';
+import '../../data/review_repository_impl.dart';
+import '../model/review.dart';
 
 abstract class ReviewRepository {
   Future<void> addReview(ReviewModel reviewData);

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/favorite/presentation/favorite.dart';
-import 'package:tugtugan/features/home/presentation/home.dart';
-import 'package:tugtugan/features/inbox/presentation/screen/inbox.dart';
-import 'package:tugtugan/features/profile/presentation/screen/profile.dart';
-import 'package:tugtugan/features/search/presentation/search.dart';
 
 import '../../../commons/widgets/navbar/custom_navbar.dart';
+import '../../favorite/presentation/favorite.dart';
+import '../../home/presentation/home.dart';
+import '../../inbox/presentation/screen/inbox.dart';
+import '../../profile/presentation/screen/profile.dart';
+import '../../search/presentation/search.dart';
 
 class NavigationGate extends StatefulWidget {
   const NavigationGate({super.key});

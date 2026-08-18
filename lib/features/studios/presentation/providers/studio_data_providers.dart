@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:tugtugan/core/appmodels/studio_model.dart';
+
+import '../../../../core/appmodels/studio_model.dart';
 
 final studioProvider = StreamProvider<List<StudioModel>>((ref) {
   return FirebaseFirestore.instance

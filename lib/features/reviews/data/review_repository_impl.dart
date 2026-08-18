@@ -1,10 +1,10 @@
 import 'dart:developer' as developer;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tugtugan/features/reviews/domain/model/review.dart';
 
 import '../../../core/appmodels/review_model.dart';
 import '../../../core/appmodels/users.dart';
+import '../domain/model/review.dart';
 import '../domain/repo/review_repository.dart';
 
 class ReviewRepositoryImpl extends ReviewRepository {

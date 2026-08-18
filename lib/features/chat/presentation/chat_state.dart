@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tugtugan/features/chat/domain/chat_repository.dart';
-import 'package:tugtugan/features/chat/domain/message_model.dart';
+
+import '../domain/chat_repository.dart';
+import '../domain/message_model.dart';
 
 class RealTimeChatState extends ChangeNotifier {
   final RealTimeChatRepository _userRepo;
