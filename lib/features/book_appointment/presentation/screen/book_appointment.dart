@@ -221,6 +221,7 @@ class _EmbeddedBookingSectionState
             SizedBox(
               height: 300,
               child: CustomScrollView(
+                physics: const NeverScrollableScrollPhysics(),
                 slivers: [
                   SliverPersistentHeader(
                     pinned: true,
@@ -272,7 +273,7 @@ class _EmbeddedBookingSectionState
                   controller: _scrollController,
                   child: GridView.builder(
                     controller: _scrollController,
-                    padding: const EdgeInsets.only(bottom: 100),
+                    padding: const EdgeInsets.only(bottom: 100, right: 10),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
