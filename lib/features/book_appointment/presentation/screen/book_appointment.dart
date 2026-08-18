@@ -219,7 +219,7 @@ class _EmbeddedBookingSectionState
               ),
             ),
             SizedBox(
-              height: 300,
+              height: 350,
               child: CustomScrollView(
                 physics: const NeverScrollableScrollPhysics(),
                 slivers: [
@@ -245,10 +245,11 @@ class _EmbeddedBookingSectionState
               ),
             ),
             const SizedBox(height: 8),
-            Text(
-              "Choose a time slot",
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            const Text("Choose a time slot",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                )),
             const SizedBox(height: 4),
 
             SizedBox(

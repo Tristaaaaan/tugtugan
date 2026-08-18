@@ -29,7 +29,7 @@ Widget _buildDayCell(
     child: Text(
       '${day.day}',
       style: TextStyle(
-        fontSize: 16,
+        fontSize: 12,
         fontWeight: FontWeight.w500,
         color: isPast
             ? Colors.grey
@@ -218,6 +218,7 @@ class CalendarHeaderDelegate extends SliverPersistentHeaderDelegate {
               const SizedBox(height: 12),
 
               TableCalendar(
+                rowHeight: 42.0,
                 availableGestures: AvailableGestures.none,
                 headerVisible: false,
                 daysOfWeekVisible: false,
