@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:tugtugan/features/book_appointment/data/datasource/local/local_datasource.dart';
-import 'package:tugtugan/features/book_appointment/presentation/utils/availability_color.dart';
-import 'package:tugtugan/features/book_appointment/presentation/widget/calendar.dart';
+
+import '../../data/datasource/local/local_datasource.dart';
+import '../utils/availability_color.dart';
+import '../widget/calendar.dart';
 
 final focusedDayProvider = StateProvider<DateTime>((ref) {
   return DateTime.now(); // Default: today

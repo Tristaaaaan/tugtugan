@@ -1,4 +1,4 @@
-import '../domain/studio_repository.dart';
+import '../domain/repos/studio_repository.dart';
 
 class StudioUseCase {
   final StudioRepository repository;

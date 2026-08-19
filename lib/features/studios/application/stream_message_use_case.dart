@@ -1,5 +1,5 @@
 import '../../../core/appmodels/studio_model.dart';
-import '../domain/studio_repository.dart';
+import '../domain/repos/studio_repository.dart';
 
 class StreamStudioUseCase {
   final StudioRepository repository;

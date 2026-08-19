@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tugtugan/features/studios/domain/entities/booking_model_entity.dart';
+
+import '../../domain/entities/booking_model_entity.dart';
 
 part 'booking_model.freezed.dart';
 

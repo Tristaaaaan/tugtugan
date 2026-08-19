@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/appmodels/studio_model.dart';
-import '../domain/studio_repository.dart';
+import '../domain/repos/studio_repository.dart';
 
 class StudioServices implements StudioRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

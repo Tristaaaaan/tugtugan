@@ -1,7 +1,8 @@
 import 'dart:core';
 
 import 'package:equatable/equatable.dart';
-import 'package:tugtugan/features/studios/data/model/booking_model.dart';
+
+import '../../data/model/booking_model.dart';
 
 class BookingModelEntity extends Equatable {
   final String? id;
