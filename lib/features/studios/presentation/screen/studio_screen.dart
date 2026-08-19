@@ -2,6 +2,7 @@ import 'dart:developer' as developer;
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -217,17 +218,46 @@ class _StudioState extends ConsumerState<Studio>
                       child: const Text('Back'),
                     ),
                     RegularButton(
-                      width: 200,
-                      text: 'Confirm',
-                      backgroundColor:
-                          Theme.of(context).colorScheme.primaryFixedDim,
-                      textColor: Theme.of(context).colorScheme.surface,
-                      buttonKey: "confirmBookingButton",
-                      withIcon: false,
-                      onTap: () {
-                        // TODO: hook up your booking confirmation flow
-                      },
-                    ),
+                        width: 200,
+                        text: 'Continue',
+                        backgroundColor:
+                            Theme.of(context).colorScheme.primaryFixedDim,
+                        textColor: Theme.of(context).colorScheme.surface,
+                        buttonKey: "confirmBookingButton",
+                        withIcon: false,
+                        onTap: () async {
+                          final user = FirebaseAuth.instance.currentUser;
+
+                          // 1. Check if user is signed in
+                          if (user == null) {
+                            developer.log("User is not signed in.");
+                            // Redirect user to login screen here
+                            return;
+                          }
+
+                          try {
+                            // 2. Force token refresh if session expired
+                            await user.getIdToken(true);
+
+                            final functions = FirebaseFunctions.instanceFor(
+                              region: 'us-central1',
+                            );
+
+                            final callable =
+                                functions.httpsCallable('create_appointment');
+
+                            final result = await callable.call({
+                              'date': '2026-08-20',
+                            });
+
+                            print(result.data);
+                          } on FirebaseFunctionsException catch (e) {
+                            developer.log(
+                                "Cloud Function Error: ${e.code} - ${e.message}");
+                          } catch (e) {
+                            developer.log("Error: $e");
+                          }
+                        }),
                   ],
                 )
               : Row(
@@ -347,26 +377,26 @@ class _StudioInfoSection extends StatelessWidget {
                 Icon(Icons.message,
                     color: Theme.of(context).colorScheme.primaryFixedDim),
                 const SizedBox(height: 4),
-                const Text("Chat", style: TextStyle(fontSize: 14)),
+                const Text("Message", style: TextStyle(fontSize: 14)),
               ],
             ),
           ),
         ),
-        InkWell(
-          borderRadius: BorderRadius.circular(8),
-          onTap: onReview,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            child: Column(
-              children: [
-                Icon(Icons.message,
-                    color: Theme.of(context).colorScheme.primaryFixedDim),
-                const SizedBox(height: 4),
-                const Text("Review", style: TextStyle(fontSize: 14)),
-              ],
-            ),
-          ),
-        ),
+        // InkWell(
+        //   borderRadius: BorderRadius.circular(8),
+        //   onTap: onReview,
+        //   child: Container(
+        //     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        //     child: Column(
+        //       children: [
+        //         Icon(Icons.message,
+        //             color: Theme.of(context).colorScheme.primaryFixedDim),
+        //         const SizedBox(height: 4),
+        //         const Text("Review", style: TextStyle(fontSize: 14)),
+        //       ],
+        //     ),
+        //   ),
+        // ),
         const SizedBox(height: 10),
         ExpandableText(text: studio.description),
       ],

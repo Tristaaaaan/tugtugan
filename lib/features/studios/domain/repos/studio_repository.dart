@@ -1,4 +1,4 @@
-import '../../../core/appmodels/studio_model.dart';
+import '../../../../core/appmodels/studio_model.dart';
 
 abstract class StudioRepository {
   Future<void> followStudio(String studioId, String userId);
