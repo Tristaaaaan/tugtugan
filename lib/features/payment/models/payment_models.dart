@@ -34,7 +34,8 @@ class PaymentAttachResult {
   factory PaymentAttachResult.fromJson(Map<String, dynamic> json) {
     return PaymentAttachResult(
       status: json['status'] as String,
-      requiresAction: (json['requiresAction'] as bool?) ?? (json['redirectUrl'] != null),
+      requiresAction:
+          (json['requiresAction'] as bool?) ?? (json['redirectUrl'] != null),
       redirectUrl: json['redirectUrl'] as String?,
     );
   }

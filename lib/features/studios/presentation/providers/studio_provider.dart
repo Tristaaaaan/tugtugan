@@ -1,8 +1,44 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:riverpod/riverpod.dart';
 
-import '../../data/studio_services.dart';
+import '../../data/datasource/remote/studio_information_remote_datasource.dart';
+import '../../data/repository/studio_repo_impl.dart';
 import '../../domain/repos/studio_repository.dart';
+import 'studio_availability_controller.dart';
+import 'studio_availability_state.dart';
 
 final studioServiceProvider = Provider<StudioRepository>((ref) {
   return StudioServices();
 });
+
+final studioInformationRepositoryProvider =
+    Provider<StudioInformationRepository>((ref) {
+  final remoteDatasource = ref.watch(
+    studioInformationRemoteDatasourceProvider,
+  );
+
+  return StudioInformationRepositoryImpl(
+    studioInformationRemoteDatasource: remoteDatasource,
+  );
+});
+
+final studioInformationRemoteDatasourceProvider =
+    Provider<StudioInformationRemoteDatasource>((ref) {
+  return StudioInformationRemoteDatasourceImpl(
+    functions: FirebaseFunctions.instance,
+  );
+});
+
+final studioAvailabilityControllerProvider = StateNotifierProvider.family<
+    StudioAvailabilityController, StudioAvailabilityState, String>(
+  (ref, studioId) {
+    final repository = ref.watch(
+      studioInformationRepositoryProvider,
+    );
+
+    return StudioAvailabilityController(
+      repository,
+      studioId,
+    );
+  },
+);

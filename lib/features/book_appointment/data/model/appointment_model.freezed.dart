@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'booking_model.dart';
+part of 'appointment_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,46 +15,44 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$BookingModel {
+mixin _$AppointmentModel {
   String? get id => throw _privateConstructorUsedError;
   String get studioId => throw _privateConstructorUsedError;
   String get customerId => throw _privateConstructorUsedError;
-  DateTime get startAt => throw _privateConstructorUsedError;
-  DateTime get endAt => throw _privateConstructorUsedError;
-  String get bookingNumber => throw _privateConstructorUsedError;
-  BookingStatus get status => throw _privateConstructorUsedError;
-  DateTime? get approvedAt => throw _privateConstructorUsedError;
-  DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  List<AppointmentSlotModel> get slots => throw _privateConstructorUsedError;
+  String? get bookingNumber => throw _privateConstructorUsedError;
+  BookingStatus? get status => throw _privateConstructorUsedError;
+  int? get approvedAt => throw _privateConstructorUsedError;
+  int? get createdAt => throw _privateConstructorUsedError;
+  int? get updatedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $BookingModelCopyWith<BookingModel> get copyWith =>
+  $AppointmentModelCopyWith<AppointmentModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $BookingModelCopyWith<$Res> {
-  factory $BookingModelCopyWith(
-          BookingModel value, $Res Function(BookingModel) then) =
-      _$BookingModelCopyWithImpl<$Res, BookingModel>;
+abstract class $AppointmentModelCopyWith<$Res> {
+  factory $AppointmentModelCopyWith(
+          AppointmentModel value, $Res Function(AppointmentModel) then) =
+      _$AppointmentModelCopyWithImpl<$Res, AppointmentModel>;
   @useResult
   $Res call(
       {String? id,
       String studioId,
       String customerId,
-      DateTime startAt,
-      DateTime endAt,
-      String bookingNumber,
-      BookingStatus status,
-      DateTime? approvedAt,
-      DateTime createdAt,
-      DateTime updatedAt});
+      List<AppointmentSlotModel> slots,
+      String? bookingNumber,
+      BookingStatus? status,
+      int? approvedAt,
+      int? createdAt,
+      int? updatedAt});
 }
 
 /// @nodoc
-class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
-    implements $BookingModelCopyWith<$Res> {
-  _$BookingModelCopyWithImpl(this._value, this._then);
+class _$AppointmentModelCopyWithImpl<$Res, $Val extends AppointmentModel>
+    implements $AppointmentModelCopyWith<$Res> {
+  _$AppointmentModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -67,13 +65,12 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
     Object? id = freezed,
     Object? studioId = null,
     Object? customerId = null,
-    Object? startAt = null,
-    Object? endAt = null,
-    Object? bookingNumber = null,
-    Object? status = null,
+    Object? slots = null,
+    Object? bookingNumber = freezed,
+    Object? status = freezed,
     Object? approvedAt = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -88,65 +85,60 @@ class _$BookingModelCopyWithImpl<$Res, $Val extends BookingModel>
           ? _value.customerId
           : customerId // ignore: cast_nullable_to_non_nullable
               as String,
-      startAt: null == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      endAt: null == endAt
-          ? _value.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      bookingNumber: null == bookingNumber
+      slots: null == slots
+          ? _value.slots
+          : slots // ignore: cast_nullable_to_non_nullable
+              as List<AppointmentSlotModel>,
+      bookingNumber: freezed == bookingNumber
           ? _value.bookingNumber
           : bookingNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
+              as String?,
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as BookingStatus,
+              as BookingStatus?,
       approvedAt: freezed == approvedAt
           ? _value.approvedAt
           : approvedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdAt: null == createdAt
+              as int?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as int?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as int?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$BookingModelImplCopyWith<$Res>
-    implements $BookingModelCopyWith<$Res> {
-  factory _$$BookingModelImplCopyWith(
-          _$BookingModelImpl value, $Res Function(_$BookingModelImpl) then) =
-      __$$BookingModelImplCopyWithImpl<$Res>;
+abstract class _$$AppointmentModelImplCopyWith<$Res>
+    implements $AppointmentModelCopyWith<$Res> {
+  factory _$$AppointmentModelImplCopyWith(_$AppointmentModelImpl value,
+          $Res Function(_$AppointmentModelImpl) then) =
+      __$$AppointmentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String? id,
       String studioId,
       String customerId,
-      DateTime startAt,
-      DateTime endAt,
-      String bookingNumber,
-      BookingStatus status,
-      DateTime? approvedAt,
-      DateTime createdAt,
-      DateTime updatedAt});
+      List<AppointmentSlotModel> slots,
+      String? bookingNumber,
+      BookingStatus? status,
+      int? approvedAt,
+      int? createdAt,
+      int? updatedAt});
 }
 
 /// @nodoc
-class __$$BookingModelImplCopyWithImpl<$Res>
-    extends _$BookingModelCopyWithImpl<$Res, _$BookingModelImpl>
-    implements _$$BookingModelImplCopyWith<$Res> {
-  __$$BookingModelImplCopyWithImpl(
-      _$BookingModelImpl _value, $Res Function(_$BookingModelImpl) _then)
+class __$$AppointmentModelImplCopyWithImpl<$Res>
+    extends _$AppointmentModelCopyWithImpl<$Res, _$AppointmentModelImpl>
+    implements _$$AppointmentModelImplCopyWith<$Res> {
+  __$$AppointmentModelImplCopyWithImpl(_$AppointmentModelImpl _value,
+      $Res Function(_$AppointmentModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -155,15 +147,14 @@ class __$$BookingModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? studioId = null,
     Object? customerId = null,
-    Object? startAt = null,
-    Object? endAt = null,
-    Object? bookingNumber = null,
-    Object? status = null,
+    Object? slots = null,
+    Object? bookingNumber = freezed,
+    Object? status = freezed,
     Object? approvedAt = freezed,
-    Object? createdAt = null,
-    Object? updatedAt = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
-    return _then(_$BookingModelImpl(
+    return _then(_$AppointmentModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -176,53 +167,49 @@ class __$$BookingModelImplCopyWithImpl<$Res>
           ? _value.customerId
           : customerId // ignore: cast_nullable_to_non_nullable
               as String,
-      startAt: null == startAt
-          ? _value.startAt
-          : startAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      endAt: null == endAt
-          ? _value.endAt
-          : endAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      bookingNumber: null == bookingNumber
+      slots: null == slots
+          ? _value._slots
+          : slots // ignore: cast_nullable_to_non_nullable
+              as List<AppointmentSlotModel>,
+      bookingNumber: freezed == bookingNumber
           ? _value.bookingNumber
           : bookingNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      status: null == status
+              as String?,
+      status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as BookingStatus,
+              as BookingStatus?,
       approvedAt: freezed == approvedAt
           ? _value.approvedAt
           : approvedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      createdAt: null == createdAt
+              as int?,
+      createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      updatedAt: null == updatedAt
+              as int?,
+      updatedAt: freezed == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$BookingModelImpl extends _BookingModel {
-  const _$BookingModelImpl(
+class _$AppointmentModelImpl extends _AppointmentModel {
+  const _$AppointmentModelImpl(
       {this.id,
       required this.studioId,
       required this.customerId,
-      required this.startAt,
-      required this.endAt,
-      required this.bookingNumber,
-      required this.status,
+      required final List<AppointmentSlotModel> slots,
+      this.bookingNumber,
+      this.status,
       this.approvedAt,
-      required this.createdAt,
-      required this.updatedAt})
-      : super._();
+      this.createdAt,
+      this.updatedAt})
+      : _slots = slots,
+        super._();
 
   @override
   final String? id;
@@ -230,38 +217,41 @@ class _$BookingModelImpl extends _BookingModel {
   final String studioId;
   @override
   final String customerId;
+  final List<AppointmentSlotModel> _slots;
   @override
-  final DateTime startAt;
+  List<AppointmentSlotModel> get slots {
+    if (_slots is EqualUnmodifiableListView) return _slots;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_slots);
+  }
+
   @override
-  final DateTime endAt;
+  final String? bookingNumber;
   @override
-  final String bookingNumber;
+  final BookingStatus? status;
   @override
-  final BookingStatus status;
+  final int? approvedAt;
   @override
-  final DateTime? approvedAt;
+  final int? createdAt;
   @override
-  final DateTime createdAt;
-  @override
-  final DateTime updatedAt;
+  final int? updatedAt;
 
   @override
   String toString() {
-    return 'BookingModel(id: $id, studioId: $studioId, customerId: $customerId, startAt: $startAt, endAt: $endAt, bookingNumber: $bookingNumber, status: $status, approvedAt: $approvedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'AppointmentModel(id: $id, studioId: $studioId, customerId: $customerId, slots: $slots, bookingNumber: $bookingNumber, status: $status, approvedAt: $approvedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BookingModelImpl &&
+            other is _$AppointmentModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.studioId, studioId) ||
                 other.studioId == studioId) &&
             (identical(other.customerId, customerId) ||
                 other.customerId == customerId) &&
-            (identical(other.startAt, startAt) || other.startAt == startAt) &&
-            (identical(other.endAt, endAt) || other.endAt == endAt) &&
+            const DeepCollectionEquality().equals(other._slots, _slots) &&
             (identical(other.bookingNumber, bookingNumber) ||
                 other.bookingNumber == bookingNumber) &&
             (identical(other.status, status) || other.status == status) &&
@@ -274,29 +264,38 @@ class _$BookingModelImpl extends _BookingModel {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, studioId, customerId,
-      startAt, endAt, bookingNumber, status, approvedAt, createdAt, updatedAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      studioId,
+      customerId,
+      const DeepCollectionEquality().hash(_slots),
+      bookingNumber,
+      status,
+      approvedAt,
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BookingModelImplCopyWith<_$BookingModelImpl> get copyWith =>
-      __$$BookingModelImplCopyWithImpl<_$BookingModelImpl>(this, _$identity);
+  _$$AppointmentModelImplCopyWith<_$AppointmentModelImpl> get copyWith =>
+      __$$AppointmentModelImplCopyWithImpl<_$AppointmentModelImpl>(
+          this, _$identity);
 }
 
-abstract class _BookingModel extends BookingModel {
-  const factory _BookingModel(
+abstract class _AppointmentModel extends AppointmentModel {
+  const factory _AppointmentModel(
       {final String? id,
       required final String studioId,
       required final String customerId,
-      required final DateTime startAt,
-      required final DateTime endAt,
-      required final String bookingNumber,
-      required final BookingStatus status,
-      final DateTime? approvedAt,
-      required final DateTime createdAt,
-      required final DateTime updatedAt}) = _$BookingModelImpl;
-  const _BookingModel._() : super._();
+      required final List<AppointmentSlotModel> slots,
+      final String? bookingNumber,
+      final BookingStatus? status,
+      final int? approvedAt,
+      final int? createdAt,
+      final int? updatedAt}) = _$AppointmentModelImpl;
+  const _AppointmentModel._() : super._();
 
   @override
   String? get id;
@@ -305,21 +304,19 @@ abstract class _BookingModel extends BookingModel {
   @override
   String get customerId;
   @override
-  DateTime get startAt;
+  List<AppointmentSlotModel> get slots;
   @override
-  DateTime get endAt;
+  String? get bookingNumber;
   @override
-  String get bookingNumber;
+  BookingStatus? get status;
   @override
-  BookingStatus get status;
+  int? get approvedAt;
   @override
-  DateTime? get approvedAt;
+  int? get createdAt;
   @override
-  DateTime get createdAt;
-  @override
-  DateTime get updatedAt;
+  int? get updatedAt;
   @override
   @JsonKey(ignore: true)
-  _$$BookingModelImplCopyWith<_$BookingModelImpl> get copyWith =>
+  _$$AppointmentModelImplCopyWith<_$AppointmentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

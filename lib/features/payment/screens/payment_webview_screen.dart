@@ -6,8 +6,10 @@ import 'package:webview_flutter/webview_flutter.dart';
 /// navigates to your configured success/failed redirect endpoint.
 class PaymentWebviewScreen extends StatefulWidget {
   final String checkoutUrl;
-  final String successUrlPrefix; // must match PAYMENT_SUCCESS_REDIRECT_URL on the backend
-  final String failedUrlPrefix; // must match PAYMENT_FAILED_REDIRECT_URL on the backend
+  final String
+      successUrlPrefix; // must match PAYMENT_SUCCESS_REDIRECT_URL on the backend
+  final String
+      failedUrlPrefix; // must match PAYMENT_FAILED_REDIRECT_URL on the backend
 
   const PaymentWebviewScreen({
     super.key,

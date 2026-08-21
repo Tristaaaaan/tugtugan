@@ -1,5 +1,5 @@
-import 'package:tugtugan/features/studios/domain/usecases/create_appointment_usecase.dart';
+import '../entities/appointment_entity.dart';
 
 abstract class AppointmentRepository {
-  Future<void> createAppointment(Appointment bookingModelEntity);
+  Future<void> createAppointment(AppointmentEntity appointmentEntity);
 }

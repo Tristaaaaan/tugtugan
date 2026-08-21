@@ -108,7 +108,6 @@ class CalendarHeaderDelegate extends SliverPersistentHeaderDelegate {
         children: [
           const SizedBox(height: 12),
 
-          // Month navigation
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

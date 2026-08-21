@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import '../../data/datasource/local/local_datasource.dart';
-import '../utils/availability_color.dart';
+import '../../../studios/presentation/providers/studio_provider.dart';
 import '../widget/calendar.dart';
 
 final focusedDayProvider = StateProvider<DateTime>((ref) {
@@ -89,33 +87,7 @@ class _EmbeddedBookingSectionState
 
   // Multiple time slots can be picked for the same day
   // (e.g. "August 26, 8:00AM, 9:00, 12:00PM").
-  final Set<AppointmentTime> selectedTimes = {};
   bool _showScrollToTop = false;
-
-  void _toggleSlot(AppointmentTime slot) {
-    setState(() {
-      if (selectedTimes.contains(slot)) {
-        selectedTimes.remove(slot);
-      } else {
-        selectedTimes.add(slot);
-      }
-    });
-  }
-
-  /// "August 26, 8:00AM, 9:00, 12:00PM"
-  String _buildSelectionSummary(DateTime focusedDay) {
-    if (selectedTimes.isEmpty) return 'No time selected yet';
-
-    final datePart = DateFormat('MMMM d').format(focusedDay);
-
-    // Keep display order matching dummyTimes rather than Set insertion order
-    final orderedTimes = dummyTimes
-        .where((t) => selectedTimes.contains(t))
-        .map((t) => t.time)
-        .join(', ');
-
-    return '$datePart, $orderedTimes';
-  }
 
   @override
   void initState() {
@@ -152,7 +124,10 @@ class _EmbeddedBookingSectionState
   Widget build(BuildContext context) {
     final focusedDay = ref.watch(focusedDayProvider);
     final currentFocusedMonth = ref.watch(focusedMonthProvider);
-
+    final selectedMonthStudioAvailability =
+        ref.watch(studioAvailabilityControllerProvider(
+      widget.studioId,
+    ));
     List<DateTime> datesWithData = [];
 
     // Fixed height, non-Scaffold layout — sits directly inside the
@@ -205,45 +180,58 @@ class _EmbeddedBookingSectionState
               ),
             ),
             // Live-updating selected date + time(s) summary
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              child: Text(
-                _buildSelectionSummary(focusedDay),
-                key: ValueKey(_buildSelectionSummary(focusedDay)),
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  color: selectedTimes.isEmpty
-                      ? Colors.grey
-                      : Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
+            // AnimatedSwitcher(
+            //   duration: const Duration(milliseconds: 200),
+            //   child: Text(
+            //     _buildSelectionSummary(focusedDay),
+            //     key: ValueKey(_buildSelectionSummary(focusedDay)),
+            //     style: TextStyle(
+            //       fontSize: 14,
+            //       fontWeight: FontWeight.w500,
+            //       color: selectedTimes.isEmpty
+            //           ? Colors.grey
+            //           : Theme.of(context).colorScheme.primary,
+            //     ),
+            //   ),
+            // ),
             SizedBox(
               height: 350,
-              child: CustomScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                slivers: [
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: CalendarHeaderDelegate(
-                      currentFocusedMonth: currentFocusedMonth,
-                      focusedDay: focusedDay,
-                      datesWithData: datesWithData,
-                      onPreviousMonth: () => _navigateToMonth(ref, -1),
-                      onNextMonth: () => _navigateToMonth(ref, 1),
-                      onPageChanged: (focusedMonth) {
-                        ref.read(focusedMonthProvider.notifier).state =
-                            focusedMonth;
-                      },
-                      onDaySelected: (selectedDay) {
-                        ref.read(focusedDayProvider.notifier).state =
-                            selectedDay;
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              child: selectedMonthStudioAvailability.when(
+                  initial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (e) => Center(child: Text(e.toString())),
+                  empty: () => const Center(child: Text('No Availability')),
+                  loaded: (data) {
+                    if (data.isEmpty) {
+                      return const Center(child: Text('No Availability'));
+                    }
+
+                    return CustomScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      slivers: [
+                        SliverPersistentHeader(
+                          pinned: true,
+                          delegate: CalendarHeaderDelegate(
+                            currentFocusedMonth: currentFocusedMonth,
+                            focusedDay: focusedDay,
+                            datesWithData: datesWithData,
+                            onPreviousMonth: () => _navigateToMonth(ref, -1),
+                            onNextMonth: () => _navigateToMonth(ref, 1),
+                            onPageChanged: (focusedMonth) {
+                              ref.read(focusedMonthProvider.notifier).state =
+                                  focusedMonth;
+                            },
+                            onDaySelected: (selectedDay) {
+                              ref.read(focusedDayProvider.notifier).state =
+                                  selectedDay;
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
             ),
             const SizedBox(height: 8),
             const Text("Choose a time slot",
@@ -253,143 +241,9 @@ class _EmbeddedBookingSectionState
                 )),
             const SizedBox(height: 4),
 
-            SizedBox(
-              // Bounded height since this now lives inside another
-              // scroll view (the Studio screen's CustomScrollView)
-              // rather than owning the viewport itself.
-              height: 400,
-              child: ScrollbarTheme(
-                data: ScrollbarThemeData(
-                  thumbColor: WidgetStateProperty.all(
-                    Theme.of(context).colorScheme.primary,
-                  ),
-                  trackColor: WidgetStateProperty.all(
-                    Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withValues(alpha: 0.15),
-                  ),
-                ),
-                child: Scrollbar(
-                  thumbVisibility: true,
-                  controller: _scrollController,
-                  child: GridView.builder(
-                    controller: _scrollController,
-                    padding: const EdgeInsets.only(bottom: 100, right: 10),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                      childAspectRatio: 2.5,
-                    ),
-                    itemCount: dummyTimes.length,
-                    itemBuilder: (context, index) {
-                      final slot = dummyTimes[index];
+            // Get Business Hours
 
-                      final isAvailable =
-                          slot.availability != Availability.occupied;
-
-                      final statusText = switch (slot.availability) {
-                        Availability.available => 'Available',
-                        Availability.occupied => 'Occupied',
-                      };
-
-                      final isSelected = selectedTimes.contains(slot);
-
-                      return GestureDetector(
-                        onTap: isAvailable ? () => _toggleSlot(slot) : null,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border(
-                              bottom: BorderSide(
-                                color: isSelected
-                                    ? Theme.of(context).colorScheme.primary
-                                    : getAvailabilityColor(slot.availability),
-                                width: .3,
-                              ),
-                              left: BorderSide(
-                                color: isSelected
-                                    ? Theme.of(context).colorScheme.primary
-                                    : getAvailabilityColor(slot.availability),
-                                width: 3,
-                              ),
-                            ),
-                            color: isSelected
-                                ? Theme.of(context).colorScheme.primary
-                                : null,
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                isSelected
-                                    ? Icons.check_circle
-                                    : Icons.access_time,
-                                color: isSelected
-                                    ? Theme.of(context).colorScheme.surface
-                                    : Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withValues(alpha: 0.5),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      slot.time,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                        color: !isAvailable
-                                            ? Colors.grey
-                                            : isSelected
-                                                ? Theme.of(context)
-                                                    .colorScheme
-                                                    .surface
-                                                : null,
-                                      ),
-                                    ),
-                                    Text(
-                                      statusText,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: isSelected
-                                            ? Theme.of(context)
-                                                .colorScheme
-                                                .surface
-                                            : getAvailabilityColor(
-                                                slot.availability),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      )
-                          .animate(delay: (index * 40).ms)
-                          .fadeIn(duration: 1000.ms, curve: Curves.easeOut)
-                          .slideY(
-                            begin: 0.15,
-                            end: 0,
-                            duration: 350.ms,
-                            curve: Curves.easeOutCubic,
-                          );
-                    },
-                  ),
-                ),
-              ),
-            ),
+            // TimeSlotsContainer(scrollController: _scrollController),
           ],
         ),
         Positioned(

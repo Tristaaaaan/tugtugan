@@ -1,8 +1,10 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/book_appointment/presentation/providers/create_appointment_states.dart';
-import 'package:tugtugan/features/studios/domain/usecases/create_appointment_usecase.dart';
+
+import '../../domain/entities/appointment_entity.dart';
+import '../../domain/usecases/create_appointment_usecase.dart';
+import 'create_appointment_states.dart';
 
 class AppointmentController extends StateNotifier<CreateAppointmentState> {
   AppointmentController(this._createAppointmentUseCase)
@@ -13,7 +15,7 @@ class AppointmentController extends StateNotifier<CreateAppointmentState> {
   bool _isLoading = false;
 
   /// 🔹 Create a new appointment
-  Future<void> createAppointment(Appointment appointment) async {
+  Future<void> createAppointment(AppointmentEntity appointment) async {
     if (_isLoading) {
       developer.log('createAppointment skipped — already in progress');
       return;

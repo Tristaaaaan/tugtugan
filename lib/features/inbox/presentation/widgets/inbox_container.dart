@@ -6,8 +6,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../commons/widgets/avatars/avatar_placeholder.dart';
-import '../../../../core/appmodels/studio_model.dart';
 import '../../../chat/domain/studio_chat_model.dart';
+import '../../../studios/data/model/studio_model.dart';
 import '../../data/chat_service.dart';
 
 class InboxContainer extends StatelessWidget {

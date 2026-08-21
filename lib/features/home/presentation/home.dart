@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../commons/widgets/tiles/studio_tiles.dart';
-import '../../../core/appmodels/studio_model.dart';
+import '../../studios/data/model/studio_model.dart';
 import '../../studios/presentation/providers/studio_data_providers.dart';
 
 class HomePage extends ConsumerWidget {

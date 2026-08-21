@@ -7,34 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:tugtugan/features/studios/domain/usecases/create_appointment_usecase.dart';
-import 'package:tugtugan/features/studios/presentation/providers/appointment_providers.dart';
 
 import '../../../../commons/widgets/buttons/regular_button.dart';
 import '../../../../commons/widgets/text/expandable_text.dart';
-import '../../../../core/appmodels/studio_model.dart';
 import '../../../../core/apptext/app_text.dart';
+import '../../../book_appointment/data/model/appointment_model.dart';
+import '../../../book_appointment/domain/entities/appointment_entity.dart';
+import '../../../book_appointment/domain/entities/appointment_slot_entity.dart';
+import '../../../book_appointment/presentation/providers/appointment_providers.dart';
 import '../../../book_appointment/presentation/screen/book_appointment.dart';
 import '../../../reviews/presentation/widgets/add_review/write_review.dart';
 import '../../../reviews/presentation/widgets/display_review/review_content.dart';
 import '../../application/studio_use_case.dart';
-import '../../data/studio_services.dart';
+import '../../data/model/studio_model.dart';
+import '../../data/repository/studio_repo_impl.dart';
 import '../providers/studio_data_providers.dart';
 
-// TODO: point these at your actual project paths
-// import '../providers/specific_studio_provider.dart';
-// import '../models/studio_model.dart';
-// import '../use_cases/studio_use_case.dart';
-// import '../services/studio_services.dart';
-// import '../widgets/expandable_text.dart';
-// import '../widgets/review_content.dart';
-// import '../widgets/regular_button.dart';
-// import '../constants/app_text.dart';
-// import '../widgets/review_sheet.dart' show showReviewSheet;
-
-/// True once the Reserve button has been tapped and the screen has
-/// morphed into the embedded booking UI. Drives both the header
-/// collapse animation and the content cross-fade.
 final isBookingModeProvider = StateProvider<bool>((ref) => false);
 
 class Studio extends ConsumerStatefulWidget {
@@ -90,7 +78,6 @@ class _StudioState extends ConsumerState<Studio>
           return SafeArea(
             child: CustomScrollView(
               slivers: [
-                // --- Header: animates between full (430) and collapsed (160) ---
                 AnimatedBuilder(
                   animation: _bookingController,
                   builder: (context, _) {
@@ -106,7 +93,6 @@ class _StudioState extends ConsumerState<Studio>
                       delegate: StudioHeaderDelegate(
                         height: height,
                         imageUrl: studio.imageUrl,
-                        // Fade + shrink the follow button as we collapse
                         actionOpacity: 1 - t,
                         onBack: () {
                           if (isBooking) {
@@ -128,8 +114,6 @@ class _StudioState extends ConsumerState<Studio>
                     );
                   },
                 ),
-
-                // --- Body: cross-fades between studio info and booking UI ---
                 SliverList(
                   delegate: SliverChildListDelegate(
                     [
@@ -157,12 +141,9 @@ class _StudioState extends ConsumerState<Studio>
                                   key: const ValueKey('booking'),
                                   studioId: studio.id,
                                   studioName: studio.studioName,
-                                  // TODO: swap in the real fields once
-                                  // rating/reviewCount live on StudioModel
                                   rating: 4.5,
                                   reviewCount: 12,
                                   onConfirm: () {
-                                    // TODO: hook up your booking confirmation flow
                                     developer.log(
                                         'Confirm booking for studio: ${studio.id}');
                                   },
@@ -228,11 +209,55 @@ class _StudioState extends ConsumerState<Studio>
                         buttonKey: "confirmBookingButton",
                         withIcon: false,
                         onTap: () async {
-                          final appointment = Appointment(
-                            date: DateTime.now(),
+                          final List<AppointmentSlotEntity> slots = [
+                            AppointmentSlotEntity(
+                              startAt: DateTime(2026, 8, 21, 9, 0)
+                                  .millisecondsSinceEpoch,
+                              endAt: DateTime(2026, 8, 21, 10, 0)
+                                  .millisecondsSinceEpoch,
+                            ),
+                            AppointmentSlotEntity(
+                              startAt: DateTime(2026, 8, 21, 10, 0)
+                                  .millisecondsSinceEpoch,
+                              endAt: DateTime(2026, 8, 21, 11, 0)
+                                  .millisecondsSinceEpoch,
+                            ),
+                            AppointmentSlotEntity(
+                              startAt: DateTime(2026, 8, 21, 11, 0)
+                                  .millisecondsSinceEpoch,
+                              endAt: DateTime(2026, 8, 21, 12, 0)
+                                  .millisecondsSinceEpoch,
+                            ),
+                            AppointmentSlotEntity(
+                              startAt: DateTime(2026, 8, 21, 13, 0)
+                                  .millisecondsSinceEpoch,
+                              endAt: DateTime(2026, 8, 21, 14, 0)
+                                  .millisecondsSinceEpoch,
+                            ),
+                            AppointmentSlotEntity(
+                              startAt: DateTime(2026, 8, 21, 14, 0)
+                                  .millisecondsSinceEpoch,
+                              endAt: DateTime(2026, 8, 21, 15, 0)
+                                  .millisecondsSinceEpoch,
+                            ),
+                            AppointmentSlotEntity(
+                              startAt: DateTime(2026, 8, 21, 15, 0)
+                                  .millisecondsSinceEpoch,
+                              endAt: DateTime(2026, 8, 21, 16, 0)
+                                  .millisecondsSinceEpoch,
+                            ),
+                          ];
+                          final appointment = AppointmentEntity(
+                            studioId: widget.studioId!,
+                            customerId: FirebaseAuth.instance.currentUser!.uid,
+                            slots: slots,
                           );
+                          final payload =
+                              AppointmentModel.fromEntity(appointment)
+                                  .toPayload();
+                          developer.log('Payload being sent: $payload');
 
-                          ref
+                          await ref
                               .read(appointmentControllerProvider.notifier)
                               .createAppointment(appointment);
                         }),
@@ -270,8 +295,6 @@ class _StudioState extends ConsumerState<Studio>
   }
 }
 
-/// The studio's name/rating/chat/review/description block.
-/// Extracted so it can be cross-faded with [EmbeddedBookingSection].
 class _StudioInfoSection extends StatelessWidget {
   final StudioModel studio;
   final VoidCallback onShowMap;
@@ -382,9 +405,6 @@ class _StudioInfoSection extends StatelessWidget {
   }
 }
 
-/// Sliver header that animates its own extent between a full hero image
-/// (430) and a collapsed strip (160), and fades the follow button out
-/// as it shrinks. Replaces the old static SliverAppBar.
 class StudioHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double height;
   final String imageUrl;

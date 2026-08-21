@@ -1,4 +1,4 @@
-import '../../../core/appmodels/studio_model.dart';
+import '../data/model/studio_model.dart';
 import '../domain/repos/studio_repository.dart';
 
 class StreamStudioUseCase {

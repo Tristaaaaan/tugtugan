@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../commons/widgets/buttons/regular_button.dart';
 
+import '../../../../commons/widgets/buttons/regular_button.dart';
 import '../../data/subscription_repo_impl.dart';
 import 'subcription_sheet.dart';
 
@@ -91,10 +91,10 @@ class TugtuganStudioProgramScreen extends StatelessWidget {
                       }
                     }
                     // Handle subscription logic here
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Subscription feature coming soon!')),
-                    );
+                    // ScaffoldMessenger.of(context).showSnackBar(
+                    //   const SnackBar(
+                    //       content: Text('Subscription feature coming soon!')),
+                    // );
                   },
                 ),
               )

@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../core/appmodels/studio_model.dart';
 import '../../chat/domain/studio_chat_model.dart';
 import '../../chat/presentation/chat_provider.dart';
+import '../../studios/data/model/studio_model.dart';
 import '../../studios/presentation/providers/studio_provider.dart';
 import '../data/chat_service.dart';
 import '../domain/inbox_repository.dart';
