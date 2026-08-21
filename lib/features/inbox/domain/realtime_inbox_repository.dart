@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:tugtugan/features/chat/domain/studio_chat_model.dart';
+
+import '../../chat/domain/studio_chat_model.dart';
 
 class RealTimeInboxRepository {
   final String userId;

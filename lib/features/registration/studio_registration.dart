@@ -1,8 +1,9 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter/material.dart';
-import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
-import 'package:tugtugan/commons/widgets/textfields/regular_textfield.dart';
+
+import '../../commons/widgets/buttons/regular_button.dart';
+import '../../commons/widgets/textfields/regular_textfield.dart';
 
 class StudioRegistration extends StatelessWidget {
   const StudioRegistration({super.key});

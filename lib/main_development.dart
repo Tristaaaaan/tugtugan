@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tugtugan/config/app_config.dart';
-import 'package:tugtugan/config/app_environments.dart';
-import 'package:tugtugan/core/appthemes/app_themes.dart';
-import 'package:tugtugan/features/authentication/auth_gate.dart';
-import 'package:tugtugan/features/chat/presentation/chat_screen.dart';
-import 'package:tugtugan/features/favorite/presentation/favorite.dart';
-import 'package:tugtugan/features/home/presentation/home.dart';
-import 'package:tugtugan/features/inbox/presentation/screen/inbox.dart';
-import 'package:tugtugan/features/maps/presentation/maps.dart';
-import 'package:tugtugan/features/navigation/presentation/gate.dart';
-import 'package:tugtugan/features/profile/presentation/screen/profile.dart';
-import 'package:tugtugan/firebase/prod/firebase_options.dart';
 
-import 'features/book_appointment/presentation/screen/book_appointment.dart';
+import 'config/app_config.dart';
+import 'config/app_environments.dart';
+import 'core/appthemes/app_themes.dart';
+import 'features/authentication/auth_gate.dart';
+import 'features/chat/presentation/chat_screen.dart';
+import 'features/favorite/presentation/favorite.dart';
+import 'features/home/presentation/home.dart';
+import 'features/inbox/presentation/screen/inbox.dart';
+import 'features/maps/presentation/maps.dart';
+import 'features/navigation/presentation/gate.dart';
+import 'features/payment/screens/card_payment_screen.dart';
+import 'features/profile/presentation/screen/profile.dart';
 import 'features/studios/presentation/screen/studio_screen.dart';
+import 'firebase/prod/firebase_options.dart';
 
 void main() async {
   AppConfig.setEnvironment(Flavors.development);
@@ -97,8 +97,8 @@ final GoRouter _router = GoRouter(
           },
         ),
         GoRoute(
-          path: 'book-appointment',
-          builder: (context, state) => const BookAppointmentScreen(),
+          path: 'booking-payment',
+          builder: (context, state) => const CardPaymentScreen(),
         ),
         GoRoute(
           path: 'maps',
@@ -133,6 +133,7 @@ class MainApp extends ConsumerWidget {
     final theme = ref.read(themeNotifierProvider.notifier).currentTheme;
 
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       theme: theme,
       routerConfig: _router,
     );

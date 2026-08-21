@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/subscription/domain/model/package_model.dart';
+import '../../domain/model/package_model.dart';
 
 class SubscriptionSheet extends StatelessWidget {
   final List<MockPackage> packages;

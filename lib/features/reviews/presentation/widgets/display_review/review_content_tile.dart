@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:tugtugan/commons/widgets/avatars/avatar_placeholder.dart';
-import 'package:tugtugan/commons/widgets/avatars/image_avatar.dart';
-import 'package:tugtugan/core/appmodels/users.dart';
+import '../../../../../commons/widgets/avatars/avatar_placeholder.dart';
+import '../../../../../commons/widgets/avatars/image_avatar.dart';
+import '../../../../../core/appmodels/users.dart';
 
 class ReviewContentTile extends StatelessWidget {
   final String writtenReview;

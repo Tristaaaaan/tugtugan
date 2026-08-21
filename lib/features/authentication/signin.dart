@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/commons/widgets/buttons/loading_state_notifier.dart';
-import 'package:tugtugan/commons/widgets/buttons/regular_button.dart';
-import 'package:tugtugan/core/apptext/app_text.dart';
-import 'package:tugtugan/features/authentication/auth_services.dart';
+
+import '../../commons/widgets/buttons/loading_state_notifier.dart';
+import '../../commons/widgets/buttons/regular_button.dart';
+import '../../core/apptext/app_text.dart';
+import 'auth_services.dart';
 
 class SigninPage extends ConsumerWidget {
   const SigninPage({super.key});

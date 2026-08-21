@@ -1,6 +1,6 @@
-import 'package:tugtugan/features/chat/domain/chat_repository.dart';
-import 'package:tugtugan/features/chat/domain/message_model.dart';
-import 'package:tugtugan/features/chat/domain/studio_chat_model.dart';
+import '../domain/chat_repository.dart';
+import '../domain/message_model.dart';
+import '../domain/studio_chat_model.dart';
 
 class SendMessageUseCase {
   final ChatRepository repository;

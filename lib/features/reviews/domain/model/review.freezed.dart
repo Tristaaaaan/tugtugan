@@ -33,12 +33,8 @@ mixin _$Review {
   DateTime? get updatedAt => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
 
-  /// Serializes this Review to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Review
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $ReviewCopyWith<Review> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -70,8 +66,6 @@ class _$ReviewCopyWithImpl<$Res, $Val extends Review>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Review
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -159,8 +153,6 @@ class __$$ReviewImplCopyWithImpl<$Res>
       _$ReviewImpl _value, $Res Function(_$ReviewImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Review
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -301,7 +293,7 @@ class _$ReviewImpl extends _Review {
             const DeepCollectionEquality().equals(other._images, _images));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -316,9 +308,7 @@ class _$ReviewImpl extends _Review {
       updatedAt,
       const DeepCollectionEquality().hash(_images));
 
-  /// Create a copy of Review
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
@@ -370,11 +360,8 @@ abstract class _Review extends Review {
   DateTime? get updatedAt;
   @override
   List<String> get images;
-
-  /// Create a copy of Review
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$ReviewImplCopyWith<_$ReviewImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

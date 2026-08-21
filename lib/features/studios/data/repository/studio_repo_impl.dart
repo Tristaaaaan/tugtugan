@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tugtugan/core/appmodels/studio_model.dart';
 
-import '../domain/studio_repository.dart';
+import '../../domain/entities/availability_entity.dart';
+import '../../domain/repos/studio_repository.dart';
+import '../datasource/remote/studio_information_remote_datasource.dart';
+import '../model/studio_model.dart';
 
 class StudioServices implements StudioRepository {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -51,5 +53,26 @@ class StudioServices implements StudioRepository {
         return StudioModel.fromMap(docSnapshot.data()!);
       },
     );
+  }
+}
+
+class StudioInformationRepositoryImpl implements StudioInformationRepository {
+  final StudioInformationRemoteDatasource studioInformationRemoteDatasource;
+
+  StudioInformationRepositoryImpl(
+      {required this.studioInformationRemoteDatasource});
+  @override
+  Future<List<StudioAvailabilityEntity>?> getAvailability(
+    String studioId,
+    int year,
+    int month,
+  ) async {
+    final models = await studioInformationRemoteDatasource.getAvailability(
+      studioId,
+      year,
+      month,
+    );
+
+    return models.map((model) => model.toEntity()).toList();
   }
 }

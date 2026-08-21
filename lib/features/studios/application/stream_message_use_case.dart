@@ -1,5 +1,5 @@
-import 'package:tugtugan/core/appmodels/studio_model.dart';
-import 'package:tugtugan/features/studios/domain/studio_repository.dart';
+import '../data/model/studio_model.dart';
+import '../domain/repos/studio_repository.dart';
 
 class StreamStudioUseCase {
   final StudioRepository repository;

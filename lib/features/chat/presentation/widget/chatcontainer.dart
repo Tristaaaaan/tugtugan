@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/chat/presentation/chat_provider.dart';
 
+import '../chat_provider.dart';
 import 'chatbubble.dart';
 
 class ChatScreen extends ConsumerWidget {

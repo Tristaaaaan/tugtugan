@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/chat/domain/message_model.dart';
-import 'package:tugtugan/features/chat/domain/studio_chat_model.dart';
+
+import 'message_model.dart';
+import 'studio_chat_model.dart';
 
 abstract class ChatRepository {
   Future<String> sendMessage(MessageModel messageModel);

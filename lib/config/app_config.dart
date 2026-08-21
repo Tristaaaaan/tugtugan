@@ -1,4 +1,4 @@
-import 'package:tugtugan/config/app_environments.dart';
+import 'app_environments.dart';
 
 class AppConfig {
   static Flavors flavors = Flavors.production;

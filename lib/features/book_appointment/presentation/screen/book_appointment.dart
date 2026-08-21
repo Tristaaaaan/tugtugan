@@ -1,9 +1,9 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
+
+import '../../../studios/presentation/providers/studio_provider.dart';
+import '../widget/calendar.dart';
 
 final focusedDayProvider = StateProvider<DateTime>((ref) {
   return DateTime.now(); // Default: today
@@ -12,6 +12,7 @@ final focusedDayProvider = StateProvider<DateTime>((ref) {
 final focusedMonthProvider = StateProvider<DateTime>((ref) {
   return DateTime.now();
 });
+
 // This returns a DateTime instead of String
 DateTime parseGroupDate(String originalDate) {
   final parts = originalDate.split('-');
@@ -29,7 +30,6 @@ String formatDateDisplay(String dateString) {
   final today = DateTime(now.year, now.month, now.day);
   final yesterday = today.subtract(const Duration(days: 1));
 
-  // Parse the stored date (assuming format "month-day-year")
   final parts = dateString.split('-');
   final date = DateTime(
     int.parse(parts[2]), // year
@@ -42,7 +42,6 @@ String formatDateDisplay(String dateString) {
   } else if (date == yesterday) {
     return 'Yesterday';
   } else {
-    // Return formatted date (e.g., "Jan 5, 2023")
     return DateFormat('MMM d, y').format(date);
   }
 }
@@ -57,122 +56,225 @@ void _navigateToMonth(WidgetRef ref, int monthOffset) {
   ref.read(focusedDayProvider.notifier).state = newFocusedDay;
 }
 
-Widget _buildDayCell(BuildContext context, DateTime day,
-    {bool isSelected = false,
-    bool isToday = false,
-    required List<DateTime> datesWithData}) {
-  Color bgColor;
-  Color textColor;
-  // Check if the day is in the list of dates with data
-  if (datesWithData.contains(DateTime(day.year, day.month, day.day))) {
-    // Background color for days with data
-    bgColor = Theme.of(context).colorScheme.primary;
-    textColor = Theme.of(context).colorScheme.surface;
-  } else if (isSelected) {
-    bgColor = Theme.of(context).colorScheme.tertiaryContainer;
-    textColor = Theme.of(context).colorScheme.surface;
-  } else if (isToday) {
-    bgColor = Theme.of(context).colorScheme.tertiary;
-    textColor = Theme.of(context).colorScheme.inversePrimary;
-  } else {
-    bgColor = Colors.transparent;
-    textColor = Theme.of(context).colorScheme.primaryFixedDim;
-  }
+/// The calendar + time-slot grid, extracted from the old
+/// `BookAppointmentScreen`. No `Scaffold`, no own `FloatingActionButton`,
+/// no own route — it's a plain widget meant to be dropped straight into
+/// the Studio screen's sliver body once booking mode is active.
+class EmbeddedBookingSection extends ConsumerStatefulWidget {
+  final String studioId;
+  final String studioName;
+  final double rating;
+  final int reviewCount;
+  final VoidCallback? onConfirm;
 
-  return Container(
-    width: double.infinity,
-    margin: const EdgeInsets.all(10),
-    padding: const EdgeInsets.all(4),
-    decoration: BoxDecoration(
-      color: bgColor,
-      borderRadius: BorderRadius.circular(8),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          '${day.day}',
-          style: TextStyle(
-            color: textColor,
-          ),
-        ),
-        const SizedBox(height: 4),
-      ],
-    ),
-  );
-}
-
-class BookAppointmentScreen extends ConsumerWidget {
-  const BookAppointmentScreen({
+  const EmbeddedBookingSection({
     super.key,
+    required this.studioId,
+    required this.studioName,
+    this.rating = 0,
+    this.reviewCount = 0,
+    this.onConfirm,
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<EmbeddedBookingSection> createState() =>
+      _EmbeddedBookingSectionState();
+}
+
+class _EmbeddedBookingSectionState
+    extends ConsumerState<EmbeddedBookingSection> {
+  final ScrollController _scrollController = ScrollController();
+
+  // Multiple time slots can be picked for the same day
+  // (e.g. "August 26, 8:00AM, 9:00, 12:00PM").
+  bool _showScrollToTop = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _scrollController.addListener(() {
+      final shouldShow = _scrollController.hasClients &&
+          _scrollController.position.maxScrollExtent > 0 &&
+          _scrollController.offset > 50;
+
+      if (_showScrollToTop != shouldShow) {
+        setState(() {
+          _showScrollToTop = shouldShow;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final focusedDay = ref.watch(focusedDayProvider);
     final currentFocusedMonth = ref.watch(focusedMonthProvider);
+    final selectedMonthStudioAvailability =
+        ref.watch(studioAvailabilityControllerProvider(
+      widget.studioId,
+    ));
     List<DateTime> datesWithData = [];
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Date and Preferences"),
-      ),
-      body: CustomScrollView(
-        slivers: [
-          SliverList(
-            delegate: SliverChildListDelegate([
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+    // Fixed height, non-Scaffold layout — sits directly inside the
+    // Studio screen's sliver body instead of owning its own screen.
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.chevron_left),
-                    onPressed: () => _navigateToMonth(ref, -1),
-                  ),
-                  Text(
-                    DateFormat('MMMM yyyy').format(currentFocusedMonth),
-                    style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.chevron_right),
-                    onPressed: () => _navigateToMonth(ref, 1),
+                  // Studio name + rating
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.studioName,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      ShaderMask(
+                        shaderCallback: (bounds) => LinearGradient(
+                          colors: [
+                            Theme.of(context).colorScheme.tertiaryContainer,
+                            Colors.amber,
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ).createShader(bounds),
+                        blendMode: BlendMode.srcIn,
+                        child: const Icon(Icons.star,
+                            size: 14, color: Colors.amber),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        '${widget.rating.toStringAsFixed(1)} (${widget.reviewCount} reviews)',
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              TableCalendar(
-                availableGestures: AvailableGestures.none,
-                headerVisible: false,
-                firstDay: DateTime.utc(2000, 1, 1),
-                lastDay: DateTime.utc(2030, 3, 14),
-                focusedDay: focusedDay,
-                onPageChanged: (focusedMonth) {
-                  ref.read(focusedMonthProvider.notifier).state = focusedMonth;
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  ref.read(focusedDayProvider.notifier).state = selectedDay;
-                  developer.log(selectedDay.toString());
-                },
-                calendarBuilders: CalendarBuilders(
-                  defaultBuilder: (context, day, focusedDay) {
-                    return _buildDayCell(context, day,
-                        datesWithData: datesWithData);
-                  },
-                  selectedBuilder: (context, day, focusedDay) {
-                    return _buildDayCell(context, day,
-                        datesWithData: datesWithData, isSelected: true);
-                  },
-                  todayBuilder: (context, day, focusedDay) {
-                    return _buildDayCell(context, day,
-                        datesWithData: datesWithData, isToday: true);
-                  },
+            ),
+            // Live-updating selected date + time(s) summary
+            // AnimatedSwitcher(
+            //   duration: const Duration(milliseconds: 200),
+            //   child: Text(
+            //     _buildSelectionSummary(focusedDay),
+            //     key: ValueKey(_buildSelectionSummary(focusedDay)),
+            //     style: TextStyle(
+            //       fontSize: 14,
+            //       fontWeight: FontWeight.w500,
+            //       color: selectedTimes.isEmpty
+            //           ? Colors.grey
+            //           : Theme.of(context).colorScheme.primary,
+            //     ),
+            //   ),
+            // ),
+            SizedBox(
+              height: 350,
+              child: selectedMonthStudioAvailability.when(
+                  initial: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  loading: () =>
+                      const Center(child: CircularProgressIndicator()),
+                  error: (e) => Center(child: Text(e.toString())),
+                  empty: () => const Center(child: Text('No Availability')),
+                  loaded: (data) {
+                    if (data.isEmpty) {
+                      return const Center(child: Text('No Availability'));
+                    }
+
+                    return CustomScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      slivers: [
+                        SliverPersistentHeader(
+                          pinned: true,
+                          delegate: CalendarHeaderDelegate(
+                            currentFocusedMonth: currentFocusedMonth,
+                            focusedDay: focusedDay,
+                            datesWithData: datesWithData,
+                            onPreviousMonth: () => _navigateToMonth(ref, -1),
+                            onNextMonth: () => _navigateToMonth(ref, 1),
+                            onPageChanged: (focusedMonth) {
+                              ref.read(focusedMonthProvider.notifier).state =
+                                  focusedMonth;
+                            },
+                            onDaySelected: (selectedDay) {
+                              ref.read(focusedDayProvider.notifier).state =
+                                  selectedDay;
+                            },
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+            ),
+            const SizedBox(height: 8),
+            const Text("Choose a time slot",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                )),
+            const SizedBox(height: 4),
+
+            // Get Business Hours
+
+            // TimeSlotsContainer(scrollController: _scrollController),
+          ],
+        ),
+        Positioned(
+          right: 8,
+          bottom: 8,
+          child: AnimatedOpacity(
+            opacity: _showScrollToTop ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 300),
+            child: IgnorePointer(
+              ignoring: !_showScrollToTop,
+              child: FloatingActionButton(
+                mini: true,
+                elevation: 0,
+                heroTag: 'scrollToTopBooking',
+                shape: const CircleBorder(),
+                backgroundColor: Theme.of(context)
+                    .colorScheme
+                    .primary
+                    .withValues(alpha: 0.5),
+                onPressed: _scrollToTop,
+                child: Icon(
+                  Icons.keyboard_arrow_up,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
-                selectedDayPredicate: (day) => isSameDay(focusedDay, day),
-                availableCalendarFormats: const {CalendarFormat.month: 'Month'},
               ),
-            ]),
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
+
+enum Availability { available, occupied }

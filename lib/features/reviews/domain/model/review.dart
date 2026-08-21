@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tugtugan/core/appmodels/timestamp_conver.dart';
+import '../../../../core/appmodels/timestamp_conver.dart';
 
 part 'review.freezed.dart';
 part 'review.g.dart';
