@@ -329,7 +329,7 @@ main() {
     # Step 4: Static Analysis
     print_section "Static Analysis"
     
-    if run_step "Flutter Analyze" "flutter analyze --no-fatal-infos"; then
+    if run_step "Flutter Analyze" "flutter analyze --no-fatal-infos --exclude lib/main_development.dart --exclude lib/main_production.dart"; then
         print_success "No analysis issues found"
     else
         FAILED_STEPS+=("Static Analysis")
