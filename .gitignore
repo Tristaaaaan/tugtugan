@@ -45,7 +45,6 @@ app.*.map.json
 /android/app/release
 
 # lib Related
-**lib/firebase
 /functions/*.json
 .env
 
