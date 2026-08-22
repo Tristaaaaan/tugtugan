@@ -96,7 +96,7 @@ class HomePage extends ConsumerWidget {
                                   itemBuilder: (context, index) {
                                     final StudioModel studio = data[index];
                                     return StudioTile(
-                                      image: studio.imageUrl,
+                                      image: studio.imageUrl.first,
                                       studioName: studio.studioName,
                                       rating: 4.2,
                                       onTap: () => context.push(
@@ -156,7 +156,7 @@ class HomePage extends ConsumerWidget {
                                   itemBuilder: (context, index) {
                                     final StudioModel studio = data[index];
                                     return StudioTile(
-                                      image: studio.imageUrl,
+                                      image: studio.imageUrl.first,
                                       studioName: studio.studioName,
                                       rating: 4.2,
                                       onTap: () => context

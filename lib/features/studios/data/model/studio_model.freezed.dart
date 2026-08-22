@@ -21,7 +21,7 @@ mixin _$StudioModel {
   String get description => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
   GeoPoint get location => throw _privateConstructorUsedError;
-  String get imageUrl => throw _privateConstructorUsedError;
+  List<String> get imageUrl => throw _privateConstructorUsedError;
   List<String> get followers => throw _privateConstructorUsedError;
   BusinessHoursModel? get businessHours => throw _privateConstructorUsedError;
 
@@ -42,7 +42,7 @@ abstract class $StudioModelCopyWith<$Res> {
       String description,
       String address,
       GeoPoint location,
-      String imageUrl,
+      List<String> imageUrl,
       List<String> followers,
       BusinessHoursModel? businessHours});
 
@@ -95,7 +95,7 @@ class _$StudioModelCopyWithImpl<$Res, $Val extends StudioModel>
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
       followers: null == followers
           ? _value.followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -134,7 +134,7 @@ abstract class _$$StudioModelImplCopyWith<$Res>
       String description,
       String address,
       GeoPoint location,
-      String imageUrl,
+      List<String> imageUrl,
       List<String> followers,
       BusinessHoursModel? businessHours});
 
@@ -184,9 +184,9 @@ class __$$StudioModelImplCopyWithImpl<$Res>
           : location // ignore: cast_nullable_to_non_nullable
               as GeoPoint,
       imageUrl: null == imageUrl
-          ? _value.imageUrl
+          ? _value._imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
       followers: null == followers
           ? _value._followers
           : followers // ignore: cast_nullable_to_non_nullable
@@ -208,10 +208,11 @@ class _$StudioModelImpl extends _StudioModel {
       required this.description,
       required this.address,
       required this.location,
-      required this.imageUrl,
+      required final List<String> imageUrl,
       required final List<String> followers,
       this.businessHours})
-      : _followers = followers,
+      : _imageUrl = imageUrl,
+        _followers = followers,
         super._();
 
   @override
@@ -224,8 +225,14 @@ class _$StudioModelImpl extends _StudioModel {
   final String address;
   @override
   final GeoPoint location;
+  final List<String> _imageUrl;
   @override
-  final String imageUrl;
+  List<String> get imageUrl {
+    if (_imageUrl is EqualUnmodifiableListView) return _imageUrl;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imageUrl);
+  }
+
   final List<String> _followers;
   @override
   List<String> get followers {
@@ -255,8 +262,7 @@ class _$StudioModelImpl extends _StudioModel {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
+            const DeepCollectionEquality().equals(other._imageUrl, _imageUrl) &&
             const DeepCollectionEquality()
                 .equals(other._followers, _followers) &&
             (identical(other.businessHours, businessHours) ||
@@ -271,7 +277,7 @@ class _$StudioModelImpl extends _StudioModel {
       description,
       address,
       location,
-      imageUrl,
+      const DeepCollectionEquality().hash(_imageUrl),
       const DeepCollectionEquality().hash(_followers),
       businessHours);
 
@@ -289,7 +295,7 @@ abstract class _StudioModel extends StudioModel {
       required final String description,
       required final String address,
       required final GeoPoint location,
-      required final String imageUrl,
+      required final List<String> imageUrl,
       required final List<String> followers,
       final BusinessHoursModel? businessHours}) = _$StudioModelImpl;
   const _StudioModel._() : super._();
@@ -305,7 +311,7 @@ abstract class _StudioModel extends StudioModel {
   @override
   GeoPoint get location;
   @override
-  String get imageUrl;
+  List<String> get imageUrl;
   @override
   List<String> get followers;
   @override

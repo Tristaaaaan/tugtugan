@@ -14,7 +14,7 @@ abstract class StudioModel with _$StudioModel {
     required String description,
     required String address,
     required GeoPoint location,
-    required String imageUrl,
+    required List<String> imageUrl,
     required List<String> followers,
     BusinessHoursModel? businessHours,
   }) = _StudioModel;
@@ -30,7 +30,9 @@ abstract class StudioModel with _$StudioModel {
       description: map['description'] as String,
       address: map['address'] as String,
       location: map['location'] as GeoPoint,
-      imageUrl: map['imageUrl'] as String,
+      imageUrl: List<String>.from(
+        map['imageUrl'] ?? [],
+      ),
       followers: List<String>.from(
         map['followers'] ?? [],
       ),

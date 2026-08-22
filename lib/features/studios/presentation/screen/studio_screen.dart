@@ -37,7 +37,8 @@ class _StudioState extends ConsumerState<Studio>
     with SingleTickerProviderStateMixin {
   static const double _fullHeaderHeight = 430;
   static const double _collapsedHeaderHeight = 160;
-
+  List<String> _studioImages = [];
+  String _studioName = '';
   late final AnimationController _bookingController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 400),
@@ -102,7 +103,10 @@ class _StudioState extends ConsumerState<Studio>
           final StudioEntity studio = data;
           final userId = auth.currentUser!.uid;
           final isFollowing = studio.followers.contains(userId);
-
+          final studioName = studio.studioName;
+          final studioImages = studio.imageUrl;
+          _studioName = studioName;
+          _studioImages = studioImages;
           return SafeArea(
             child: CustomScrollView(
               slivers: [
@@ -170,6 +174,7 @@ class _StudioState extends ConsumerState<Studio>
                                   studioAvailability: studio.businessHours!,
                                   studioId: studio.id,
                                   studioName: studio.studioName,
+                                  studioImage: studio.imageUrl,
                                   rating: 4.5,
                                   reviewCount: 12,
                                   onConfirm: () {
@@ -234,9 +239,14 @@ class _StudioState extends ConsumerState<Studio>
                         buttonKey: "confirmBookingButton",
                         withIcon: false,
                         onTap: () async {
+                          developer.log("Studio ID: ${widget.studioId}");
+                          developer.log("Studio Name: $_studioName");
+                          developer.log("Studio Images: $_studioImages");
                           final List<AppointmentSlotEntity> slots =
                               ref.read(appointmentSelectionProvider).slots;
                           final appointment = AppointmentEntity(
+                            studioImage: _studioImages,
+                            studioName: _studioName,
                             studioId: widget.studioId,
                             customerId: FirebaseAuth.instance.currentUser!.uid,
                             slots: slots,

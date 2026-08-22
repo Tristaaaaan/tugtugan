@@ -6,4 +6,12 @@ class AppText {
   static const price = "Price";
 
   static const datePref = "Date and Preferences";
+
+  // My Appoinments
+
+  static const myAppointments = "My Appointments";
+
+  static const active = "Active";
+
+  static const past = "Past";
 }

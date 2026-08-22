@@ -51,7 +51,7 @@ class CustomBottomNavBar extends StatelessWidget {
                 ),
                 _buildNavItem(
                   icon: Icons.favorite_border_outlined,
-                  label: "Favorites",
+                  label: "Appoinments",
                   index: 2,
                   context: context,
                 ),

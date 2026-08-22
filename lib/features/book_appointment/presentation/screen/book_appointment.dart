@@ -61,6 +61,7 @@ class EmbeddedBookingSection extends ConsumerStatefulWidget {
   final BusinessHoursEntity studioAvailability;
   final String studioName;
   final double rating;
+  final List<String> studioImage;
   final int reviewCount;
   final VoidCallback? onConfirm;
 
@@ -69,6 +70,7 @@ class EmbeddedBookingSection extends ConsumerStatefulWidget {
     required this.studioId,
     required this.studioAvailability,
     required this.studioName,
+    required this.studioImage,
     this.rating = 0,
     this.reviewCount = 0,
     this.onConfirm,

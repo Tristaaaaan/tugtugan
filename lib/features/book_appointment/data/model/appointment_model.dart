@@ -18,6 +18,9 @@ abstract class AppointmentModel with _$AppointmentModel {
     int? approvedAt,
     int? createdAt,
     int? updatedAt,
+    int? appoinmentDate,
+    List<String>? studioImage,
+    String? studioName,
   }) = _AppointmentModel;
 
   const AppointmentModel._();
@@ -45,6 +48,11 @@ abstract class AppointmentModel with _$AppointmentModel {
       approvedAt: map['approvedAt'] as int?,
       createdAt: map['createdAt'] as int?,
       updatedAt: map['updatedAt'] as int?,
+      appoinmentDate: map['appoinmentDate'] as int?,
+      studioImage: List<String>.from(
+        map['studioImage'] ?? [],
+      ),
+      studioName: map['studioName'] as String?,
     );
   }
 
@@ -59,45 +67,54 @@ abstract class AppointmentModel with _$AppointmentModel {
       'approvedAt': approvedAt,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'appoinmentDate': appoinmentDate,
+      'studioImage': studioImage,
+      'studioName': studioName
     };
   }
 
   AppointmentEntity toEntity() {
     return AppointmentEntity(
-      id: id,
-      studioId: studioId,
-      customerId: customerId,
-      slots: slots.map((slot) => slot.toEntity()).toList(),
-      bookingNumber: bookingNumber,
-      status: status,
-      approvedAt: approvedAt,
-      createdAt: createdAt,
-      updatedAt: updatedAt,
-    );
+        id: id,
+        studioId: studioId,
+        customerId: customerId,
+        slots: slots.map((slot) => slot.toEntity()).toList(),
+        bookingNumber: bookingNumber,
+        status: status,
+        approvedAt: approvedAt,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        appoinmentDate: appoinmentDate,
+        studioImage: studioImage,
+        studioName: studioName);
   }
 
   factory AppointmentModel.fromEntity(
     AppointmentEntity entity,
   ) {
     return AppointmentModel(
-      id: entity.id,
-      studioId: entity.studioId,
-      customerId: entity.customerId,
-      slots: entity.slots
-          .map(
-            (slot) => AppointmentSlotModel.fromEntity(slot),
-          )
-          .toList(),
-      bookingNumber: entity.bookingNumber,
-      status: entity.status,
-      approvedAt: entity.approvedAt,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
-    );
+        id: entity.id,
+        studioId: entity.studioId,
+        customerId: entity.customerId,
+        slots: entity.slots
+            .map(
+              (slot) => AppointmentSlotModel.fromEntity(slot),
+            )
+            .toList(),
+        bookingNumber: entity.bookingNumber,
+        status: entity.status,
+        approvedAt: entity.approvedAt,
+        createdAt: entity.createdAt,
+        updatedAt: entity.updatedAt,
+        appoinmentDate: entity.appoinmentDate,
+        studioImage: entity.studioImage,
+        studioName: entity.studioName);
   }
 
   Map<String, dynamic> toPayload() {
     return {
+      'studioName': studioName,
+      'studioImage': studioImage,
       'studioId': studioId,
       'customerId': customerId,
       'slots': slots

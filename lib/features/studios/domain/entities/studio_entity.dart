@@ -9,7 +9,7 @@ class StudioEntity extends Equatable {
   final String description;
   final String address;
   final GeoPoint location;
-  final String imageUrl;
+  final List<String> imageUrl;
   final List<String> followers;
   final BusinessHoursEntity? businessHours;
 

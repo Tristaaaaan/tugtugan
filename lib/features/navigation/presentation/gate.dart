@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../commons/widgets/navbar/custom_navbar.dart';
-import '../../favorite/presentation/favorite.dart';
+import '../../appointments/presentation/screen/appointment_screen.dart';
 import '../../home/presentation/home.dart';
 import '../../inbox/presentation/screen/inbox.dart';
 import '../../profile/presentation/screen/profile.dart';
@@ -21,7 +21,7 @@ class _NavigationGateState extends State<NavigationGate> {
   final List<Widget> _screens = const [
     HomePage(),
     FindStudioPage(),
-    FavoriteStudioPage(),
+    AppointmentScreen(),
     InboxPage(),
     ProfilePage(),
   ];
