@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
 import '../../model/availability_model.dart';
 import '../../model/business_hours_model.dart';
 
 abstract class StudioInformationRemoteDatasource {
-  Future<BusinessHoursModel> getBusinessHours();
+  Future<BusinessHoursModel> getBusinessHours(String studioId);
   Future<List<AvailabilityModel>> getAvailability(
     String studioId,
     int year,
@@ -21,9 +22,28 @@ class StudioInformationRemoteDatasourceImpl
   });
 
   @override
-  Future<BusinessHoursModel> getBusinessHours() async {
-    // Implement when the business-hours function is available.
-    throw UnimplementedError();
+  Future<BusinessHoursModel> getBusinessHours(String studioId) async {
+    try {
+      final docSnapshot = await FirebaseFirestore.instance
+          .collection('studios')
+          .doc(studioId)
+          .get();
+
+      if (!docSnapshot.exists) {
+        throw Exception('Studio not found');
+      }
+
+      final data = docSnapshot.data();
+      if (data == null || !data.containsKey('businessHours')) {
+        throw Exception('Business hours not found for this studio');
+      }
+
+      return BusinessHoursModel.fromMap(data['businessHours']);
+    } catch (e) {
+      throw Exception(
+        'Failed to get business hours: $e',
+      );
+    }
   }
 
   @override

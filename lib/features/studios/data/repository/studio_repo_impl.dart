@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tugtugan/features/studios/domain/entities/business_hours_entity.dart';
 
 import '../../domain/entities/availability_entity.dart';
 import '../../domain/repos/studio_repository.dart';
@@ -74,5 +75,13 @@ class StudioInformationRepositoryImpl implements StudioInformationRepository {
     );
 
     return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<BusinessHoursEntity> getBusinessHours(String studioId) async {
+    final model = await studioInformationRemoteDatasource.getBusinessHours(
+      studioId,
+    );
+    return model.toEntity();
   }
 }
