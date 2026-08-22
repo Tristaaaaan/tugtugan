@@ -1,8 +1,8 @@
 import 'dart:developer' as developer;
 
-import 'package:tugtugan/features/appointments/domain/repository/user_appoinments_repo.dart';
-import 'package:tugtugan/features/book_appointment/data/datasource/remote/appoinment_remote_datasource.dart';
-import 'package:tugtugan/features/book_appointment/domain/entities/appointment_entity.dart';
+import '../../../book_appointment/data/datasource/remote/appoinment_remote_datasource.dart';
+import '../../../book_appointment/domain/entities/appointment_entity.dart';
+import '../../domain/repository/user_appoinments_repo.dart';
 
 class UserAppoinmentsRepoImpl implements UserAppointmentsRepository {
   final AppointmentRemoteDataSource _appointmentRemoteDataSource;

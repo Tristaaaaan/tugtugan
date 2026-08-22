@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/appointments/presentation/widget/appointment_image_container.dart';
-import 'package:tugtugan/features/book_appointment/domain/entities/appointment_entity.dart';
+
+import '../../../book_appointment/domain/entities/appointment_entity.dart';
+import 'appointment_image_container.dart';
 
 class AppointmentContainer extends StatelessWidget {
   final AppointmentEntity appointment;

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tugtugan/features/book_appointment/domain/entities/appointment_entity.dart';
+
+import '../../../book_appointment/domain/entities/appointment_entity.dart';
 
 part 'user_appointments_states.freezed.dart';
 

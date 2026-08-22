@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/core/apptext/app_text.dart';
-import 'package:tugtugan/features/appointments/presentation/enums/top_selection_bar_enum.dart';
-import 'package:tugtugan/features/appointments/presentation/providers/user_appointments_providers.dart';
-import 'package:tugtugan/features/appointments/presentation/widget/appointment_container.dart';
-import 'package:tugtugan/features/appointments/presentation/widget/top_selection_bar.dart';
+
+import '../../../../core/apptext/app_text.dart';
+import '../enums/top_selection_bar_enum.dart';
+import '../providers/user_appointments_providers.dart';
+import '../widget/appointment_container.dart';
+import '../widget/top_selection_bar.dart';
 
 class AppointmentScreen extends ConsumerStatefulWidget {
   const AppointmentScreen({super.key});
@@ -44,14 +45,6 @@ class _AppointmentScreenState extends ConsumerState<AppointmentScreen> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
-  }
-
-  void _scrollToTop() {
-    _scrollController.animateTo(
-      0,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutCubic,
-    );
   }
 
   @override

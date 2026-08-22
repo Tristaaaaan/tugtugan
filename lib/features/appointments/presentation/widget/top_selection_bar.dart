@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/core/apptext/app_text.dart';
-import 'package:tugtugan/features/appointments/presentation/enums/top_selection_bar_enum.dart';
 
+import '../../../../core/apptext/app_text.dart';
+import '../enums/top_selection_bar_enum.dart';
 import 'top_selection_button.dart';
 
 class TopSelectionBar extends StatelessWidget {

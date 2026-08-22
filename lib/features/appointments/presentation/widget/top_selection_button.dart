@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tugtugan/features/appointments/presentation/enums/top_selection_bar_enum.dart';
+
+import '../enums/top_selection_bar_enum.dart';
 
 class TopSelectionButton extends StatelessWidget {
   final String label;

@@ -1,9 +1,10 @@
 import 'dart:developer' as developer;
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/appointments/domain/repository/user_appoinments_repo.dart';
-import 'package:tugtugan/features/appointments/presentation/providers/user_appointments_states.dart';
-import 'package:tugtugan/features/book_appointment/domain/entities/appointment_entity.dart';
+
+import '../../../book_appointment/domain/entities/appointment_entity.dart';
+import '../../domain/repository/user_appoinments_repo.dart';
+import 'user_appointments_states.dart';
 
 class UserAppointmentsController extends StateNotifier<UserAppointmentsStates> {
   final UserAppointmentsRepository _userAppointmentsRepository;
