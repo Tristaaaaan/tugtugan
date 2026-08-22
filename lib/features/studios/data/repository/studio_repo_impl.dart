@@ -78,9 +78,13 @@ class StudioInformationRepositoryImpl implements StudioInformationRepository {
   }
 
   @override
-  Future<BusinessHoursEntity> getBusinessHours(String studioId) async {
+  Future<BusinessHoursEntity> getBusinessHours(
+      String studioId, int year, int month, int day) async {
     final model = await studioInformationRemoteDatasource.getBusinessHours(
       studioId,
+      year,
+      month,
+      day,
     );
     return model.toEntity();
   }

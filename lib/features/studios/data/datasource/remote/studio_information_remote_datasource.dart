@@ -5,7 +5,8 @@ import '../../model/availability_model.dart';
 import '../../model/business_hours_model.dart';
 
 abstract class StudioInformationRemoteDatasource {
-  Future<BusinessHoursModel> getBusinessHours(String studioId);
+  Future<BusinessHoursModel> getBusinessHours(
+      String studioI, int year, int month, int day);
   Future<List<AvailabilityModel>> getAvailability(
     String studioId,
     int year,
@@ -22,7 +23,8 @@ class StudioInformationRemoteDatasourceImpl
   });
 
   @override
-  Future<BusinessHoursModel> getBusinessHours(String studioId) async {
+  Future<BusinessHoursModel> getBusinessHours(
+      String studioId, int year, int month, int day) async {
     try {
       final docSnapshot = await FirebaseFirestore.instance
           .collection('studios')

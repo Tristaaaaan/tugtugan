@@ -3,6 +3,7 @@ import 'package:riverpod/riverpod.dart';
 
 import '../../../book_appointment/domain/entities/appointment_slot_entity.dart';
 import '../../data/model/studio_model.dart';
+import '../../domain/entities/studio_entity.dart';
 
 final studioProvider = StreamProvider<List<StudioModel>>((ref) {
   return FirebaseFirestore.instance
@@ -15,31 +16,28 @@ final studioProvider = StreamProvider<List<StudioModel>>((ref) {
 });
 
 final specificStudioProvider =
-    StreamProvider.family<StudioModel, String>((ref, studioId) {
+    StreamProvider.family<StudioEntity, String>((ref, studioId) {
   return FirebaseFirestore.instance
       .collection("studios")
       .doc(studioId)
       .snapshots()
       .map(
-        (querySnapshot) => StudioModel.fromSnapshot(querySnapshot),
+        (querySnapshot) => StudioModel.fromSnapshot(querySnapshot).toEntity(),
       );
 });
 
+// Class
 class AppointmentSelection {
-  final DateTime? date;
   final List<AppointmentSlotEntity> slots;
 
   const AppointmentSelection({
-    this.date,
     this.slots = const [],
   });
 
   AppointmentSelection copyWith({
-    DateTime? date,
     List<AppointmentSlotEntity>? slots,
   }) {
     return AppointmentSelection(
-      date: date ?? this.date,
       slots: slots ?? this.slots,
     );
   }
@@ -51,23 +49,17 @@ class AppointmentSelectionNotifier extends Notifier<AppointmentSelection> {
     return const AppointmentSelection();
   }
 
-  void selectDate(DateTime date) {
-    state = AppointmentSelection(
-      date: date,
-      slots: [],
-    );
-  }
-
+  /// Toggle a time slot on/off
   void toggleSlot(AppointmentSlotEntity slot) {
-    if (state.date == null) return;
-
-    final exists = state.slots.contains(slot);
-
-    if (exists) {
+    final isSelected = isSlotSelected(slot);
+    if (isSelected) {
+      // Remove the slot
       state = state.copyWith(
-        slots: state.slots.where((item) => item != slot).toList(),
+        slots:
+            state.slots.where((item) => item.startAt != slot.startAt).toList(),
       );
     } else {
+      // Add the slot
       state = state.copyWith(
         slots: [
           ...state.slots,
@@ -77,12 +69,12 @@ class AppointmentSelectionNotifier extends Notifier<AppointmentSelection> {
     }
   }
 
-  void clearSlots() {
-    state = state.copyWith(
-      slots: [],
-    );
+  /// Check if a slot is currently selected
+  bool isSlotSelected(AppointmentSlotEntity slot) {
+    return state.slots.any((item) => item.startAt == slot.startAt);
   }
 
+  /// Clear everything (date and slots)
   void clear() {
     state = const AppointmentSelection();
   }

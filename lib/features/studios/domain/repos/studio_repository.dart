@@ -17,5 +17,10 @@ abstract class StudioInformationRepository {
     int month,
   );
 
-  Future<BusinessHoursEntity> getBusinessHours(String studioId);
+  Future<BusinessHoursEntity> getBusinessHours(
+    String studioId,
+    int year,
+    int month,
+    int date,
+  );
 }

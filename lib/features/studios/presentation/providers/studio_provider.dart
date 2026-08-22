@@ -65,16 +65,32 @@ final studioAvailabilityControllerProvider = StateNotifierProvider.family<
   },
 );
 
+class GetStudioTimeSlotParams extends Equatable {
+  final String studioId;
+  final DateTime? selectedDate;
+
+  const GetStudioTimeSlotParams({
+    required this.studioId,
+    required this.selectedDate,
+  });
+
+  @override
+  List<Object?> get props => [studioId, selectedDate];
+}
+
 final studioTimeSlotControllerProvider = StateNotifierProvider.family<
-    StudioTimeSlotController, StudioTimeSlotState, String>(
-  (ref, studioId) {
+    StudioTimeSlotController, StudioTimeSlotState, GetStudioTimeSlotParams>(
+  (ref, studioTimeSlot) {
     final repository = ref.watch(
       studioInformationRepositoryProvider,
     );
 
     return StudioTimeSlotController(
       repository,
-      studioId,
+      studioTimeSlot.studioId,
+      studioTimeSlot.selectedDate ?? DateTime.now(),
     );
   },
 );
+
+final isBookingModeProvider = StateProvider<bool>((ref) => false);
