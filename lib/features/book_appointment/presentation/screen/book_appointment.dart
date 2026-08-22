@@ -3,10 +3,10 @@ import 'dart:developer' as developer;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:tugtugan/features/book_appointment/presentation/widget/time_slots_container.dart';
 
 import '../../../studios/presentation/providers/studio_provider.dart';
 import '../widget/calendar.dart';
+import '../widget/time_slots_container.dart';
 
 final focusedDayProvider = StateProvider<DateTime>((ref) {
   return DateTime.now(); // Default: today

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/book_appointment/domain/entities/appointment_slot_entity.dart';
-import 'package:tugtugan/features/book_appointment/presentation/screen/book_appointment.dart';
-import 'package:tugtugan/features/book_appointment/presentation/utils/availability_color.dart';
-import 'package:tugtugan/features/book_appointment/presentation/utils/time_format.dart';
-import 'package:tugtugan/features/studios/presentation/providers/studio_data_providers.dart';
-import 'package:tugtugan/features/studios/presentation/providers/studio_provider.dart';
+
+import '../../../studios/presentation/providers/studio_data_providers.dart';
+import '../../../studios/presentation/providers/studio_provider.dart';
+import '../../domain/entities/appointment_slot_entity.dart';
+import '../screen/book_appointment.dart';
+import '../utils/availability_color.dart';
+import '../utils/time_format.dart';
 
 class TimeSlotsContainer extends ConsumerStatefulWidget {
   final String studioId;

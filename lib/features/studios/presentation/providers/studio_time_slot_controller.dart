@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tugtugan/features/studios/domain/repos/studio_repository.dart';
-import 'package:tugtugan/features/studios/presentation/providers/studio_time_slot_state.dart';
+
+import '../../domain/repos/studio_repository.dart';
+import 'studio_time_slot_state.dart';
 
 class StudioTimeSlotController extends StateNotifier<StudioTimeSlotState> {
   final StudioInformationRepository _studioInformationRepository;

@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tugtugan/features/studios/domain/entities/business_hours_entity.dart';
+
+import '../../domain/entities/business_hours_entity.dart';
 
 part 'studio_time_slot_state.freezed.dart';
 

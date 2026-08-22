@@ -1,7 +1,6 @@
-import 'package:tugtugan/features/studios/domain/entities/business_hours_entity.dart';
-
 import '../../data/model/studio_model.dart';
 import '../entities/availability_entity.dart';
+import '../entities/business_hours_entity.dart';
 
 abstract class StudioRepository {
   Future<void> followStudio(String studioId, String userId);

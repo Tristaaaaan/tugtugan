@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:tugtugan/features/book_appointment/domain/entities/appointment_slot_entity.dart';
 
+import '../../../book_appointment/domain/entities/appointment_slot_entity.dart';
 import '../../../book_appointment/domain/enums/weekday_enum.dart';
 
 class BusinessHoursEntity extends Equatable {

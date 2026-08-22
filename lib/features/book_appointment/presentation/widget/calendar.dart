@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:tugtugan/features/studios/domain/entities/availability_entity.dart';
+
+import '../../../studios/domain/entities/availability_entity.dart';
 
 class CalendarHeaderView extends StatelessWidget {
   final DateTime currentFocusedMonth;

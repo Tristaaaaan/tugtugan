@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tugtugan/features/studios/domain/entities/business_hours_entity.dart';
 
 import '../../domain/entities/availability_entity.dart';
+import '../../domain/entities/business_hours_entity.dart';
 import '../../domain/repos/studio_repository.dart';
 import '../datasource/remote/studio_information_remote_datasource.dart';
 import '../model/studio_model.dart';
