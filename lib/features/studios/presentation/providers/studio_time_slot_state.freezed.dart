@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'studio_availability_state.dart';
+part of 'studio_time_slot_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,13 +15,13 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$StudioAvailabilityState {
+mixin _$StudioTimeSlotState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<StudioAvailabilityEntity> studioAvailability)
-        loaded,
+    required TResult Function(BusinessHoursEntity studioAvailability) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,8 +29,8 @@ mixin _$StudioAvailabilityState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<StudioAvailabilityEntity> studioAvailability)?
-        loaded,
+    TResult? Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -38,7 +38,8 @@ mixin _$StudioAvailabilityState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<StudioAvailabilityEntity> studioAvailability)? loaded,
+    TResult Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -48,6 +49,7 @@ mixin _$StudioAvailabilityState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Failure value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +58,7 @@ mixin _$StudioAvailabilityState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Failure value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +67,7 @@ mixin _$StudioAvailabilityState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Failure value)? error,
     required TResult orElse(),
   }) =>
@@ -71,17 +75,16 @@ mixin _$StudioAvailabilityState {
 }
 
 /// @nodoc
-abstract class $StudioAvailabilityStateCopyWith<$Res> {
-  factory $StudioAvailabilityStateCopyWith(StudioAvailabilityState value,
-          $Res Function(StudioAvailabilityState) then) =
-      _$StudioAvailabilityStateCopyWithImpl<$Res, StudioAvailabilityState>;
+abstract class $StudioTimeSlotStateCopyWith<$Res> {
+  factory $StudioTimeSlotStateCopyWith(
+          StudioTimeSlotState value, $Res Function(StudioTimeSlotState) then) =
+      _$StudioTimeSlotStateCopyWithImpl<$Res, StudioTimeSlotState>;
 }
 
 /// @nodoc
-class _$StudioAvailabilityStateCopyWithImpl<$Res,
-        $Val extends StudioAvailabilityState>
-    implements $StudioAvailabilityStateCopyWith<$Res> {
-  _$StudioAvailabilityStateCopyWithImpl(this._value, this._then);
+class _$StudioTimeSlotStateCopyWithImpl<$Res, $Val extends StudioTimeSlotState>
+    implements $StudioTimeSlotStateCopyWith<$Res> {
+  _$StudioTimeSlotStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -98,7 +101,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$StudioAvailabilityStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$StudioTimeSlotStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -112,7 +115,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'StudioAvailabilityState.initial()';
+    return 'StudioTimeSlotState.initial()';
   }
 
   @override
@@ -129,8 +132,8 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<StudioAvailabilityEntity> studioAvailability)
-        loaded,
+    required TResult Function(BusinessHoursEntity studioAvailability) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -141,8 +144,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<StudioAvailabilityEntity> studioAvailability)?
-        loaded,
+    TResult? Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -153,7 +156,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<StudioAvailabilityEntity> studioAvailability)? loaded,
+    TResult Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -169,6 +173,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Failure value) error,
   }) {
     return initial(this);
@@ -180,6 +185,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Failure value)? error,
   }) {
     return initial?.call(this);
@@ -191,6 +197,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Failure value)? error,
     required TResult orElse(),
   }) {
@@ -201,7 +208,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements StudioAvailabilityState {
+abstract class _Initial implements StudioTimeSlotState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -214,7 +221,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$StudioAvailabilityStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$StudioTimeSlotStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -228,7 +235,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'StudioAvailabilityState.loading()';
+    return 'StudioTimeSlotState.loading()';
   }
 
   @override
@@ -245,8 +252,8 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<StudioAvailabilityEntity> studioAvailability)
-        loaded,
+    required TResult Function(BusinessHoursEntity studioAvailability) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -257,8 +264,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<StudioAvailabilityEntity> studioAvailability)?
-        loaded,
+    TResult? Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -269,7 +276,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<StudioAvailabilityEntity> studioAvailability)? loaded,
+    TResult Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -285,6 +293,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Failure value) error,
   }) {
     return loading(this);
@@ -296,6 +305,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Failure value)? error,
   }) {
     return loading?.call(this);
@@ -307,6 +317,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Failure value)? error,
     required TResult orElse(),
   }) {
@@ -317,7 +328,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements StudioAvailabilityState {
+abstract class _Loading implements StudioTimeSlotState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -327,12 +338,12 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<StudioAvailabilityEntity> studioAvailability});
+  $Res call({BusinessHoursEntity studioAvailability});
 }
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$StudioAvailabilityStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$StudioTimeSlotStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -345,9 +356,9 @@ class __$$LoadedImplCopyWithImpl<$Res>
   }) {
     return _then(_$LoadedImpl(
       null == studioAvailability
-          ? _value._studioAvailability
+          ? _value.studioAvailability
           : studioAvailability // ignore: cast_nullable_to_non_nullable
-              as List<StudioAvailabilityEntity>,
+              as BusinessHoursEntity,
     ));
   }
 }
@@ -355,21 +366,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(final List<StudioAvailabilityEntity> studioAvailability)
-      : _studioAvailability = studioAvailability;
+  const _$LoadedImpl(this.studioAvailability);
 
-  final List<StudioAvailabilityEntity> _studioAvailability;
   @override
-  List<StudioAvailabilityEntity> get studioAvailability {
-    if (_studioAvailability is EqualUnmodifiableListView)
-      return _studioAvailability;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_studioAvailability);
-  }
+  final BusinessHoursEntity studioAvailability;
 
   @override
   String toString() {
-    return 'StudioAvailabilityState.loaded(studioAvailability: $studioAvailability)';
+    return 'StudioTimeSlotState.loaded(studioAvailability: $studioAvailability)';
   }
 
   @override
@@ -377,13 +381,12 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality()
-                .equals(other._studioAvailability, _studioAvailability));
+            (identical(other.studioAvailability, studioAvailability) ||
+                other.studioAvailability == studioAvailability));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_studioAvailability));
+  int get hashCode => Object.hash(runtimeType, studioAvailability);
 
   @JsonKey(ignore: true)
   @override
@@ -396,8 +399,8 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<StudioAvailabilityEntity> studioAvailability)
-        loaded,
+    required TResult Function(BusinessHoursEntity studioAvailability) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) error,
   }) {
     return loaded(studioAvailability);
@@ -408,8 +411,8 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<StudioAvailabilityEntity> studioAvailability)?
-        loaded,
+    TResult? Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? error,
   }) {
     return loaded?.call(studioAvailability);
@@ -420,7 +423,8 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<StudioAvailabilityEntity> studioAvailability)? loaded,
+    TResult Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -436,6 +440,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Failure value) error,
   }) {
     return loaded(this);
@@ -447,6 +452,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Failure value)? error,
   }) {
     return loaded?.call(this);
@@ -458,6 +464,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Failure value)? error,
     required TResult orElse(),
   }) {
@@ -468,14 +475,134 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements StudioAvailabilityState {
-  const factory _Loaded(
-      final List<StudioAvailabilityEntity> studioAvailability) = _$LoadedImpl;
+abstract class _Loaded implements StudioTimeSlotState {
+  const factory _Loaded(final BusinessHoursEntity studioAvailability) =
+      _$LoadedImpl;
 
-  List<StudioAvailabilityEntity> get studioAvailability;
+  BusinessHoursEntity get studioAvailability;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$EmptyImplCopyWith<$Res> {
+  factory _$$EmptyImplCopyWith(
+          _$EmptyImpl value, $Res Function(_$EmptyImpl) then) =
+      __$$EmptyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$EmptyImplCopyWithImpl<$Res>
+    extends _$StudioTimeSlotStateCopyWithImpl<$Res, _$EmptyImpl>
+    implements _$$EmptyImplCopyWith<$Res> {
+  __$$EmptyImplCopyWithImpl(
+      _$EmptyImpl _value, $Res Function(_$EmptyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$EmptyImpl implements _Empty {
+  const _$EmptyImpl();
+
+  @override
+  String toString() {
+    return 'StudioTimeSlotState.empty()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$EmptyImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(BusinessHoursEntity studioAvailability) loaded,
+    required TResult Function() empty,
+    required TResult Function(String message) error,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult? Function()? empty,
+    TResult? Function(String message)? error,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult Function()? empty,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
+    required TResult Function(_Failure value) error,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
+    TResult? Function(_Failure value)? error,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
+    TResult Function(_Failure value)? error,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Empty implements StudioTimeSlotState {
+  const factory _Empty() = _$EmptyImpl;
 }
 
 /// @nodoc
@@ -489,7 +616,7 @@ abstract class _$$FailureImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$FailureImplCopyWithImpl<$Res>
-    extends _$StudioAvailabilityStateCopyWithImpl<$Res, _$FailureImpl>
+    extends _$StudioTimeSlotStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
       _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
@@ -519,7 +646,7 @@ class _$FailureImpl implements _Failure {
 
   @override
   String toString() {
-    return 'StudioAvailabilityState.error(message: $message)';
+    return 'StudioTimeSlotState.error(message: $message)';
   }
 
   @override
@@ -544,8 +671,8 @@ class _$FailureImpl implements _Failure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<StudioAvailabilityEntity> studioAvailability)
-        loaded,
+    required TResult Function(BusinessHoursEntity studioAvailability) loaded,
+    required TResult Function() empty,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -556,8 +683,8 @@ class _$FailureImpl implements _Failure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<StudioAvailabilityEntity> studioAvailability)?
-        loaded,
+    TResult? Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult? Function()? empty,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -568,7 +695,8 @@ class _$FailureImpl implements _Failure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<StudioAvailabilityEntity> studioAvailability)? loaded,
+    TResult Function(BusinessHoursEntity studioAvailability)? loaded,
+    TResult Function()? empty,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -584,6 +712,7 @@ class _$FailureImpl implements _Failure {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Empty value) empty,
     required TResult Function(_Failure value) error,
   }) {
     return error(this);
@@ -595,6 +724,7 @@ class _$FailureImpl implements _Failure {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Empty value)? empty,
     TResult? Function(_Failure value)? error,
   }) {
     return error?.call(this);
@@ -606,6 +736,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Empty value)? empty,
     TResult Function(_Failure value)? error,
     required TResult orElse(),
   }) {
@@ -616,7 +747,7 @@ class _$FailureImpl implements _Failure {
   }
 }
 
-abstract class _Failure implements StudioAvailabilityState {
+abstract class _Failure implements StudioTimeSlotState {
   const factory _Failure(final String message) = _$FailureImpl;
 
   String get message;

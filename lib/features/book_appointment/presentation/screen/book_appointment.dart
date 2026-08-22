@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../../studios/domain/entities/business_hours_entity.dart';
 import '../../../studios/presentation/providers/studio_provider.dart';
 import '../widget/calendar.dart';
+import '../widget/time_slots_container.dart';
 
 final focusedDayProvider = StateProvider<DateTime>((ref) {
-  return DateTime.now(); // Default: today
+  return DateTime.now();
 });
 
 final focusedMonthProvider = StateProvider<DateTime>((ref) {
   return DateTime.now();
 });
 
-// This returns a DateTime instead of String
 DateTime parseGroupDate(String originalDate) {
   final parts = originalDate.split('-');
   final month = int.parse(parts[0]);
@@ -24,7 +25,6 @@ DateTime parseGroupDate(String originalDate) {
       DateTime.now().second, DateTime.now().microsecond);
 }
 
-// Helper function to format the date string
 String formatDateDisplay(String dateString) {
   final now = DateTime.now();
   final today = DateTime(now.year, now.month, now.day);
@@ -56,12 +56,9 @@ void _navigateToMonth(WidgetRef ref, int monthOffset) {
   ref.read(focusedDayProvider.notifier).state = newFocusedDay;
 }
 
-/// The calendar + time-slot grid, extracted from the old
-/// `BookAppointmentScreen`. No `Scaffold`, no own `FloatingActionButton`,
-/// no own route — it's a plain widget meant to be dropped straight into
-/// the Studio screen's sliver body once booking mode is active.
 class EmbeddedBookingSection extends ConsumerStatefulWidget {
   final String studioId;
+  final BusinessHoursEntity studioAvailability;
   final String studioName;
   final double rating;
   final int reviewCount;
@@ -70,6 +67,7 @@ class EmbeddedBookingSection extends ConsumerStatefulWidget {
   const EmbeddedBookingSection({
     super.key,
     required this.studioId,
+    required this.studioAvailability,
     required this.studioName,
     this.rating = 0,
     this.reviewCount = 0,
@@ -85,8 +83,6 @@ class _EmbeddedBookingSectionState
     extends ConsumerState<EmbeddedBookingSection> {
   final ScrollController _scrollController = ScrollController();
 
-  // Multiple time slots can be picked for the same day
-  // (e.g. "August 26, 8:00AM, 9:00, 12:00PM").
   bool _showScrollToTop = false;
 
   @override
@@ -124,14 +120,17 @@ class _EmbeddedBookingSectionState
   Widget build(BuildContext context) {
     final focusedDay = ref.watch(focusedDayProvider);
     final currentFocusedMonth = ref.watch(focusedMonthProvider);
-    final selectedMonthStudioAvailability =
-        ref.watch(studioAvailabilityControllerProvider(
-      widget.studioId,
-    ));
+    final selectedMonthStudioAvailability = ref.watch(
+      studioAvailabilityControllerProvider(
+        GetStudioAvailabilityParams(
+          studioId: widget.studioId,
+          month: currentFocusedMonth.month,
+          year: currentFocusedMonth.year,
+        ),
+      ),
+    );
     List<DateTime> datesWithData = [];
 
-    // Fixed height, non-Scaffold layout — sits directly inside the
-    // Studio screen's sliver body instead of owning its own screen.
     return Stack(
       children: [
         Column(
@@ -142,7 +141,6 @@ class _EmbeddedBookingSectionState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Studio name + rating
                   Row(
                     children: [
                       Expanded(
@@ -179,59 +177,34 @@ class _EmbeddedBookingSectionState
                 ],
               ),
             ),
-            // Live-updating selected date + time(s) summary
-            // AnimatedSwitcher(
-            //   duration: const Duration(milliseconds: 200),
-            //   child: Text(
-            //     _buildSelectionSummary(focusedDay),
-            //     key: ValueKey(_buildSelectionSummary(focusedDay)),
-            //     style: TextStyle(
-            //       fontSize: 14,
-            //       fontWeight: FontWeight.w500,
-            //       color: selectedTimes.isEmpty
-            //           ? Colors.grey
-            //           : Theme.of(context).colorScheme.primary,
-            //     ),
-            //   ),
-            // ),
-            SizedBox(
-              height: 350,
-              child: selectedMonthStudioAvailability.when(
-                  initial: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  error: (e) => Center(child: Text(e.toString())),
-                  empty: () => const Center(child: Text('No Availability')),
-                  loaded: (data) {
-                    if (data.isEmpty) {
-                      return const Center(child: Text('No Availability'));
-                    }
 
-                    return CustomScrollView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      slivers: [
-                        SliverPersistentHeader(
-                          pinned: true,
-                          delegate: CalendarHeaderDelegate(
-                            currentFocusedMonth: currentFocusedMonth,
-                            focusedDay: focusedDay,
-                            datesWithData: datesWithData,
-                            onPreviousMonth: () => _navigateToMonth(ref, -1),
-                            onNextMonth: () => _navigateToMonth(ref, 1),
-                            onPageChanged: (focusedMonth) {
-                              ref.read(focusedMonthProvider.notifier).state =
-                                  focusedMonth;
-                            },
-                            onDaySelected: (selectedDay) {
-                              ref.read(focusedDayProvider.notifier).state =
-                                  selectedDay;
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+            // BOOKING CALENDAR DATA SELECTOR
+            SizedBox(
+              height: 375,
+              child: selectedMonthStudioAvailability.when(
+                initial: () => const Center(child: CircularProgressIndicator()),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (e) => Center(child: Text(e.toString())),
+                loaded: (data) {
+                  return CalendarHeaderView(
+                    businessHours: widget.studioAvailability,
+                    currentFocusedMonth: currentFocusedMonth,
+                    focusedDay: focusedDay,
+                    studioId: widget.studioId,
+                    datesWithData: datesWithData,
+                    availabilityData: data,
+                    onPreviousMonth: () => _navigateToMonth(ref, -1),
+                    onNextMonth: () => _navigateToMonth(ref, 1),
+                    onPageChanged: (focusedMonth) {
+                      ref.read(focusedMonthProvider.notifier).state =
+                          focusedMonth;
+                    },
+                    onDaySelected: (selectedDay) {
+                      ref.read(focusedDayProvider.notifier).state = selectedDay;
+                    },
+                  );
+                },
+              ),
             ),
             const SizedBox(height: 8),
             const Text("Choose a time slot",
@@ -243,7 +216,8 @@ class _EmbeddedBookingSectionState
 
             // Get Business Hours
 
-            // TimeSlotsContainer(scrollController: _scrollController),
+            TimeSlotsContainer(
+                scrollController: _scrollController, studioId: widget.studioId),
           ],
         ),
         Positioned(

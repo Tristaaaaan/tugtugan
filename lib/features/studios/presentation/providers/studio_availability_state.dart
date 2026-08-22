@@ -11,6 +11,5 @@ class StudioAvailabilityState with _$StudioAvailabilityState {
   const factory StudioAvailabilityState.loaded(
     List<StudioAvailabilityEntity> studioAvailability,
   ) = _Loaded;
-  const factory StudioAvailabilityState.empty() = _Empty;
   const factory StudioAvailabilityState.error(String message) = _Failure;
 }

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../domain/entities/availability_entity.dart';
+import '../../domain/entities/business_hours_entity.dart';
 import '../../domain/repos/studio_repository.dart';
 import '../datasource/remote/studio_information_remote_datasource.dart';
 import '../model/studio_model.dart';
@@ -74,5 +75,17 @@ class StudioInformationRepositoryImpl implements StudioInformationRepository {
     );
 
     return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<BusinessHoursEntity> getBusinessHours(
+      String studioId, int year, int month, int day) async {
+    final model = await studioInformationRemoteDatasource.getBusinessHours(
+      studioId,
+      year,
+      month,
+      day,
+    );
+    return model.toEntity();
   }
 }

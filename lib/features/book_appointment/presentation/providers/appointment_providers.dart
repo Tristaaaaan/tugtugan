@@ -33,3 +33,5 @@ final appointmentControllerProvider =
     ref.watch(createAppointmentUseCaseProvider),
   ),
 );
+
+final selectedDayProvider = StateProvider<DateTime>((ref) => DateTime.now());
