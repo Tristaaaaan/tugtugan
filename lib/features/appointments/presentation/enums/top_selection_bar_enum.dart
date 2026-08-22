@@ -1,0 +1,4 @@
+enum ActiveAppointmentSelectionBar {
+  active,
+  past,
+}

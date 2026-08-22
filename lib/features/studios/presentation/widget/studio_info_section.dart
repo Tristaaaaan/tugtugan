@@ -117,7 +117,7 @@ class StudioInfoSection extends StatelessWidget {
 
 class StudioHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double height;
-  final String imageUrl;
+  final List<String> imageUrl;
   final double actionOpacity;
   final bool showFollowButton;
   final bool isFollowing;
@@ -147,7 +147,7 @@ class StudioHeaderDelegate extends SliverPersistentHeaderDelegate {
       fit: StackFit.expand,
       children: [
         CachedNetworkImage(
-          imageUrl: imageUrl,
+          imageUrl: imageUrl.first,
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,

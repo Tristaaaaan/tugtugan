@@ -22,6 +22,8 @@ def create_appointment(req: https_fn.CallableRequest):
     # 3. Get request data
     studio_id = req.data.get("studioId")
     slots = req.data.get("slots")
+    studio_name = req.data.get("studioName")
+    studio_image = req.data.get("studioImage")
 
     # 4. Validate studio ID
     if not studio_id:
@@ -30,12 +32,27 @@ def create_appointment(req: https_fn.CallableRequest):
             message="studioId is required.",
         )
 
+    # Validate studio name
+    if not isinstance(studio_name, str) or not studio_name:
+        raise https_fn.HttpsError(
+            code=https_fn.FunctionsErrorCode.INVALID_ARGUMENT,
+            message="studioName is required.",
+        )
+
+    # Validate studio image
+    if not isinstance(studio_image, list):
+        raise https_fn.HttpsError(
+            code=https_fn.FunctionsErrorCode.INVALID_ARGUMENT,
+            message="studioImage must be a list.",
+        )
+
     # 5. Validate slots is a list
     if not isinstance(slots, list) or len(slots) == 0:
         raise https_fn.HttpsError(
             code=https_fn.FunctionsErrorCode.INVALID_ARGUMENT,
             message="At least one slot is required.",
         )
+
 
     # 6. Validate and normalize each slot
     validated_slots = []
@@ -114,6 +131,9 @@ def create_appointment(req: https_fn.CallableRequest):
         "status": "pending",
         "studioId": studio_id,
         "updatedAt": now,
+        "studioImage": studio_image,
+        "studioName": studio_name,
+        "appointmentDate": now,
     }
 
     appointment_ref.set(appointment_data)

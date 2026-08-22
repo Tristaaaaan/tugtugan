@@ -62,7 +62,7 @@ class InboxContainer extends StatelessWidget {
                             name: studio.studioName,
                           )
                         : CachedNetworkImage(
-                            imageUrl: studio.imageUrl,
+                            imageUrl: studio.imageUrl.first,
                             fit: BoxFit.cover,
                             errorWidget: (context, url, error) => const Icon(
                               Icons.broken_image,

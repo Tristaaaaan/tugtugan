@@ -25,6 +25,9 @@ mixin _$AppointmentModel {
   int? get approvedAt => throw _privateConstructorUsedError;
   int? get createdAt => throw _privateConstructorUsedError;
   int? get updatedAt => throw _privateConstructorUsedError;
+  int? get appoinmentDate => throw _privateConstructorUsedError;
+  List<String>? get studioImage => throw _privateConstructorUsedError;
+  String? get studioName => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppointmentModelCopyWith<AppointmentModel> get copyWith =>
@@ -46,7 +49,10 @@ abstract class $AppointmentModelCopyWith<$Res> {
       BookingStatus? status,
       int? approvedAt,
       int? createdAt,
-      int? updatedAt});
+      int? updatedAt,
+      int? appoinmentDate,
+      List<String>? studioImage,
+      String? studioName});
 }
 
 /// @nodoc
@@ -71,6 +77,9 @@ class _$AppointmentModelCopyWithImpl<$Res, $Val extends AppointmentModel>
     Object? approvedAt = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? appoinmentDate = freezed,
+    Object? studioImage = freezed,
+    Object? studioName = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -109,6 +118,18 @@ class _$AppointmentModelCopyWithImpl<$Res, $Val extends AppointmentModel>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as int?,
+      appoinmentDate: freezed == appoinmentDate
+          ? _value.appoinmentDate
+          : appoinmentDate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      studioImage: freezed == studioImage
+          ? _value.studioImage
+          : studioImage // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      studioName: freezed == studioName
+          ? _value.studioName
+          : studioName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -130,7 +151,10 @@ abstract class _$$AppointmentModelImplCopyWith<$Res>
       BookingStatus? status,
       int? approvedAt,
       int? createdAt,
-      int? updatedAt});
+      int? updatedAt,
+      int? appoinmentDate,
+      List<String>? studioImage,
+      String? studioName});
 }
 
 /// @nodoc
@@ -153,6 +177,9 @@ class __$$AppointmentModelImplCopyWithImpl<$Res>
     Object? approvedAt = freezed,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
+    Object? appoinmentDate = freezed,
+    Object? studioImage = freezed,
+    Object? studioName = freezed,
   }) {
     return _then(_$AppointmentModelImpl(
       id: freezed == id
@@ -191,6 +218,18 @@ class __$$AppointmentModelImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as int?,
+      appoinmentDate: freezed == appoinmentDate
+          ? _value.appoinmentDate
+          : appoinmentDate // ignore: cast_nullable_to_non_nullable
+              as int?,
+      studioImage: freezed == studioImage
+          ? _value._studioImage
+          : studioImage // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      studioName: freezed == studioName
+          ? _value.studioName
+          : studioName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -207,8 +246,12 @@ class _$AppointmentModelImpl extends _AppointmentModel {
       this.status,
       this.approvedAt,
       this.createdAt,
-      this.updatedAt})
+      this.updatedAt,
+      this.appoinmentDate,
+      final List<String>? studioImage,
+      this.studioName})
       : _slots = slots,
+        _studioImage = studioImage,
         super._();
 
   @override
@@ -235,10 +278,24 @@ class _$AppointmentModelImpl extends _AppointmentModel {
   final int? createdAt;
   @override
   final int? updatedAt;
+  @override
+  final int? appoinmentDate;
+  final List<String>? _studioImage;
+  @override
+  List<String>? get studioImage {
+    final value = _studioImage;
+    if (value == null) return null;
+    if (_studioImage is EqualUnmodifiableListView) return _studioImage;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? studioName;
 
   @override
   String toString() {
-    return 'AppointmentModel(id: $id, studioId: $studioId, customerId: $customerId, slots: $slots, bookingNumber: $bookingNumber, status: $status, approvedAt: $approvedAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'AppointmentModel(id: $id, studioId: $studioId, customerId: $customerId, slots: $slots, bookingNumber: $bookingNumber, status: $status, approvedAt: $approvedAt, createdAt: $createdAt, updatedAt: $updatedAt, appoinmentDate: $appoinmentDate, studioImage: $studioImage, studioName: $studioName)';
   }
 
   @override
@@ -260,7 +317,13 @@ class _$AppointmentModelImpl extends _AppointmentModel {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.appoinmentDate, appoinmentDate) ||
+                other.appoinmentDate == appoinmentDate) &&
+            const DeepCollectionEquality()
+                .equals(other._studioImage, _studioImage) &&
+            (identical(other.studioName, studioName) ||
+                other.studioName == studioName));
   }
 
   @override
@@ -274,7 +337,10 @@ class _$AppointmentModelImpl extends _AppointmentModel {
       status,
       approvedAt,
       createdAt,
-      updatedAt);
+      updatedAt,
+      appoinmentDate,
+      const DeepCollectionEquality().hash(_studioImage),
+      studioName);
 
   @JsonKey(ignore: true)
   @override
@@ -294,7 +360,10 @@ abstract class _AppointmentModel extends AppointmentModel {
       final BookingStatus? status,
       final int? approvedAt,
       final int? createdAt,
-      final int? updatedAt}) = _$AppointmentModelImpl;
+      final int? updatedAt,
+      final int? appoinmentDate,
+      final List<String>? studioImage,
+      final String? studioName}) = _$AppointmentModelImpl;
   const _AppointmentModel._() : super._();
 
   @override
@@ -315,6 +384,12 @@ abstract class _AppointmentModel extends AppointmentModel {
   int? get createdAt;
   @override
   int? get updatedAt;
+  @override
+  int? get appoinmentDate;
+  @override
+  List<String>? get studioImage;
+  @override
+  String? get studioName;
   @override
   @JsonKey(ignore: true)
   _$$AppointmentModelImplCopyWith<_$AppointmentModelImpl> get copyWith =>

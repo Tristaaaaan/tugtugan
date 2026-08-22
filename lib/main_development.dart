@@ -7,9 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'config/app_config.dart';
 import 'config/app_environments.dart';
 import 'core/appthemes/app_themes.dart';
+import 'features/appointments/presentation/screen/appointment_screen.dart';
 import 'features/authentication/auth_gate.dart';
 import 'features/chat/presentation/chat_screen.dart';
-import 'features/favorite/presentation/favorite.dart';
 import 'features/home/presentation/home.dart';
 import 'features/inbox/presentation/screen/inbox.dart';
 import 'features/maps/presentation/maps.dart';
@@ -67,9 +67,9 @@ final GoRouter _router = GoRouter(
               },
             ),
             GoRoute(
-              path: '/favorite-studio',
+              path: '/appointments',
               builder: (BuildContext context, GoRouterState state) {
-                return const FavoriteStudioPage();
+                return const AppointmentScreen();
               },
             ),
             GoRoute(
